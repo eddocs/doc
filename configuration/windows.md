@@ -1,4 +1,4 @@
-# Windows
+# Windows (this whole page needs to be reviewed)
 
 ## Configuration
 
