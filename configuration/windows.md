@@ -7,7 +7,7 @@ Follow the directions below to run Edge Delta agent on Windows environments.
 1. Download the [latest version](https://github.com/edgedelta/edgedelta-release) of the Edge Delta kit.
 2. Create _C:\LogGenTest-CoffeeCo-SPC_ directory and copy the kit and agent contents there.
 3. Run **Setup.cmd** \(this will simply create the _C:\EdgeDeltaPOCWork\SB\_SPC_ for logs output\).
-4. Open **config\_windows.json**. Some example inputs and outputs have been pre-configured, modify these as needed. Both URLs at the end of config need to be updated with valid URLs. Please see below for information on config file.
+4. Open **config\_windows.yaml**. Some example inputs and outputs have been pre-configured, modify these as needed. Both URLs at the end of config need to be updated with valid URLs. Please see below for information on config file.
 
 ## Package Contents
 
