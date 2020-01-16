@@ -11,23 +11,72 @@ Follow the directions below to run Edge Delta agent on Windows environments.
 
 ## Package Contents
 
-1. **Main \(folder\)**: This folder holds the set of scripts that allows you to emulate the logs of a production system which Edge Delta will monitor.
-2. **cmd\_ErrorGen folders**: These folders have various scripts to help generate loads on systems \(to be used for proof of concept or testing purposes\). 
+1. **Main \(folder\)**: Set of scripts that allows you to emulate the logs of a production system which Edge Delta will monitor.
+2. **cmd\_ErrorGen folders**: Scripts to help generate loads on systems \(to be used for proof of concept or testing purposes\). 
 3. **README \(md\)**: Document that explains how to setup the agent and sandbox environment
 4. **Setup.cmd**: Script to generate folder structure.
-5. **Config\_windows \(json\)**: This is the configuration file required by the agent and loaded into memory when agent process is started. Can include inputs \(e.g: logs\) and outputs \(e.g: Slack or Sumo Logic or other partners\)
-6. **edgedelta\_\(msi\)**: This is the Edge Delta agent. 
+5. **Config\_windows \(yaml\)**: Configuration file required by the agent and loaded into memory when agent process is started. Can include global agent settings, inputs \(e.g: logs\) and outputs \(e.g: Slack or Sumo Logic or other partners\)
+6. **edgedelta\_\(msi\)**: Edge Delta agent. 
 
 ## Configuration File Instructions
 
-The configuration file is loaded into memory at runtime and is used to both determine the inputs and the outputs of the Edge Delta agent. There is an example json that is included in this package that you can use as a guide. Please do note that the config is not initially usable as it includes two invalid links as outputs.
+The configuration file is loaded into memory at runtime and is used to both determine the inputs and the outputs of the Edge Delta agent. There is an example yaml that is included in the download package that you can use as a guide. Please do note that the config is not initially usable as it includes two invalid links as outputs.
 
-The first part of the config is the "path" which defines the scope of where the Edge Delta agent will look.
+The configuration file has three main parts:
 
-For example:
+1. Agent settings \(global\)
+
+   Configure global settings for the Edge Delta agent.
+
+2. Workflows
+
+   Configure inputs \(sources\) and outputs \(where you want Edge Delta agent to send results, and notifications\) in this part.
+
+3. Monitors
+
+   Configure regexes and triggers in this part.
+
+Now let's go into details of each part.
+
+### Agent settings
+
+Schema:
 
 ```javascript
-"path" : "C:\\EdgeDeltaPOCWork\\SB_SPC\\DataOutput.log"
+agent_settings:
+  agent_key: 
+  ac_buffer_size: 
+  tag: 
+  disable_printer: 
+  grace_period: 
+  log:
+    - level: 
+    - path: 
+```
+
+| Setting | Required | Type | Options | Default Value | Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| agent\_key | Yes | GUID | GUID | N/A | Unique key that identifies Edge Delta agent for your company, given to you by the Edge Delta sales team.  |
+| ac\_buffer\_size | No | Integer | 0-9999 |  | Defines the space the Edge Delta agent utilizes in memory in MB |
+| tag | No | Text | 1-128 characters or numbers | N/A | User defined prefix that agent writes on each line that is sent to an output.  |
+| disable\_printer | No | Boolean | true/false | false | Disables writing agent results on screen. By default it is enabled. |
+| grace\_period | Yes | Time | 1-9999s | 0s | Grace period agent waits before triggering alerts. Can be in seconds \(s\), minutes \(m\) |
+| log | No |  |  |  | If not specified, agent uses default name \(edgedelta.log\), default level \(error\) and default location \(path where agent ran\) |
+| log/level | No | Text | error, warning, info |  | Logging level for the agent logs |
+| log/path | No | Text |  | N/A | Path of the log file; if path is not specified, the log file is created  uses the path where the agent ran. |
+
+Example:
+
+```javascript
+agent_settings:
+  agent_key: 1234-A1BD-2345-1234
+  ac_buffer_size: 125
+  tag: QAServers
+  disable_printer: true
+  grace_period: 30s
+  log:
+    - level: error
+    - path: e:\logs\myedgedelta.log
 ```
 
 Will look within that directory and log file.
