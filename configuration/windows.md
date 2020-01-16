@@ -69,7 +69,7 @@ Example:
 
 ```javascript
 agent_settings:
-  agent_key: 1234-A1BD-2345-1234
+  agent_key: 1234-A1B1-2345-1234
   ac_buffer_size: 125
   tag: QAServers
   disable_printer: true
