@@ -1,12 +1,12 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [Planning and Design](planning.md)
+* [Planning and Design](planning-and-design.md)
 * [Installation](installation/README.md)
   * [Requirements](installation/requirements.md)
   * [Windows](installation/windows.md)
-  * [Linux](installation/linux.md)
-  * [MacOS](installation/macos.md)
+  * [Linux](configuration/linux.md)
+  * [MacOS](configuration/macos.md)
   * [Docker](installation/docker.md)
 * [Configuration](configuration/README.md)
   * [Overview](configuration/overview.md)
