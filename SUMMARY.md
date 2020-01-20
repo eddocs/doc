@@ -4,7 +4,7 @@
 * [Planning and Design](planning-and-design.md)
 * [Installation](configuration/README.md)
   * [Requirements](installation/requirements.md)
-  * [Windows](installation/windows.md)
+  * [Windows](configuration/windows.md)
   * [Linux](configuration/linux.md)
   * [MacOS](configuration/macos.md)
   * [Docker](configuration/docker.md)

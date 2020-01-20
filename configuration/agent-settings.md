@@ -4,7 +4,6 @@ Schema:
 
 ```javascript
 agent_settings:
-  agent_key: 
   ac_buffer_size: 
   tag: 
   disable_printer: 
