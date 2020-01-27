@@ -12,9 +12,9 @@ Edge Delta package is available for hosts with Windows, Linux and MacOS operatin
 
 Edge Delta has an optional configuration backend which eases distribution of configuration updates in your organization when there are large number of installations.
 
-Contact info@edgedelta.com to get an API token to use with Docker or organization specific installer package for other options.
+Contact info@edgedelta.com to get an API token to use with Docker or URL to download organization specific installer package for other options.
 
-To set and update your configuration another application and administrator credential file will be also provided.
+To set and update your configuration, another application and administrator credential file will be also provided.
 
 
 

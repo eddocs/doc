@@ -44,7 +44,7 @@ registry.gitlab.com/edgedelta/edgedelta/agent:latest
 
 ## Resource limitations
 
-You can limit the cpu or memory resources used by Edge Delta container as seen below.
+You can limit the cpu or memory resources used by Edge Delta container.
 
 ```
 docker run -it --cpus=".25" --memory="256m" \
