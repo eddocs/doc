@@ -1,6 +1,6 @@
 # Docker
 
-Edge Delta has a Docker container image that can be deployed in a sidecar pattern to ingest log data from other Docker containers and provides isolation and encapsulation.
+Edge Delta has a Docker container image that can be deployed in a sidecar pattern to ingest log data from other Docker containers and provide isolation and encapsulation.
 
 
 
