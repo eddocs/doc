@@ -1,28 +1,26 @@
 # Docker
 
-Edge Delta Docker image can be run on hosts running Docker environment to ingest log data from other Docker containers.
+Edge Delta has a Docker container image that can be deployed in a sidecar pattern to ingest log data from other Docker containers and provides isolation and encapsulation.
 
 
 
 ## Docker Registry Access
 
-To be able to run Edge Delta Docker image, running host needs to have Edge Delta Docker registry access.
+To be able to run Edge Delta Docker container image, running host needs to have Edge Delta Docker registry access.
 
 Contact [info@edgedelta.com](mailto:info@edgedelta.com) to receive Docker registry username and password for your organization.
 
-Replace your\_username and your\_password parts in command below and run on hosts where you will run Edge Delta Docker container.
+Replace `your_username` and `your_password` in command below and run on hosts where you will run Edge Delta Docker container.
 
 ```text
 docker login registry.gitlab.com -u your_username -p your_password
 ```
 
-
-
 ## Running the Container
 
-You may use a local configuration file or let Edge Delta container to fetch its configuration from the configuration backend.
+When it is time to run the Edge Delta container, you can either use a local configuration file or have the Edge Delta container fetch its configuration from the Edge Delta configuration backend.
 
-### Run with Local Configuration File
+### Run with a Local Configuration File
 
 Replace `$PWD/config.yml`with absolute path of the local configuration file on host.
 
@@ -33,11 +31,15 @@ docker run -it \
 registry.gitlab.com/edgedelta/edgedelta/agent:latest
 ```
 
-### Run with Configuration API Token and Configuration Backend
+### Run with an API Token Utilizing Configuration Backend
 
 Replace `your_api_token` with the token you receive from [info@edgedelta.com](mailto:info@edgedelta.com) 
 
 Container should have internet access to fetch the configuration.
+
+{% hint style="info" %}
+This allows you to update your configuration file, upload it to the Edge Delta configuration backend service in the cloud and have all Edge Delta agents pull this configuration at run time. More details and instructions on how to upload configuration file to the cloud will be provided to you when you get your API token from [info@edgedelta.com](mailto:info@edgedelta.com). 
+{% endhint %}
 
 ```text
 docker run -it \
@@ -46,9 +48,9 @@ docker run -it \
 registry.gitlab.com/edgedelta/edgedelta/agent:latest
 ```
 
-## Resource Limitations
+## Limiting Resource Consumption
 
-You can limit the CPU or memory resources that Edge Delta container uses. In example below we are limiting Edge Delta container to utilize maximum 25% CPU and 256 MB of memory 
+You can limit the CPU or memory resources that Edge Delta container consumes. In example below we are limiting Edge Delta container to utilize maximum 25% CPU and 256 MB of memory. 
 
 ```text
 docker run -it --cpus=".25" --memory="256m" \
