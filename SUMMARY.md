@@ -9,7 +9,7 @@
   * [Docker](installation/docker.md)
 * [Configuration](configuration-1.md)
   * [Overview](configuration/overview.md)
-  * [Agent Settings](configuration/agent-settings.md)
+  * [Agent Settings](configuration-1/agent-settings.md)
   * [Workflows](configuration/workflows.md)
   * [Monitors](configuration/monitors.md)
   * [Expected Results](configuration/expected-results.md)
