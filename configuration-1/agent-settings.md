@@ -34,18 +34,16 @@ agent_settings:
   disable_printer: true
   grace_period: 30s
   log:
-    - level: error
-    - path: e:\logs\myedgedelta.log
+    level: error
+    path: e:\logs\myedgedelta.log
   resource_limit:
-    - cpu_utilization: 
-    - memory_utilization_limit_inMB: 0
-    - memory_utilization_limit_percent: 50
-    - persistent_storage_size_limit: 1000
+    cpu_utilization: 
+    memory_utilization_limit_inMB: 0
+    memory_utilization_limit_percent: 50
+    persistent_storage_size_limit: 1000
   supervised_learning:
-    - enabled: 
-    - sample_msg_count
-    - once_every
-  archieve
-  misc
+    enabled: true
+    sample_msg_count: 100
+    once_every: 1h
 ```
 
