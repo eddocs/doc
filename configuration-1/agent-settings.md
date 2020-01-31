@@ -10,19 +10,12 @@
 | disable\_printer | Disable displaying agent process results on screen. Enabled by default. | false |
 | grace\_period | Time the agent waits before triggering alerts. Can be in seconds \(s\) or minutes \(m\) | 0s |
 | _log_  | If omitted, agent uses default log name as "edgedelta.log", default log level as "error and default log path as installation path |  |
-|  - level | Logging level for the agent logs |  |
-|  - path | Path of the agent log file | N/A |
-| _resource\_limit_  | Limit the resources agent consumes |  |
-|  - cpu\_utilization | Limit the max CPU consumption |  |
-|  - memory\_utilization\_limit\_inMB | Limit the max memory consumption in MB |  |
-|  - memory\_utilization\_limit\_percent           | Limit the max memory consumption in percentage |  |
-|  - persistent\_storage\_size\_limit | Limit the max disk space agent can consume on the host |  |
+| level | Logging level for the agent logs |  |
+| path | Path of the agent log file | N/A |
 | _supervised\_learning_  |  |  |
-|  - enabled |  |  |
-|  - sample\_msg\_count |  |  |
-|  - once\_every |  |  |
-| archive |  |  |
-| misc |  |  |
+| enabled | Enable or disable the supervised learning feature |  |
+| sample\_msg\_count |  |  |
+| once\_every |  |  |
 
 Example:
 
@@ -36,11 +29,6 @@ agent_settings:
   log:
     level: error
     path: e:\logs\myedgedelta.log
-  resource_limit:
-    cpu_utilization: 
-    memory_utilization_limit_inMB: 0
-    memory_utilization_limit_percent: 50
-    persistent_storage_size_limit: 1000
   supervised_learning:
     enabled: true
     sample_msg_count: 100
