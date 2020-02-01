@@ -18,7 +18,7 @@ docker login registry.gitlab.com -u your_username -p your_password
 
 ## Running the Container
 
-When it is time to run the Edge Delta container, you can either use a local configuration file or have the Edge Delta container fetch its configuration from the Edge Delta configuration backend.
+When it is time to run the Edge Delta container, you can either use a local configuration file or have the Edge Delta container fetch its configuration from the Edge Delta Central Configuration Backend \(CCB\).
 
 ### Run with a Local Configuration File
 
@@ -31,14 +31,14 @@ docker run -it \
 registry.gitlab.com/edgedelta/edgedelta/agent:latest
 ```
 
-### Run with an API Token Utilizing Configuration Backend
+### Run with an API Token Utilizing Central Configuration Backend \(CCB\)
 
 Replace `your_api_token` with the token you receive from [info@edgedelta.com](mailto:info@edgedelta.com) 
 
-Container should have internet access to fetch the configuration.
+Container must have internet access to fetch the configuration.
 
 {% hint style="info" %}
-This allows you to update your configuration file, upload it to the Edge Delta configuration backend service in the cloud and have all Edge Delta agents pull this configuration at run time. More details and instructions on how to upload configuration file to the cloud will be provided to you when you get your API token from [info@edgedelta.com](mailto:info@edgedelta.com). 
+More information about [CCB](../configuration-1/ccb.md) can be found under [Configuration](../configuration-1/) section
 {% endhint %}
 
 ```text
