@@ -2,8 +2,6 @@
 
 Edge Delta has a Docker container image that can be deployed in a sidecar pattern to ingest log data from other Docker containers and provide isolation and encapsulation.
 
-
-
 ## Docker Registry Access
 
 To be able to run Edge Delta Docker container image, running host needs to have Edge Delta Docker registry access.
@@ -31,9 +29,9 @@ docker run -it \
 registry.gitlab.com/edgedelta/edgedelta/agent:latest
 ```
 
-### Run with an API Token Utilizing Central Configuration Backend \(CCB\)
+### Run with an API Key Utilizing Central Configuration Backend \(CCB\)
 
-Replace `your_api_token` with the token you receive from [info@edgedelta.com](mailto:info@edgedelta.com) 
+Replace `your_api_key` with the Api key you receive from [info@edgedelta.com](mailto:info@edgedelta.com)
 
 Container must have internet access to fetch the configuration.
 
@@ -44,13 +42,13 @@ More information about [CCB](../configuration-1/ccb.md) can be found under [Conf
 ```text
 docker run -it \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
--e "ED_API_TOKEN=your_api_token" \
+-e "ED_API_KEY=your_api_key" \
 registry.gitlab.com/edgedelta/edgedelta/agent:latest
 ```
 
 ## Limiting Resource Consumption
 
-You can limit the CPU or memory resources that Edge Delta container consumes. In example below we are limiting Edge Delta container to utilize maximum 25% CPU and 256 MB of memory. 
+You can limit the CPU or memory resources that Edge Delta container consumes. In example below we are limiting Edge Delta container to utilize maximum 25% CPU and 256 MB of memory.
 
 ```text
 docker run -it --cpus=".25" --memory="256m" \

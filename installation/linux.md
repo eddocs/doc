@@ -2,25 +2,19 @@
 
 Edge Delta provides a convenient self extracting installer package supporting common Linux distributions such as Ubuntu, Debian, CentOS, RHEL.
 
+## Download
 
-
-## Download 
-
-Contact Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to get a download link. 
-
-{% hint style="info" %}
-Make sure to specify whether or not you would like to take advantage of [Central Configuration Backend \(CCB\)](../configuration-1/ccb.md). You will be provided with a unique installation file specific to your tenant if you would like to utilize CCB.
-{% endhint %}
+Contact Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to get a script URL and your API key.
 
 ## Installation
 
-Replace `download_link` below with the URL received from Edge Delta team and run following command in an empty folder.
-
-```text
-wget download_link -v
-chmod +x edgedelta_*_linux_amd64.sh
-sudo ./edgedelta_*_linux_amd64.sh
+Replace the DOWNLOAD_URL below with the script URL you received from Edge Delta team and run following command in terminal:
 ```
+ED_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L <DOWNLOAD_URL>/install.sh)"
+
+```
+
+Script may prompt sudo password if you are not running it as root.
 
 Script deploys Edge Delta into `path /opt/edgedelta/agent/` and system service `edgedelta` starts automatically with default configuration.
 
