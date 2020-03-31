@@ -1,6 +1,12 @@
+---
+description: >-
+  The following document covers the process for deploying the Edge Delta service
+  as a Docker container for containerized environments.
+---
+
 # Docker
 
-Edge Delta has a Docker container image that can be deployed in a sidecar pattern to ingest log data from other Docker containers and provide isolation and encapsulation.
+Edge Delta has a Docker container image that can be deployed as a Sidecar or DaemonSet architecture to analyze telemetry from other Docker containers and provide isolation and encapsulation.
 
 ## Docker Registry Access
 
