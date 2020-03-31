@@ -1,3 +1,9 @@
+---
+description: >-
+  The following document covers the process for deploying the Edge Delta service
+  on a Linux-based Operating System.
+---
+
 # Linux
 
 Edge Delta provides a convenient self extracting installation package supporting common Linux distributions such as Ubuntu, Debian, CentOS, RHEL. 
