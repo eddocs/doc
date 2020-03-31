@@ -1,42 +1,46 @@
+---
+description: >-
+  The following document covers the process for deploying the Edge Delta service
+  on a Windows-based Operating System.
+---
+
 # Windows
 
 ## Windows
 
-Edge Delta has a very simple MSI installation, once complete, agent will run as a background service in Windows operating systems.
-
-Edge Delta supports both 64 bit and 32 bit Windows platforms and a variety of operating system versions.
+Edge Delta has a very simple 64 or 32 bit MSI installation process, once complete, the agent will run as a background service for Windows-based operating systems.
 
 ### Download
 
-Contact Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to get a download link and your API key.
+Contact the Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to create an account and get access to the agent deployment portal. 
 
 ### UI Installation
 
-After downloading the package, simply double click and follow the wizard.
+After downloading the appropriate installation package, simply double click and follow the wizard.
 
 You can change the installation directory where the Edge Delta agent will install during installation wizard, default path is "Program Files" or "Program Files \(x86\)" depending of your chosen platform.
 
-Enter your API key when wizard prompts and finish installation.
+When prompted, provide the appropriate configuration API Key from the administration portal, and complete installation. 
+
+![](../.gitbook/assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
+
+
 
 ## Command Line Silent Installation
 
-After downloading the package start cmd.exe as Administrator. Change directory into download directory. Replace Api key you receive with YOUR\_APIKEY and run following command:
+After downloading the package start cmd.exe as Administrator. Navigate to the appropriate download directory. Replace &lt;YOUR API KEY&gt; with the appropriate configuration API Key from the administration portal,  and run following command:
 
 ```text
-start /wait msiexec /qn /i edgedelta-version_64bit.msi APIKEY="<YOUR_APIKEY>"
+start /wait msiexec /qn /i edgedelta-version_64bit.msi APIKEY="<YOUR_API_KEY>"
 ```
 
-It will not output anything due to silent mode.
+It will not output anything to the terminal due to the service running in silent mode.
 
 ## Configuration
 
-Once installation completed, the configuration file \(config.yaml\) and the agent log file \(edgedelta.log\) can be found in the installation directory.
-
-{% hint style="info" %}
-Edge Delta monitors section in the configuration file needs to be updated after installation.
-{% endhint %}
+Once installation completed, the configuration file \(config.yml\) and the agent log file \(edgedelta.log\) can be found in the installation directory.
 
 ### Troubleshooting
 
-After installation Windows services UI \(services.msc\) and edgedelta.log file can be used to troubleshooting and to check the status of the agent.
+After installation, the Windows services UI \(services.msc\) and the edgedelta.log file can be used to troubleshoot and to check the status of the agent.
 
