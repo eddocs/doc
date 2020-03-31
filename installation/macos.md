@@ -1,3 +1,9 @@
+---
+description: >-
+  The following document covers the process for deploying the Edge Delta service
+  on the MacOS Operating System.
+---
+
 # MacOS
 
 Edge Delta provides a convenient self extracting installer package for MacOS.
