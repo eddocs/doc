@@ -30,7 +30,7 @@ Check the service status using the following command
 launchctl list edgedelta
 ```
 
-Configuration path: `/opt/edgedelta/agent/conf.yaml`
+Configuration File path: `/opt/edgedelta/agent/config.yaml`
 
-Log file path: `/opt/edgedelta/agent/edgedelta.log`
+Edge Delta's Service Log file path: `/opt/edgedelta/agent/edgedelta.log`
 
