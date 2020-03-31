@@ -8,10 +8,10 @@ Contact Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to get a
 
 ## Installation
 
-Replace the DOWNLOAD_URL below with the script URL you received from Edge Delta team and run following command in terminal:
-```
-ED_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L <DOWNLOAD_URL>/install.sh)"
+Replace the DOWNLOAD\_URL below with the script URL you received from Edge Delta team and run following command in terminal:
 
+```text
+ED_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L <DOWNLOAD_URL>/install.sh)"
 ```
 
 Script may prompt sudo password if you are not running it as root.
@@ -29,3 +29,4 @@ launchctl list edgedelta
 Configuration path: `/opt/edgedelta/agent/conf.yaml`
 
 Log file path: `/opt/edgedelta/agent/edgedelta.log`
+
