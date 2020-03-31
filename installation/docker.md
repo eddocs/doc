@@ -4,11 +4,11 @@ Edge Delta has a Docker container image that can be deployed in a sidecar patter
 
 ## Docker Registry Access
 
-To be able to run Edge Delta Docker container image, running host needs to have Edge Delta Docker registry access.
+To be able to run the Edge Delta Docker container image, the running host needs to have Edge Delta Docker registry access.
 
-Contact [info@edgedelta.com](mailto:info@edgedelta.com) to receive Docker registry username and password for your organization.
+Contact [info@edgedelta.com](mailto:info@edgedelta.com) to receive the Docker registry username and password for your organization.
 
-Replace `your_username` and `your_password` in command below and run on hosts where you will run Edge Delta Docker container.
+Replace `your_username` and `your_password` in the command below and run on hosts where you will run the Edge Delta Docker container.
 
 ```text
 docker login registry.gitlab.com -u your_username -p your_password
@@ -16,22 +16,13 @@ docker login registry.gitlab.com -u your_username -p your_password
 
 ## Running the Container
 
-When it is time to run the Edge Delta container, you can either use a local configuration file or have the Edge Delta container fetch its configuration from the Edge Delta Central Configuration Backend \(CCB\).
-
-### Run with a Local Configuration File
-
-Replace `$PWD/config.yml`with absolute path of the local configuration file on host.
-
-```text
-docker run -it \
--v /var/run/docker.sock:/var/run/docker.sock:ro \
--v $PWD/config.yml:/edgedelta/config.yml \
-registry.gitlab.com/edgedelta/edgedelta/agent:latest
-```
+When it is time to run the Edge Delta container, you can either have the Edge Delta container fetch its configuration from the Edge Delta Central Configuration Backend \(recommended\), or use a local configuration file.
 
 ### Run with an API Key Utilizing Central Configuration Backend \(CCB\)
 
-Replace `your_api_key` with the Api key you receive from [info@edgedelta.com](mailto:info@edgedelta.com)
+Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your configuration API Key from the administration portal: 
+
+![](../.gitbook/assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
 
 Container must have internet access to fetch the configuration.
 
@@ -42,7 +33,18 @@ More information about [CCB](../configuration-1/ccb.md) can be found under [Conf
 ```text
 docker run -it \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
--e "ED_API_KEY=your_api_key" \
+-e "ED_API_KEY=<YOUR_API_KEY>" \
+registry.gitlab.com/edgedelta/edgedelta/agent:latest
+```
+
+### Run with a Local Configuration File
+
+Replace `$PWD/config.yml`with absolute path of the local configuration file on host.
+
+```text
+docker run -it \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v $PWD/config.yml:/edgedelta/config.yml \
 registry.gitlab.com/edgedelta/edgedelta/agent:latest
 ```
 
