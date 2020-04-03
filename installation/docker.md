@@ -65,3 +65,31 @@ docker run -it --cpus=".25" --memory="256m" \
 registry.gitlab.com/edgedelta/edgedelta/agent:latest
 ```
 
+## Troubleshooting
+
+Check to see if the agent's container is running by running the following Docker command, if the container is running, a container containing edgedelta in the IMAGE name should appear in the list:
+
+```text
+docker ps
+```
+
+Check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings.
+
+Run the following command to view all containers \(whether running or not\), this will be used to capture the CONTAINER ID of the Edge Delta agent
+
+```text
+docker ps -a
+```
+
+Copy the CONTAINER ID of the Edge Delta agent \(should be listed at the top of the list of containers\)
+
+Run the following command using the agent's CONTAINER ID
+
+```text
+docker logs CONTAINERID
+```
+
+
+
+
+
