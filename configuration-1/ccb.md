@@ -14,11 +14,39 @@ Additionally, CCB allows users to update and modify configuration files directly
 
 ![](../.gitbook/assets/screen-shot-2020-04-02-at-10.43.45-am.png)
 
-If you have many Edge Delta agents and agents have internet connectivity, use CCB to simplify distributing changes to all agents. 
 
-With CCB, agents will download their configuration file from the Edge Delta cloud service at runtime. 
 
-An installation file with a unique identifier \(API\_TOKEN\) is required for this configuration. Contact Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to get a download link.
+## Local Configuration File Management
+
+In addition to the Central Configuration Backend \(CCB\), Edge Delta also supports the ability to manage and deploy configuration files locally if preferred, using tools like Chef, Puppet, Ansible, Salt, Terraform, etc. 
+
+In order to provide the configuration locally, a flag must be provided at agent deploy time to let the system know Local Configuration File Management is in place.
+
+ **Run Parameter:**
+
+-c path/to/config.yml
+
+**Linux Example:** .
+
+```text
+./edge_delta.sh -c /opt/configs/edge_delta.yml
+```
+
+**Windows Example:**
+
+```
+start /wait msiexec /qn /i edgedelta-version_64bit.msi -c /opt/configs/edge_delta.yml
+```
+
+
+
+\*\*\*\*
+
+
+
+
+
+
 
 
 
