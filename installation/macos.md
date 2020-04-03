@@ -36,7 +36,19 @@ Check the service status using the following command
 launchctl list edgedelta
 ```
 
-Configuration File path: `/opt/edgedelta/agent/config.yaml`
-
+Check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings.  
+  
 Edge Delta's Service Log file path: `/opt/edgedelta/agent/edgedelta.log`
+
+```
+cat /opt/edgedelta/agent/edgedelta.log
+```
+
+Check the agent's configuration file to ensure the configuration doesn't contain issues.
+
+Configuration File path: `/opt/edgedelta/agent/config.yml`
+
+```
+cat /opt/edgedelta/agent/config.yml
+```
 
