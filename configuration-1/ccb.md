@@ -14,7 +14,25 @@ Additionally, CCB allows users to update and modify configuration files directly
 
 ![](../.gitbook/assets/screen-shot-2020-04-02-at-10.43.45-am.png)
 
+## Creating a New Configuration
 
+In the Edge Delta admin portal, click the green Add button in the bottom left corner to generate a new configuration.
+
+![](../.gitbook/assets/screen-shot-2020-04-07-at-1.37.04-pm.png)
+
+In the following dialog window, populate the Tag and Description fields \(used for organizing the configurations in the Admin portal\), as well as your configuration, and hit save.
+
+![](../.gitbook/assets/screen-shot-2020-04-08-at-8.39.49-am%20%281%29.png)
+
+Once you've saved your configuration, you will return to the configuration portal, where your new configuration will be listed, as well as an API Key associated with the configuration. 
+
+The API Key is utilized as part of the agent deployment process, allowing new agents to install and deploy pre-configured based on a configuration from the portal. 
+
+## Updating an Existing Configuration
+
+To edit an existing configuration, hit the yellow Edit button to the right of the configuration you wish to edit.  Once you've made your changes, hit the green Save button in the bottom right to save your changes.
+
+To apply the updated configuration to agents that are already deployed and running, simply restart the agent's service, and the updated configuration will automatically propagate down to the agent. 
 
 ## Local Configuration File Management
 
