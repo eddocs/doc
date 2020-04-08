@@ -56,3 +56,35 @@ In order to provide the configuration locally, a flag must be provided at agent 
 start /wait msiexec /qn /i edgedelta-version_64bit.msi -c /opt/configs/edge_delta.yml
 ```
 
+
+
+\*\*\*\*
+
+
+
+
+
+
+
+
+
+
+
+###  
+
+
+
+
+
+### 
+
+### 
+
+
+
+
+
+### Configuration File - Example
+
+
+
