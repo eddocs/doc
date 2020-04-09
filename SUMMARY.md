@@ -9,6 +9,7 @@
 * [Configuration](configuration-1/README.md)
   * [Central Configuration Backend \(CCB\)](configuration-1/ccb.md)
   * [Agent Settings](configuration-1/agent-settings.md)
+  * [Inputs](configuration-1/inputs.md)
   * [Workflows](configuration-1/workflows.md)
   * [Monitors](configuration-1/monitors.md)
   * [Expected Results](configuration-1/expected-results.md)
