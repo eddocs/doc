@@ -10,7 +10,7 @@ The Edge Delta agents utilize a configuration file to manage various settings, s
 
 The configuration file is automatically loaded into memory at runtime. Updates to the configuration file are typically made via the CCB \(Central Configuration Backend\), or locally against the file itself. 
 
-If configuration updates are made in the UI, via the CCB, these updates are automatically propagated down to the agent, without requiring a restart. 
+If configuration updates are made in the UI \(via the CCB\), these updates are automatically propagated down to the agent without requiring a restart. 
 
 ## Schema
 
