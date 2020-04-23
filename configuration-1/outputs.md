@@ -47,7 +47,7 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
-| type | Streaming destination type \(i.e. splunk, sumologic, datadog, etc.\) | Yes |
+| type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
 | endpoint | Full HTTPs URL for this endpoint | Yes |
 
 ```go
@@ -67,7 +67,7 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
-| type | Streaming destination type \(i.e. splunk, sumologic, datadog, etc.\) | Yes |
+| type | Streaming destination type \(i.e. datadog, sumologic, splunk, etc.\) | Yes |
 | api\_key | Datadog API Key | Yes |
 
 ```go
@@ -76,7 +76,48 @@ If enabled, the Datadog integration will stream analytics and insights to your D
         api_key: "<add datadog api key>"
 ```
 
-**Create a new Datadog API Key:** [https://docs.datadoghq.com/account\_management/api-app-keys/\#add-a-key](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key)   ****
+**Create a new Datadog API Key:** [https://docs.datadoghq.com/account\_management/api-app-keys/\#add-a-key](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key) 
 
-       ****
+## **New Relic**
+
+If enabled, the New Relic integration will stream analytics and insights to your New Relic environment
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(i.e. newrelic, sumologic, datadog, etc.\) | Yes |
+| api\_key | New Relic Insert API Key | Yes |
+
+```go
+      - name: new-relic-integration
+        type: newrelic
+        api_key: "<add new relic insert api key>"
+```
+
+**Create a new New Relic Insert API Key:** [https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys\#event-insert-key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key)
+
+## **InfluxDB**
+
+If enabled, the InfluxDB integration will stream analytics and insights to your InfluxDB deployment
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(i.e. influxdb, sumologic, datadog, etc.\) | Yes |
+| endpoint | InfluxDB endpoint | Yes |
+| http\_user | InfluxDB user credentials | Yes |
+| http\_password | InfluxDB password for connecting user | Yes |
+| db | Specific InfluxDB database to stream data to | Yes |
+
+```go
+      - name: influxdb-integration
+        type: influxdb
+        endpoint: "https://influxdb.<your-domain>.com/"
+        port: 443
+        http_user: admin
+        http_password: your_http_password
+        db: "specific_influxdb_database"
+```
+
+## 
 
