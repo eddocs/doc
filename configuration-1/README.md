@@ -1,8 +1,10 @@
 # Configuration
 
-Edge Delta agent works with a configuration file `config.yaml`. Configuration file is where you configure the global settings for the agent, inputs \(sources\) that the agent listens to, monitors/rules that it performs and the outputs that it sent its results.
+The Edge Delta agents utilize a configuration file to manage various settings such as: Inputs \(Sources\), Rules \(Monitors and Analytics\) that it performs against the data, as well as Destinations \(Streaming and Triggers\).
 
-The configuration file is loaded into memory at runtime. After making changes to the `config.yaml` file, agent process needs to be restarted so that agent can run with the new changes. 
+The configuration file is automatically loaded into memory at runtime. Updates to the configuration file are typically made via the CCB \(Central Configuration Backend\), or locally against the file itself. 
+
+If configuration updates are made in the UI, via the CCB, these updates are automatically propagated down to the agent, without requiring a restart. 
 
 ## Schema
 

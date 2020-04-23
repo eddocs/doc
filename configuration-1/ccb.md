@@ -32,7 +32,7 @@ The API Key is utilized as part of the agent deployment process, allowing new ag
 
 To edit an existing configuration, hit the yellow Edit button to the right of the configuration you wish to edit.  Once you've made your changes, hit the green Save button in the bottom right to save your changes.
 
-After an existing configuration has been updated via the UI, the updated configuration version will automatically be propagated down to running agents using that API Key. Typically the update will take place within one minute. 
+To apply the updated configuration to agents that are already deployed and running, simply restart the agent's service, and the updated configuration will automatically propagate down to the agent. 
 
 ## Local Configuration File Management
 
@@ -55,4 +55,36 @@ In order to provide the configuration locally, a flag must be provided at agent 
 ```
 start /wait msiexec /qn /i edgedelta-version_64bit.msi -c /opt/configs/edge_delta.yml
 ```
+
+
+
+\*\*\*\*
+
+
+
+
+
+
+
+
+
+
+
+###  
+
+
+
+
+
+### 
+
+### 
+
+
+
+
+
+### Configuration File - Example
+
+
 
