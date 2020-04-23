@@ -1,6 +1,12 @@
+---
+description: >-
+  This document provides an overview of the Edge Delta agent configuration
+  process, and the various pieces that go into it.
+---
+
 # Configuration
 
-The Edge Delta agents utilize a configuration file to manage various settings such as: Inputs \(Sources\), Rules \(Monitors and Analytics\) that it performs against the data, as well as Destinations \(Streaming and Triggers\).
+The Edge Delta agents utilize a configuration file to manage various settings, such as: Inputs \(Sources\), Rules \(Monitors and Analytics\) that it performs against the data, as well as Destinations \(Streaming and Triggers\).
 
 The configuration file is automatically loaded into memory at runtime. Updates to the configuration file are typically made via the CCB \(Central Configuration Backend\), or locally against the file itself. 
 
