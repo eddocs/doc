@@ -119,5 +119,26 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
         db: "specific_influxdb_database"
 ```
 
+## Trigger Destinations
+
+## **Slack**
+
+If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Trigger destination type \(i.e. slack, etc.\) | Yes |
+| endpoint | Slack Webhook or APP endpoint URL | Yes |
+
+```go
+      - name: slack-integration
+        type: slack
+        endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+
+```
+
+**Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
+
 ## 
 
