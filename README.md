@@ -11,7 +11,7 @@ In today's modern architectures, whether your infrastructure is physical, virtua
 
 Edge Delta has a novel approach to modern data analytics – the platform uses Federated Learning to analyze data. Utilizing data science concepts closest to where the data is created, Edge Delta intelligently pre-processes data before centralizing it, this unlocks unlimited data analysis, resulting in complete visibility and orders of magnitude faster alerting and automation.
 
-![The Edge Delta platform is distributed, allowing analysis without the need to centralize raw data first](.gitbook/assets/image%20%281%29.png)
+![The Edge Delta platform is distributed, allowing analysis without the need to centralize raw data first](.gitbook/assets/image%20%282%29.png)
 
 ## Planning and Design
 
@@ -22,4 +22,16 @@ The Edge Delta agent is built with the ["Go" programming language](https://golan
 \(Atypical\) If the agents do not have outbound internet connectivity, the Edge Delta agent works with a configuration file \(config.yaml\). Configuration file is used to configure the global settings for the agent, inputs \(sources\) used by the agent, monitors/rules performed by the agent, and the outputs where results are streamed.
 
 In cases where there is no outbound internet connectivity, the configuration file is created automatically after installation and loaded into memory at runtime. After making changes to the `config.yaml` file, the changes are loaded on agent process restart. 
+
+## Typical Architecture
+
+For a usual installation, the analysis initially starts at the agents, where raw logs, metrics, and telemetry is pre-processed and applied to both streams and triggers:
+
+
+
+![Anomaly Captures, Insights, and Alerts and Automation, Raw Logs are all easily integrated.  ](.gitbook/assets/image.png)
+
+The agent analyzes all data in real time, where it then can feed the Anomaly Captures, Analytics and Insights, and Alerts and Automation into existing systems. 
+
+The raw data on the other hand is forwarded to low cost storage solutions that still have re-ingestion, re-indexing, or dynamic searching capabilities. \(Snowflake, S3, Blob Storage, etc\).
 
