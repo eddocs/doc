@@ -6,17 +6,29 @@ description: >-
 
 # Configuration
 
-The Edge Delta agents utilize a configuration file to manage various settings, such as: Inputs \(Sources\), Rules \(Monitors and Analytics\) that it performs against the data, as well as Destinations \(Streaming and Triggers\).
+The Edge Delta agents utilize a configuration file to manage various settings, such as: **Inputs** \(Sources\), **Processors** \(Monitors and Analytics\) that it performs against the data, as well as **Outputs** \(Streaming destinations and Triggers\).
 
 The configuration file is automatically loaded into memory at runtime. Updates to the configuration file are typically made via the CCB \(Central Configuration Backend\), or locally against the file itself. 
 
 If configuration updates are made in the UI \(via the CCB\), these updates are automatically propagated down to the agent without requiring a restart. 
 
-## Schema
+## Configuration File Overview
+
+An Edge Delta configuration file contains five main components:
+
+* [Agent Settings](https://docs.edgedelta.com/configuration-1/agent-settings)
+* [Inputs](https://docs.edgedelta.com/configuration-1/inputs)
+* [Processors](https://docs.edgedelta.com/configuration-1/outputs)
+* [Outputs](https://docs.edgedelta.com/configuration-1/processors)
+* [Workflows](https://docs.edgedelta.com/configuration-1/workflows)
+
+These pieces work together to tell the agent which datasets should be analyzed, what analytics to perform against the datasets, and where to send the generated analytics, insights, anomalies and notifications. 
+
+**See diagram below for more details**
 
 ![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](../.gitbook/assets/image%20%2810%29.png)
 
-The configuration file has three main parts:
+## Details
 
 | Name | Description |
 | :--- | :--- |
