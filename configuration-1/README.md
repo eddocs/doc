@@ -14,7 +14,7 @@ If configuration updates are made in the UI \(via the CCB\), these updates are a
 
 ## Schema
 
-![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](../.gitbook/assets/image%20%282%29.png)
+![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](../.gitbook/assets/image%20%2810%29.png)
 
 The configuration file has three main parts:
 
