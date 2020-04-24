@@ -31,7 +31,7 @@ cluster:
   reporting_frequency: 30s    
 ```
 
-## Regexes - Simple Match
+## Regexes - Simple Keyword Match
 
 If enabled, the simple match regex processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the events that match the given match pattern.
 
