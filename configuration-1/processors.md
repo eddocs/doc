@@ -114,5 +114,19 @@ ratios:
       anomaly_probability_percentage: 90       
 ```
 
+## Traces
+
+If enabled, the traces processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the duration of events, given a fixed start and finish pattern. Trace durations will dynamically be computed for each unique value identified for a given key. Keys are typically dynamic fields such as transaction IDs, trace ID, process IDs, microservice identifiers, etc.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
+| start\_pattern | Regular Expression match pattern to define which the starting event for a trace. Start   | Yes |
+| stop\_pattern | Regular Expression match pattern to define which strings to match a failure event | Yes |
+| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
+| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
+
+|  |
+| :--- |
 
 
