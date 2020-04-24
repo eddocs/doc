@@ -6,7 +6,7 @@ description: >-
 
 # Installation
 
-The Edge Delta installation package is available and fully supported for install on hosts running Windows, Linux, and MacOS operating systems, and a Docker image is also available for containerized environments. 
+The Edge Delta installation package is available and fully supported for install on hosts running Windows, Linux, and MacOS operating systems. A Docker image is also available for containerized environments. 
 
 Select from the following deployment types below to review the appropriate documentation:
 
