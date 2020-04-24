@@ -19,5 +19,5 @@ Select from the following deployment types below to review the appropriate docum
 
 Also - within the admin console, many of the commands needed can be created for you through the wizard:
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%286%29.png)
 
