@@ -13,7 +13,6 @@
   * [Outputs](configuration-1/outputs.md)
   * [Processors](configuration-1/processors.md)
   * [Workflows](configuration-1/workflows.md)
-  * [Monitors](configuration-1/monitors.md)
   * [Expected Results](configuration-1/expected-results.md)
 * [For Developers](for-developers.md)
 
