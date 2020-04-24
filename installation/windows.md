@@ -28,6 +28,8 @@ When prompted, provide the appropriate configuration API Key from the administra
 
 ## Command Line Silent Installation
 
+_**Note**: The following steps below can be automated by selecting the 'Deploy' button on the right-hand side of a given configuration in the Edge Delta Admin Portal. After hitting the 'Deploy' button, a dialog box will appear with a pre-configured Windows command containing the appropriate API Key for deployment. Simply run the provided Powershell command on the host you want to deploy Edge Delta on, and the download + installation will begin._  
+
 After downloading the package start cmd.exe as Administrator. Navigate to the appropriate download directory. Replace &lt;YOUR API KEY&gt; with the appropriate configuration API Key from the administration portal,  and run following command:
 
 ```text
