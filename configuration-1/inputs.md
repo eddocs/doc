@@ -59,7 +59,7 @@ If enabled, Files allows you to specify a set of files to have monitored by the 
 
 ## Ports
 
-If enabled, Ports allows you to specify a set of ports and protocols to have the agent listen on for incoming traffic.
+If enabled, Ports allows you to specify a set of ports and protocols to have the agent listen on for incoming traffic. Ports are typically used to listen for traffic from network devices \(firewalls, switches, routers, ...\), time-series metrics \(statsd, graphite, carbon, ...\), as well as centralized logging architectures \(rsyslog, syslog-ng, ...\). 
 
 ```go
   ports:
@@ -76,6 +76,12 @@ If enabled, Ports allows you to specify a set of ports and protocols to have the
         crt_file: /certs/server-cert.pem
         key_file: /certs/server-key.pem
         ca_file: /certs/ca.pem
+    - protocol: udp
+      port: 8125
+      labels: "syslog, metrics, statsd"
+    - protocol: tcp
+      port: 2003
+      labels: "syslog, metrics, graphite"
 ```
 
 ## Windows Events
