@@ -15,5 +15,9 @@ Select from the following deployment types below to review the appropriate docum
 * [MacOS](macos.md)
 * [Docker](docker.md)
 
-## 
+## Admin Console:
+
+Also - within the admin console, many of the commands needed can be created for you through the wizard:
+
+![](../.gitbook/assets/image.png)
 
