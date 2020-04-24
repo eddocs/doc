@@ -11,7 +11,7 @@ In today's modern architectures, whether your infrastructure is physical, virtua
 
 Edge Delta has a novel approach to modern data analytics – the platform uses Federated Learning to analyze data. Utilizing data science concepts closest to where the data is created, Edge Delta intelligently pre-processes data before centralizing it, this unlocks unlimited data analysis, resulting in complete visibility and orders of magnitude faster alerting and automation.
 
-![The Edge Delta platform is distributed, allowing analysis without the need to centralize raw data first](.gitbook/assets/image%20%2810%29.png)
+![The Edge Delta platform is distributed, allowing analysis without the need to centralize raw data first](.gitbook/assets/image%20%2811%29.png)
 
 ## Typical Architecture
 
@@ -19,7 +19,7 @@ For a usual installation, the analysis initially starts at the agents, where raw
 
 
 
-![Anomaly Captures, Insights, and Alerts and Automation, Raw Logs are all easily integrated.  ](.gitbook/assets/image%20%283%29.png)
+![Anomaly Captures, Insights, and Alerts and Automation, Raw Logs are all easily integrated.  ](.gitbook/assets/image%20%284%29.png)
 
 The agent analyzes all data in real time, where it then can feed the Anomaly Captures, Analytics and Insights, and Alerts and Automation into existing systems. 
 
