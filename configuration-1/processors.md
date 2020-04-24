@@ -162,7 +162,9 @@ traces:
 
 ## Cluster
 
-If enabled, the cluster processor will apply realtime clustering algorithms to the specified inputs as part of a workflow. The clustering algorithms automatically detect the structure, and patterns of each incoming event, providing a comprehensive analysis of all incoming data. In addition, clustering provides a unique analysis of incoming data streams to make detecting log-based anomalies extremely simple. 
+If enabled, the cluster processor will apply realtime clustering algorithms to the specified inputs as part of a workflow. The clustering algorithms automatically detect the structure, and patterns of each incoming event, providing a comprehensive analysis of all incoming data. In addition, clustering provides a unique analysis of incoming data streams to make detecting log-based anomalies extremely simple.
+
+_Note: As expected, in certain cases the cluster algorithm can increase resource consumption of the Edge Delta service._ _This typically depends on various factors of the incoming datasets \(throughput, event structure, pattern distributions, etc.\)_ 
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
