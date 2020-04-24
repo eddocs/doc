@@ -140,5 +140,17 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
 
 **Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
 
-## 
+## Examples
+
+```go
+outputs:
+  streams:
+      - name: sumo-logic-integration
+        type: sumologic
+        endpoint: "https://[SumoEndpoint]/receiver/v1/http/[UniqueHTTPCollectorCode]"
+  triggers:
+      - name: slack-integration
+        type: slack
+        endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+```
 
