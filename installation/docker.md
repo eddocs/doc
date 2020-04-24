@@ -22,6 +22,8 @@ docker login registry.gitlab.com -u your_username -p your_password
 
 ## Running the Container
 
+_**Note**: The following steps below can be automated by selecting the 'Deploy' button on the right-hand side of a given configuration in the Edge Delta Admin Portal. After hitting the 'Deploy' button, a dialog box will appear with a pre-configured Docker run command containing the appropriate API Key for deployment. Simply run that command on the host you want to deploy Edge Delta on, and the installation / deployment process will begin._  
+
 When it is time to run the Edge Delta container, you can either have the Edge Delta container fetch its configuration from the Edge Delta Central Configuration Backend \(recommended\), or use a local configuration file.
 
 ### Run with an API Key Utilizing Central Configuration Backend \(CCB\)
