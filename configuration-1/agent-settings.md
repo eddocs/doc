@@ -36,7 +36,7 @@ Example:
 
 ```go
 agent_settings:
-  ac_buffer_size: 125
+  anomaly_capture_size: 125
   tag: prod_payments
   disable_printer: true
   grace_period: 30s

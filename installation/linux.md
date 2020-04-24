@@ -14,6 +14,8 @@ Contact the Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to c
 
 ## Installation
 
+_**Note**: The following steps below can be automated by selecting the 'Deploy' button on the right-hand side of a given configuration in the Edge Delta Admin Portal. After hitting the 'Deploy' button, a dialog box will appear with a pre-configured Linux command containing the appropriate API Key for deployment. Simply run that command on the host you want to deploy Edge Delta on, and the installation / deployment process will begin._  
+
 Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your configuration API Key from the administration portal: 
 
 ![](../.gitbook/assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
