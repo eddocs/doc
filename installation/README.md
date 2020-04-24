@@ -16,7 +16,7 @@ Select from the following deployment types below to review the appropriate docum
 * [Docker](docker.md)
 
   
-In addition - within the admin console, many of the commands needed for installation can be created for you through the wizard:
+In addition - within the admin console, many of the commands needed for installation can be created for you automatically through the wizard:
 
 ![](../.gitbook/assets/image%20%286%29.png)
 
