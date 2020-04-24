@@ -8,17 +8,19 @@ description: >-
 
 ## Windows
 
-Edge Delta has a very simple 64 or 32 bit MSI installation process, once complete, the agent will run as a background service for Windows-based operating systems.
+Edge Delta has a very simple 64 or 32 bit MSI installation process. 
+
+Once complete, the agent will run as a background service for Windows-based operating systems.
 
 ### Download
 
-Contact the Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to create an account and get access to the agent deployment portal. 
+Please contact the Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to create an account and get access to the agent deployment portal. 
 
 ### UI Installation
 
 After downloading the appropriate installation package, simply double click and follow the wizard.
 
-You can change the installation directory where the Edge Delta agent will install during installation wizard, default path is "Program Files" or "Program Files \(x86\)" depending of your chosen platform.
+You can change the installation directory where the Edge Delta agent will install during installation wizard, default path is "Program Files" or "Program Files \(x86\)" depending on your chosen platform.
 
 When prompted, provide the appropriate configuration API Key from the administration portal, and complete installation. 
 
