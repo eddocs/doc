@@ -112,5 +112,81 @@ Note: In the 'include' section, after "image=" this is a contains match, so as l
 
 ```
 
-## 
+## Examples - Linux
+
+```go
+inputs:
+  system_stats:
+    labels: "system_stats"
+  agent_stats:
+    labels: "agent_stats"
+  files:
+    - labels: "system_logs, auth"
+      path: "/var/log/auth.log"
+    - labels: "system_logs, syslog"
+      path: "/var/log/syslog"
+    - labels: "system_logs, secure"
+      path: "/var/log/secure"
+    - labels: "system_logs, messages"
+      path: "/var/log/messages"
+  ports:
+    - labels: "syslog_tcp_ports"
+      protocol: tcp
+      port: 1514
+    - labels: "syslog_tcp_ports"
+      protocol: tcp
+      port: 514
+    - labels: "syslog_udp_ports"
+      protocol: udp
+      port: 1514
+    - labels: "syslog_udp_ports"
+      protocol: udp
+      port: 514
+```
+
+## Examples - Windows
+
+```go
+inputs:
+  system_stats:
+    labels: "system_stats"
+  agent_stats:
+    labels: "agent_stats"
+  winevents:
+    - labels: "windows_events, application"
+      channel: "Application"
+    - labels: "windows_events, security"
+      channel: "Security"
+    - labels: "windows_events, system"
+      channel: "System"
+  files:
+    - labels: "iis_logs"
+      path: "C:\\inetpub\\Logs\\LogFiles\\W3SVC1\\*.log"
+  ports:
+    - labels: "syslog_tcp_ports"
+      protocol: tcp
+      port: 1514
+    - labels: "syslog_udp_ports"
+      protocol: udp
+      port: 514
+```
+
+## Examples - Docker
+
+```go
+inputs:
+  system_stats:
+    enabled: true
+    labels: "system_stats"
+  container_stats:
+    enabled: true
+    labels: "container_stats"
+  agent_stats:
+    enabled: true
+    labels: "agent_stats"
+  containers:
+    - labels: "docker_logs,all_containers"
+      include:
+        - "image=.*"
+```
 
