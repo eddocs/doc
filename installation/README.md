@@ -18,5 +18,5 @@ Select from the following deployment types below to review the appropriate docum
   
 In addition - within the admin console, many of the commands needed for installation can be created for you automatically through the wizard:
 
-![](../.gitbook/assets/image%20%286%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 

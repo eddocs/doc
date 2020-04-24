@@ -14,6 +14,8 @@ If configuration updates are made in the UI \(via the CCB\), these updates are a
 
 ## Schema
 
+![The FLE uses distributed machine learning to output streams and triggers](../.gitbook/assets/image.png)
+
 The configuration file has three main parts:
 
 | Name | Description |
