@@ -118,15 +118,104 @@ ratios:
 
 If enabled, the traces processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the duration of events, given a fixed start and finish pattern. Trace durations will dynamically be computed for each unique value identified for a given key. Keys are typically dynamic fields such as transaction IDs, trace ID, process IDs, microservice identifiers, etc.
 
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| start\_pattern | Regular Expression match pattern to define which the starting event for a trace. Start   | Yes |
-| stop\_pattern | Regular Expression match pattern to define which strings to match a failure event | Yes |
-| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
-| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Key</th>
+      <th style="text-align:left">Description</th>
+      <th style="text-align:left">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">name</td>
+      <td style="text-align:left">User defined name of this specific processor, used for mapping this processor
+        to a workflow</td>
+      <td style="text-align:left">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">start_pattern</td>
+      <td style="text-align:left">
+        <p>Regular Expression pattern to define the starting event for a trace. Start
+          pattern must contain a named capture group, which is used as the key for
+          individual traces.</p>
+        <p><em>Note: named capture groups must follow Golang regex protocol, ex:<br /> &quot;initializing render transaction: (?P&lt;transaction_id&gt;\w+)&quot;</em>
+        </p>
+      </td>
+      <td style="text-align:left">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">stop_pattern</td>
+      <td style="text-align:left">
+        <p>Regular Expression pattern to define the stopping event for a trace. Stop
+          pattern must contain a named capture group, which is used as the key for
+          individual traces.</p>
+        <p><em>Note: named capture groups must follow Golang regex protocol, ex:<br /> &quot;completed render transaction: (?P&lt;transaction_id&gt;\w+)&quot;</em>
+        </p>
+      </td>
+      <td style="text-align:left">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>trigger_thresholds</b>
+      </td>
+      <td style="text-align:left">The trigger_thresholds section is used to define trigger_thresholds (alerting
+        and automation) based on Edge Delta&apos;s analysis of the incoming data</td>
+      <td
+      style="text-align:left">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">max_duration</td>
+      <td style="text-align:left">The max timeout window (in milliseconds) for a transaction. Any transaction
+        that exceeds the max_duration will generate a trigger</td>
+      <td style="text-align:left">No</td>
+    </tr>
+  </tbody>
+</table>```go
+traces:
+  - name: rendering-transaction
+    start_pattern: "starting render transaction: (?P<transaction_id>\w+)"
+    stop_pattern: "completed render transaction: (?P<transaction_id>\w+)"
+    trigger_thresholds:
+      max_duration: 10000   
+```
 
-|  |
-| :--- |
+## Examples
 
+```go
+processors:
+
+  regexes:
+    - name: "errors"
+      pattern: "error|err|ERROR|ERR"
+      trigger_thresholds:
+        anomaly_probability_percentage: 90
+    - name: "response_time"
+      pattern: "completed in (\\d+)ms"
+      trigger_thresholds:
+        anomaly_probability_percentage: 90  
+    - name: "log_levels"
+      pattern: "level=(?P<log_level>\\w+) "
+      trigger_thresholds:
+        anomaly_probability_percentage: 90 
+      
+  ratios:
+    - name: request-error-ratio
+      success_pattern: "request succeeded"
+      failure_pattern: "request failed"
+      trigger_thresholds:
+        anomaly_probability_percentage: 90
+      
+  traces:
+    - name: rendering-transaction-traces
+      start_pattern: "starting render transaction: (?P<transaction_id>\w+)"
+      stop_pattern: "completed render transaction: (?P<transaction_id>\w+)"
+      trigger_thresholds:
+        max_duration: 10000 
+        
+  cluster:
+    name: clustering
+    num_of_clusters: 100
+    samples_per_cluster: 3
+    reporting_frequency: 30s    
+```
 
