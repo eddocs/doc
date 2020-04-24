@@ -12,25 +12,6 @@ Processors are the mechanism used to allow users to specify various analytical, 
 
 The labels are used to map processors to specific inputs and outputs, as part of a workflow. 
 
-## Cluster
-
-If enabled, the cluster processor will apply realtime clustering algorithms to the specified inputs as part of a workflow. The clustering algorithms automatically detect the structure, and patterns of each incoming event, providing a comprehensive analysis of all incoming data. In addition, clustering provides a unique analysis of incoming data streams to make detecting log-based anomalies extremely simple. 
-
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| num\_of\_clusters | Max number of clusters to generate for a given input.  | Yes |
-| samples\_per\_cluster | The number of sample events to report when providing cluster details  | Yes |
-| reporting\_frequency | The frequency to report cluster analysis to streaming destinations  | Yes |
-
-```go
-cluster:
-  name: clustering
-  num_of_clusters: 100
-  samples_per_cluster: 3
-  reporting_frequency: 30s    
-```
-
 ## Regexes - Simple Keyword Match
 
 If enabled, the simple match regex processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the events that match the given match pattern.
@@ -177,6 +158,25 @@ traces:
     stop_pattern: "completed render transaction: (?P<transaction_id>\w+)"
     trigger_thresholds:
       max_duration: 10000   
+```
+
+## Cluster
+
+If enabled, the cluster processor will apply realtime clustering algorithms to the specified inputs as part of a workflow. The clustering algorithms automatically detect the structure, and patterns of each incoming event, providing a comprehensive analysis of all incoming data. In addition, clustering provides a unique analysis of incoming data streams to make detecting log-based anomalies extremely simple. 
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
+| num\_of\_clusters | Max number of clusters to generate for a given input.  | Yes |
+| samples\_per\_cluster | The number of sample events to report when providing cluster details  | Yes |
+| reporting\_frequency | The frequency to report cluster analysis to streaming destinations  | Yes |
+
+```go
+cluster:
+  name: clustering
+  num_of_clusters: 100
+  samples_per_cluster: 3
+  reporting_frequency: 30s    
 ```
 
 ## Examples
