@@ -1,6 +1,12 @@
+---
+description: >-
+  The following document provides an overview for Installing the Edge Delta
+  agent
+---
+
 # Installation
 
-Edge Delta package is available for hosts with Windows, Linux and MacOS operating systems. Docker image is also available to be deployed and monitor containers running on Docker hosts. Follow the directions below to install it on the environment of your choice.
+The Edge Delta installation package is available for  Windows, Linux, and MacOS operating systems. A Docker image is also available for containerized environments. Select from the following deployment types below to review the appropriate documentation:
 
 * [Windows](windows.md)
 * [Linux](linux.md)
