@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Edge Delta Overview](README.md)
+* [Basic Onboarding](basic-onboarding.md)
 * [Installation](installation/README.md)
   * [Windows](installation/windows.md)
   * [Linux](installation/linux.md)
