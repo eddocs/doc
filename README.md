@@ -3,7 +3,7 @@ title: Windows
 weight: 1
 ---
 
-# Getting Started
+# Edge Delta Overview
 
 ## What is Edge Delta?
 

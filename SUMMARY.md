@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Getting Started](README.md)
+* [Edge Delta Overview](README.md)
 * [Installation](installation/README.md)
   * [Windows](installation/windows.md)
   * [Linux](installation/linux.md)
