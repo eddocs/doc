@@ -29,7 +29,7 @@ description: >-
 
 1. Identify the appropriate configuration you would like to use for deployment \(modified in prior step\)
 2. Hit the Deploy button on the right-hand side of the configuration
-3. Copy the appropriate deployment command based on the OS of the server Edge Delta will be deployed on\)
+3. Copy the appropriate deployment command based on the OS of the server Edge Delta will be deployed\)
 4. Run the deployment command on the target server to deploy Edge Delta
 5. If any issues appear after deploying the agent, view troubleshooting section for given OS of agent deployment \(see [Installation](https://docs.edgedelta.com/installation) documentation, select appropriate OS, and navigate to _**Troubleshooting**_ section of documentation\)
 
