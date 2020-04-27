@@ -7,7 +7,7 @@ weight: 1
 
 ## What is Edge Delta?
 
-In today's modern architectures, whether your infrastructure is physical, virtual, on-premise, in the cloud, containerized or serverless, applications and systems produce a large volume of telemetry \(logs, metrics, events, traces, etc.\). Real-time analytics and stream processing are used to capture the current state of these systems and provide intelligent insight. This empowers teams to be able to observe, monitor, predict, alert, and remediate in an automated manner, ensuring uptime and availability of critical production systems.
+In today's modern architectures, whether your infrastructure is physical, virtual, on-premise, in the cloud, containerized or serverless, applications and systems produce a large volume of telemetry data \(logs, metrics, events, traces, etc.\). Real-time analytics and stream processing are used to capture the current state of these systems and provide intelligent insight. This empowers teams to be able to observe, monitor, predict, alert, and remediate in an automated manner, ensuring uptime and availability of critical production systems.
 
 Edge Delta has a novel approach to modern data analytics – the platform uses Federated Learning to analyze data. Utilizing data science concepts closest to where the data is created, Edge Delta intelligently pre-processes data before centralizing it, unlocking unlimited data analysis, resulting in complete visibility and orders of magnitude faster alerting and automation.
 
