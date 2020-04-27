@@ -35,7 +35,7 @@ Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your config
 Container must have internet access to fetch the configuration.
 
 {% hint style="info" %}
-More information about [CCB](../configuration-1/ccb.md) can be found under [Configuration](../configuration-1/) section
+More information about [CCB](../configuration/ccb.md) can be found under [Configuration](../configuration/) section
 {% endhint %}
 
 ```text

@@ -19,10 +19,10 @@ description: >-
 3. Identify the appropriate example configuration to use as a starting point \(based on the OS of the server Edge Delta will be deployed on\)
 4. Hit the Edit button for the appropriate configuration
 5. Scan the configuration and identify parameters that may need to change:
-   1. **Inputs** section, add/remove/uncomment inputs as seen fit \(see [Inputs](https://docs.edgedelta.com/configuration-1/inputs) documentation for more details\)
-   2. **Outputs** section, uncomment/add/remove outputs as seen fit \(see [Outputs](https://docs.edgedelta.com/configuration-1/outputs) documentation for more details\)
-   3. **Processors** section, add/remove processors as seen fit \(see [Processors](https://docs.edgedelta.com/configuration-1/processors) documentation for more details\)
-   4. **Workflows** section, update example\_workflow to match the labels and names of the Inputs, Outputs, and Processors defined within the configuration \(see [Workflows](https://docs.edgedelta.com/configuration-1/workflows) documentation for more details\)
+   1. **Inputs** section, add/remove/uncomment inputs as seen fit \(see [Inputs](https://docs.edgedelta.com/configuration/inputs) documentation for more details\)
+   2. **Outputs** section, uncomment/add/remove outputs as seen fit \(see [Outputs](https://docs.edgedelta.com/configuration/outputs) documentation for more details\)
+   3. **Processors** section, add/remove processors as seen fit \(see [Processors](https://docs.edgedelta.com/configuration/processors) documentation for more details\)
+   4. **Workflows** section, update example\_workflow to match the labels and names of the Inputs, Outputs, and Processors defined within the configuration \(see [Workflows](https://docs.edgedelta.com/configuration/workflows) documentation for more details\)
 6. Once the appropriate updates have been made to the configuration, hit the Save button in the bottom right corner of the editor
 
 ## Deploy

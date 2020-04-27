@@ -16,11 +16,11 @@ If configuration updates are made in the UI \(via the CCB\), these updates are a
 
 An Edge Delta configuration file contains five main components:
 
-* [Agent Settings](https://docs.edgedelta.com/configuration-1/agent-settings)
-* [Inputs](https://docs.edgedelta.com/configuration-1/inputs)
-* [Processors](https://docs.edgedelta.com/configuration-1/outputs)
-* [Outputs](https://docs.edgedelta.com/configuration-1/processors)
-* [Workflows](https://docs.edgedelta.com/configuration-1/workflows)
+* [Agent Settings](https://docs.edgedelta.com/configuration/agent-settings)
+* [Inputs](https://docs.edgedelta.com/configuration/inputs)
+* [Processors](https://docs.edgedelta.com/configuration/outputs)
+* [Outputs](https://docs.edgedelta.com/configuration/processors)
+* [Workflows](https://docs.edgedelta.com/configuration/workflows)
 
 These pieces work together to tell the agent which datasets should be analyzed, what analytics to perform against the datasets, and where to send the generated analytics, insights, anomalies and notifications. 
 
