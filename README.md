@@ -7,15 +7,15 @@ weight: 1
 
 ## What is Edge Delta?
 
-In today's modern architectures, whether your infrastructure is physical, virtual, on-premise, in the cloud, containerized, or serverless applications and systems produce a large volume of logs, counters, metrics and information. Real-time analytics and stream processing are used to capture the current state of these systems and provide intelligent insight. This empowers teams to be able to observe, monitor, predict, alert, and remediate in an automated manner, ensuring uptime and availability of critical production systems.
+In today's modern architectures, whether your infrastructure is physical, virtual, on-premise, in the cloud, containerized or serverless, applications and systems produce a large volume of telemetry \(logs, metrics, events, traces, etc.\). Real-time analytics and stream processing are used to capture the current state of these systems and provide intelligent insight. This empowers teams to be able to observe, monitor, predict, alert, and remediate in an automated manner, ensuring uptime and availability of critical production systems.
 
-Edge Delta has a novel approach to modern data analytics – the platform uses Federated Learning to analyze data. Utilizing data science concepts closest to where the data is created, Edge Delta intelligently pre-processes data before centralizing it, this unlocks unlimited data analysis, resulting in complete visibility and orders of magnitude faster alerting and automation.
+Edge Delta has a novel approach to modern data analytics – the platform uses Federated Learning to analyze data. Utilizing data science concepts closest to where the data is created, Edge Delta intelligently pre-processes data before centralizing it, unlocking unlimited data analysis, resulting in complete visibility and orders of magnitude faster alerting and automation.
 
 ![The Edge Delta platform is distributed, allowing analysis without the need to centralize raw data first](.gitbook/assets/image%20%2812%29.png)
 
 ## Typical Architecture
 
-For a usual installation, the analysis initially starts at the agents, where raw logs, metrics, and telemetry is pre-processed and applied to both streams and triggers:
+For a standard installation, the analysis initially starts at the agents, where raw logs, metrics, and telemetry is pre-processed and applied to both streams and triggers:
 
 
 
@@ -23,7 +23,7 @@ For a usual installation, the analysis initially starts at the agents, where raw
 
 The agent analyzes all data in real time, where it then can feed the Anomaly Captures, Analytics and Insights, and Alerts and Automation into existing systems. 
 
-The raw data on the other hand is forwarded to low cost storage solutions that still have re-ingestion, re-indexing, or dynamic searching capabilities. \(Snowflake, S3, Blob Storage, etc\).
+The raw data on the other hand can be forwarded to low cost analytics tiers of existing monitoring platforms \(search-only, infrequent, ingest-only, etc.\) as well as storage solutions that have re-ingestion, re-indexing, or dynamic searching capabilities. \(Snowflake, S3, Blob Storage, etc\).
 
 ## Planning and Design
 
