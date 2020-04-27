@@ -16,11 +16,11 @@ If configuration updates are made in the UI \(via the CCB\), these updates are a
 
 An Edge Delta configuration file contains five main components:
 
-* [Agent Settings](https://docs.edgedelta.com/configuration-1/agent-settings)
-* [Inputs](https://docs.edgedelta.com/configuration-1/inputs)
-* [Processors](https://docs.edgedelta.com/configuration-1/outputs)
-* [Outputs](https://docs.edgedelta.com/configuration-1/processors)
-* [Workflows](https://docs.edgedelta.com/configuration-1/workflows)
+* [Agent Settings](agent-settings.md)
+* [Inputs](inputs.md)
+* [Processors](processors.md)
+* [Outputs](outputs.md)
+* [Workflows](workflows.md)
 
 These pieces work together to tell the agent which datasets should be analyzed, what analytics to perform against the datasets, and where to send the generated analytics, insights, anomalies and notifications. 
 
@@ -32,11 +32,11 @@ These pieces work together to tell the agent which datasets should be analyzed, 
 
 | Name | Description |
 | :--- | :--- |
-| [Agent settings](https://docs.edgedelta.com/configuration/agent-settings) | Agent Settings are global settings for the configuration and agent |
+| [Agent settings](agent-settings.md) | Agent Settings are global settings for the configuration and agent |
 | [Inputs](inputs.md) | Inputs define what type of data sources you monitor \(files, syslog ports, docker containers, etc.\), and the location or configuration settings of these inputs.  |
 | [Outputs](outputs.md) | Outputs are either are either Streaming destinations, or Trigger destinations. **Streaming destinations** are typically Centralized Monitoring Platforms \(i.e. Splunk, Sumo Logic, Datadog, Snowflake, New Relic, Elastic, etc.\). As the Edge Delta service is running,  analyics and insights are continuously generated and forwarded on to Streaming destinations. **Trigger destinations** are alerting and automation systems \(i.e. PagerDuty, Slack, ServiceNow, OpsGenie, Runbook, etc.\) that Edge Delta can be configured to send alerts and notifications to when anomalies are detected or various conditions are met.  |
 | [Processors](processors.md) | Processors are user-defined patterns, analytics, and processing tools to analyze the incoming data streams. Processors can be defined using regular expressions, keyword matching, ratio analytics, tracing logic, as well as clustering and statistical analysis. |
-| [Workflows](https://docs.edgedelta.com/configuration/workflows) | Workflows are the mapping of Inputs, Outputs and Processors, logically grouped together based on the underlying use-cases and analytics being performed.  |
+| [Workflows](workflows.md) | Workflows are the mapping of Inputs, Outputs and Processors, logically grouped together based on the underlying use-cases and analytics being performed.  |
 
 
 
