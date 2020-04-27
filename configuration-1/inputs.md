@@ -46,6 +46,8 @@ If enabled, Container Stats will report container level metrics, such as CPU, Me
 
 If enabled, Files allows you to specify a set of files to have monitored by the Edge Delta service.
 
+Provide the full path to the file\(s\) you want to monitor. Wildcards are supported. 
+
 ```go
   files:
     - path: "/var/log/service_a.log"
