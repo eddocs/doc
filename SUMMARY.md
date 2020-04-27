@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Getting Started](README.md)
-* [Test](test.md)
 * [Installation](installation/README.md)
   * [Windows](installation/windows.md)
   * [Linux](installation/linux.md)
