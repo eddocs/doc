@@ -15,5 +15,4 @@
   * [Processors](configuration/processors.md)
   * [Workflows](configuration/workflows.md)
   * [Expected Results](configuration/expected-results.md)
-* [For Developers](for-developers.md)
 

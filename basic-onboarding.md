@@ -40,7 +40,3 @@ description: >-
 3. Query the source that is configured to receive incoming Edge Delta data
 4. Review query results. Incoming data should contain metadata tags that match the labels and tags defined in the configuration file
 
-
-
-
-
