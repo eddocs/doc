@@ -15,5 +15,6 @@
   * [Processors](configuration/processors.md)
   * [Workflows](configuration/workflows.md)
 * [Examples](examples/README.md)
+  * [Windows Configuration](examples/windows-configuration.md)
   * [Linux Configuration](examples/linux-configuration.md)
 
