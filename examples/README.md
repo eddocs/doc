@@ -8,9 +8,9 @@ description: >-
 
 ## Configuration File Examples
 
-* Linux Configuration
-* Windows Configuration
-* Docker Configuration
+* [Linux Configuration](linux-configuration.md)
+* [Windows Configuration](windows-configuration.md)
+* [Docker Configuration](docker-configuration.md)
 
 
 
