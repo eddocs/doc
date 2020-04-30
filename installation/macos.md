@@ -10,7 +10,7 @@ Edge Delta provides a convenient self extracting installer package for MacOS.
 
 ## Download
 
-Contact the Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to create an account and get access to the agent deployment portal. 
+Go to [admin.edgedelta.com](https://admin.edgedelta.com) \(or contact the Edge Delta team at [info@edgedelta.com](mailto:info@edgedelta.com)\) to create an account and get access to the agent deployment portal. 
 
 ## Installation
 
