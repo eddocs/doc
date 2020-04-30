@@ -14,7 +14,9 @@ Once complete, the agent will run as a background service for Windows-based oper
 
 ### Download
 
-Please contact the Edge Delta team [info@edgedelta.com](mailto:info@edgedelta.com) to create an account and get access to the agent deployment portal. 
+Go to [admin.edgedelta.com](https://admin.edgedelta.com) \(or contact the Edge Delta team at [info@edgedelta.com](mailto:info@edgedelta.com)\) to create an account and get access to the agent deployment portal. 
+
+
 
 ### UI Installation
 
@@ -24,7 +26,7 @@ You can change the installation directory where the Edge Delta agent will instal
 
 When prompted, provide the appropriate configuration API Key from the administration portal, and complete installation. 
 
-![](../.gitbook/assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
+![](../.gitbook/assets/image%20%282%29.png)
 
 
 

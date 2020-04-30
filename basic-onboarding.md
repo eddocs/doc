@@ -16,7 +16,7 @@ description: >-
 
 1. Sign into [admin.edgedelta.com](https://admin.edgedelta.com/)
 2. Navigate to the **Home** tab of the Edge Delta service
-3. Identify the appropriate example configuration to use as a starting point based on the OS \(Docker, Linux, MacOS, or Windows\) of the server Edge Delta will be deployed on
+3. Identify the appropriate example configuration to use as a starting point based on the OS \(Linux, MacOS, or Windows\) of the server Edge Delta will be deployed on
 4. Hit the **Edit** button for the appropriate configuration. Output \(below\) typically needs to be configured to ensure connection to other services. 
 5. Scan the configuration and identify parameters that may need to change:
    1. **Inputs** section, add/remove/uncomment inputs as seen fit \(see [Inputs](https://docs.edgedelta.com/configuration/inputs) documentation for more details\)
