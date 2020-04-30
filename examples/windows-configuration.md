@@ -6,7 +6,9 @@ description: >-
 
 # Windows Configuration
 
+Some of the sections in the example configuration are commented out \(starting with a "\#"\), or contain a field that needs to be added \(i.e. _"&lt;ADD SUMO LOGIC HTTPS ENDPOINT&gt;"_\). The goal is to provide a template to use as a starting point, however basic modifications are required to generate a working configuration.
 
+Please comment/uncomment parameters as needed, as well as populate the appropriate values to create your desired configuration.
 
 ```go
 #Configuration File Version (currently v1 and v2 supported)
