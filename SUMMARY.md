@@ -14,5 +14,6 @@
   * [Outputs](configuration/outputs.md)
   * [Processors](configuration/processors.md)
   * [Workflows](configuration/workflows.md)
-* [Examples](examples.md)
+* [Examples](examples/README.md)
+  * [Linux Configuration](examples/linux-configuration.md)
 
