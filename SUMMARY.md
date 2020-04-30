@@ -14,4 +14,5 @@
   * [Outputs](configuration/outputs.md)
   * [Processors](configuration/processors.md)
   * [Workflows](configuration/workflows.md)
+* [Examples](examples.md)
 
