@@ -20,6 +20,8 @@ Go to [admin.edgedelta.com](https://admin.edgedelta.com) \(or contact the Edge D
 
 ### UI Installation
 
+Please download the appropriate package at [release.edgedelta.com](https://release.edgedelta.com/)
+
 After downloading the appropriate installation package, simply double click and follow the wizard.
 
 You can change the installation directory where the Edge Delta agent will install during installation wizard, default path is "Program Files" or "Program Files \(x86\)" depending on your chosen platform.
