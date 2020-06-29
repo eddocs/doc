@@ -8,18 +8,6 @@ description: >-
 
 Edge Delta has a Docker container image that can be deployed as a Sidecar or DaemonSet architecture to analyze telemetry from other Docker containers running on the host, while providing isolation and encapsulation.
 
-## Docker Registry Access
-
-To be able to run the Edge Delta Docker container image, the running host needs to have Edge Delta Docker registry access.
-
-Contact [info@edgedelta.com](mailto:info@edgedelta.com) to receive the Docker registry username and password for your organization.
-
-Replace `your_username` and `your_password` in the command below and run on hosts where you will run the Edge Delta Docker container.
-
-```text
-docker login registry.gitlab.com -u your_username -p your_password
-```
-
 ## Running the Container
 
 _**Note**: The following steps below can be automated by selecting the 'Deploy' button on the right-hand side of a given configuration in the Edge Delta Admin Portal. After hitting the 'Deploy' button, a dialog box will appear with a pre-configured Docker run command containing the appropriate API Key for deployment. Simply run that command on the host you want to deploy Edge Delta on, and the installation / deployment process will begin._
@@ -42,7 +30,7 @@ More information about [CCB](../configuration/ccb.md) can be found under [Config
 docker run -it \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -e "ED_API_KEY=<YOUR_API_KEY>" \
-registry.gitlab.com/edgedelta/edgedelta/agent:latest
+docker.io/edgedelta/edgedelta/agent:latest
 ```
 
 ### Run with a Local Configuration File
@@ -53,7 +41,7 @@ Replace `$PWD/config.yml`with absolute path of the local configuration file on h
 docker run -it \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v $PWD/config.yml:/edgedelta/config.yml \
-registry.gitlab.com/edgedelta/edgedelta/agent:latest
+docker.io/edgedelta/edgedelta/agent:latest
 ```
 
 ## Limiting Resource Consumption
@@ -64,7 +52,7 @@ You can limit the CPU or memory resources that Edge Delta container consumes. In
 docker run -it --cpus=".25" --memory="256m" \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v $PWD/config_docker.yml:/edgedelta/config.yml \
-registry.gitlab.com/edgedelta/edgedelta/agent:latest
+docker.io/edgedelta/edgedelta/agent:latest
 ```
 
 ## Troubleshooting
