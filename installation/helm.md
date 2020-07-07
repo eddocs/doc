@@ -12,13 +12,13 @@ Edge Delta uses Kubernetes recommended node level logging architecture, in other
 
 ## Installation
 
-### Add Edge Delta helm repository
+Add Edge Delta helm repository
 
 ```text
 helm repo add edgedelta https://edgedelta.github.io/charts
 ```
 
-### Run Helm installation
+Run Helm installation
 
 ```text
 helm install edgedelta edgedelta/edgedelta --set apiKey=<API_KEY>
@@ -37,7 +37,7 @@ NOTES:
 2. Find the configuration with <API_KEY> to check reporting status
 ```
 
-### Show helm installed packages 
+Show helm installed packages 
 
 ```text
 helm ls
