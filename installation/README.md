@@ -14,6 +14,8 @@ Select from the following deployment types below to review the appropriate docum
 * [Linux](linux.md)
 * [MacOS](macos.md)
 * [Docker](docker.md)
+* [Kubernetes](kubernetes.md)
+* [Kubernetes With Helm](helm.md)
 
   
 In addition - within the admin console, many of the commands needed for installation can be created for you automatically through the wizard:
