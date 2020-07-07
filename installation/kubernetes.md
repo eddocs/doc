@@ -12,31 +12,33 @@ Edge Delta uses Kubernetes recommended node level logging architecture, in other
 
 ## Installation
 
-### Create kubernetes namespace
+Create kubernetes namespace
 
 ```text
 kubectl create namespace edgedelta
 ```
 
-### Create a kube secret that contains your api token.
+Create a kube secret that contains your api token.
 
 ```text
-kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="(log in to view API tokens)"
+kubectl create secret generic ed-api-key \
+	--namespace=edgedelta \
+	--from-literal=ed-api-key="(log in to view API tokens)"
 ```
 
-### Create daemonset 
+Create daemonset 
 
 ```text
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
 
-### Checking status of Edge Delta container
+Checking status of Edge Delta container
 
 ```text
 kubectl get pods --namespace=edgedelta
 ```
 
-### Once you have the name of the pod running the Edge Delta Agent, use the following command:
+Once you have the name of the pod running the Edge Delta Agent, use the following command:
 
 ```text
 kubectl exec <pod_name> -- edgedelta status -v
@@ -53,7 +55,6 @@ To run Edge Delta Agent on specific nodes of your cluster, add a node selector o
 spec:
   nodeSelector:
     logging: edgedelta
-
 ```
 
 Read more about specifying [node selectors and affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
