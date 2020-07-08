@@ -38,14 +38,18 @@ Checking status of Edge Delta container
 kubectl get pods --namespace=edgedelta
 ```
 
-Once you have the name of the pod running the Edge Delta Agent, use the following command:
+Once you have the name of the pod running the Edge Delta Agent, run below command to see Edge Delta agent logs;
 
 ```text
-kubectl exec <pod_name> -- edgedelta status -v
-
+kubectl logs <pod_name> -n edgedelta
 ```
 
 ## Useful Tips
+
+### Uninstall Edge Delta DaemonSet
+```text
+kubectl delete daemonset edgedelta --namespace edgedelta
+```
 
 ### Running Edge Delta agent on select nodes
 To run Edge Delta Agent on specific nodes of your cluster, add a node selector or nodeAffinity section to your pod config file. If your desired nodes are labeled logging=edgedelta then adding following nodeSelector will restricy Edge Delta agent pods to Nodes that have logging=edgedelta label.
