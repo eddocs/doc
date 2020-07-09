@@ -119,6 +119,73 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
         db: "specific_influxdb_database"
 ```
 
+## **Wavefront**
+
+If enabled, the Wavefront integration will stream analytics and insights to your Wavefront environment
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(i.e. wavefront, influxdb, sumologic, datadog, etc.\) | Yes |
+| endpoint | Wavefront endpoint | Yes |
+| token | Wavefront API token | Yes |
+
+```go
+      - name: wavefront
+        type: wavefront
+        endpoint: "https://{your wavefront domain}.wavefront.com/report"
+        token: "<add wavefront api token>"
+```
+
+## **Scalyr**
+
+If enabled, the Scalyr integration will stream analytics and insights to your Scalyr environment
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(i.e. scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
+| endpoint | Scalyr endpoint | Yes |
+
+```go
+      - name: scalyr
+        type: scalyr
+        endpoint: "https://app.scalyr.com/api/uploadLogs?token={scalyr log access write key}"
+```
+
+## **Elastic Search**
+
+If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(i.e. elastic, scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
+| index | Index name where to data stored in elastic search backend | Yes |
+| cloud_id | Cloud ID of elastic search backend | No |
+| address | Adress list of elastic search backend | No |
+| token | Elastic Search API Key | No |
+| user | Username for elastic search credentials | No |
+| password | Elastic Search password for connecting user | No |
+
+- For the connection url, you can not provide cloud_id and adress at the same time. And you must provide at least one of them.
+- For the authentication, you can not provide token and user/password at the same time. And you must provide at least one of them.
+
+```go
+      - name: elastic
+        type: elastic
+        index: "index name"
+        # you can provide cloud or adress list but not both at the same time 
+        cloud_id: "<add elasticsearch cloud_id>"
+        #address:
+         #- <elastic search endpoint address_1>
+         #- <elastic search endpoint address_2>
+        # you can provide token or user/pass for auth but not both at the same time 
+        token: "elastic search api key"
+        #user: "elastic search username"
+        #password: "elastic search password"
+```
+
 ## Trigger Destinations
 
 ## **Slack**
