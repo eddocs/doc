@@ -152,7 +152,7 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Scalyr endpoint | Yes |
-| features | Features defines which data types stream to backend. Only "log" is supported. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: scalyr
