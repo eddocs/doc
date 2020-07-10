@@ -151,7 +151,9 @@ If enabled, the traces processors will analyze incoming lines and automatically 
       <td style="text-align:left">No</td>
     </tr>
   </tbody>
-</table>```go
+</table>
+
+```go
 traces:
   - name: rendering-transaction
     start_pattern: "starting render transaction: (?P<transaction_id>\w+)"
