@@ -26,6 +26,7 @@ If enabled, the Splunk integration will stream analytics and insights to a Splun
 | type | Streaming destination type \(i.e. splunk, sumologic, datadog, etc.\) | Yes |
 | endpoint | Full Splunk HEC URI for this integration | Yes |
 | token | Splunk HEC Token for this integration | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: splunk-integration
@@ -49,6 +50,7 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
 | endpoint | Full HTTPs URL for this endpoint | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: sumo-logic-integration
@@ -69,6 +71,7 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. datadog, sumologic, splunk, etc.\) | Yes |
 | api\_key | Datadog API Key | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: datadog-integration
@@ -87,6 +90,7 @@ If enabled, the New Relic integration will stream analytics and insights to your
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. newrelic, sumologic, datadog, etc.\) | Yes |
 | api\_key | New Relic Insert API Key | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: new-relic-integration
@@ -108,6 +112,7 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
 | http\_user | InfluxDB user credentials | Yes |
 | http\_password | InfluxDB password for connecting user | Yes |
 | db | Specific InfluxDB database to stream data to | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: influxdb-integration
@@ -129,6 +134,7 @@ If enabled, the Wavefront integration will stream analytics and insights to your
 | type | Streaming destination type \(i.e. wavefront, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Wavefront endpoint | Yes |
 | token | Wavefront API token | Yes |
+| features | Features defines which data types stream to backend. Only "metric" is supported. | No |
 
 ```go
       - name: wavefront
@@ -146,6 +152,7 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Scalyr endpoint | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: scalyr
@@ -167,6 +174,7 @@ If enabled, the Elastic Search integration will stream analytics and insights to
 | token | Elastic Search API Key | No |
 | user | Username for elastic search credentials | No |
 | password | Elastic Search password for connecting user | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
 * For the connection url, you can not provide cloud\_id and adress at the same time. And you must provide at least one of them.
 * For the authentication, you can not provide token and user/password at the same time. And you must provide at least one of them.
