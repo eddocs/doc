@@ -62,6 +62,7 @@ If enabled, the dimension counter regex processors will analyze incoming lines a
 | :--- | :--- | :--- |
 | name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
 | pattern | Regular Expression pattern containing a named capture group, or set of named capture groups to define which field\(s\) to perform dimensional statistics on. _Note: named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"_ | Yes |
+| dimensions | List of named capture group fields to use as dynamic dimensions \(group by\)  | Yes |
 | **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
 | anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. The anomaly\_probability\_percentage threshold will be applied dynamically to each underlying value found for the given dimension\(s\). Default value = 90 | No |
 | upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. The upper\_limit\_per\_interval threshold will be applied dynamically to each underlying value found for the given dimension\(s\). No default value. | No |
@@ -70,8 +71,31 @@ If enabled, the dimension counter regex processors will analyze incoming lines a
 regexes:
   - name: "log_levels"
     pattern: "level=(?P<log_level>\\w+) "
+    dimensions: ["log_level"]
     trigger_thresholds:
       anomaly_probability_percentage: 90       
+```
+
+## Regexes - Dimension Statistics
+
+If enabled, the dimension statistics processor will dynamically analyze a specific numerical field \(i.e. response\_time, buffer\_size, latency, ...\),  and automatically generate statistics and detect anomalies based on the aggregate values parsed out from the events, grouped by the dimensions outlined in the configuration \(i.e. log\_level, status\_code, method, host\_name, ...\)
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
+| pattern | Regular Expression pattern containing a named capture group, or set of named capture groups to define which field\(s\) to perform dimensional statistics on. _Note: named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"_ | Yes |
+| dimensions | List of named capture group fields to use as dynamic dimensions \(group by\), i.e. status\_code, log\_level, user\_name, pod, cluster, namespace, ... | Yes |
+| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
+| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. The anomaly\_probability\_percentage threshold will be applied dynamically to each underlying value found for the given dimension\(s\). Default value = 90 | No |
+| upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. The upper\_limit\_per\_interval threshold will be applied dynamically to each underlying value found for the given dimension\(s\). No default value. | No |
+
+```go
+regexes:
+  - name: "http-request-latencies"
+    pattern: "] \"(?P<method>\\w+) took (?P<latency>\\d+) ms"
+    dimensions: ["method"]
+    trigger_thresholds:
+      anomaly_probability_percentage: 90 
 ```
 
 ## Ratios
