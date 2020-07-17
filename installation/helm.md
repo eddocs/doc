@@ -19,30 +19,30 @@ Add Edge Delta helm repository
 helm repo add edgedelta https://edgedelta.github.io/charts
 ```
 
-Run Helm installation
+Run Helm installation and create "edgedelta" namespace
 
 ```text
-helm install edgedelta edgedelta/edgedelta --set apiKey=<API_KEY>
+helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta --create-namespace
 ```
 
 Output
 
 ```text
 NAME: edgedelta
-LAST DEPLOYED: Tue Jul 7 22:23:37 2020
-NAMESPACE: default
+LAST DEPLOYED: Fri Jul 17 17:49:42 2020
+NAMESPACE: edgedelta
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
 1. Visit https://admin.edgedelta.com
-2. Find the configuration with <API_KEY> to check reporting status
+2. Find the configuration with <API-KEY> to check reporting status
 ```
 
-Show helm installed packages
+Show helm installed packages in "edgedelta" namespace
 
 ```text
-helm ls
+helm ls -n edgedelta
 ```
 
 ## Useful Tips
@@ -50,6 +50,5 @@ helm ls
 ### Uninstall helm chart
 
 ```text
-helm delete edgedelta
+helm delete edgedelta -n edgedelta
 ```
-
