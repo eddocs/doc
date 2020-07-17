@@ -36,7 +36,7 @@ REVISION: 1
 TEST SUITE: None
 NOTES:
 1. Visit https://admin.edgedelta.com
-2. Find the configuration with <API-KEY> to check reporting status
+2. Find the configuration with <API-KEY> to check if agents are active
 ```
 
 Show helm installed packages in "edgedelta" namespace
