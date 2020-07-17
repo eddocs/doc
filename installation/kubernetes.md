@@ -75,7 +75,7 @@ If you are running a SELinux enforcing Kubernetes cluster you need to add follow
 
 ### Output to cluster services in other namespaces
 
-Edge Delta pods run in dedicated edgedelta namespace. If you desire to configure an output destinations within your Kubernetes cluster make sure to set a resolvable service endpoint in your agent configuration.
+Edge Delta pods run in dedicated edgedelta namespace. If you desire to configure an output destination within your Kubernetes cluster make sure to set a resolvable service endpoint in your agent configuration.
 
 Example: If you have an Elasticsearch service "elasticsearch-master" in "elasticsearch" namespace with port 9200 in your cluster "cluster-domain.example" you need to specify elastic output address as below in agent configuration:
 ```
