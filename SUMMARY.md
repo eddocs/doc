@@ -10,6 +10,7 @@
   * [MacOS](installation/macos.md)
   * [Kubernetes](installation/kubernetes.md)
   * [Kubernetes via Helm](installation/helm.md)
+  * [Amazon ECS](installation/amazon-ecs.md)
 * [Configuration](configuration/README.md)
   * [Central Configuration Backend \(CCB\)](configuration/ccb.md)
   * [Agent Settings](configuration/agent-settings.md)
