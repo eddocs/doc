@@ -77,8 +77,8 @@ If you are running a SELinux enforcing Kubernetes cluster you need to add follow
 In an OpenShift cluster you need to also run below commands to allows agent pods to run in privileged mode.
 
 ```text
-oc-test oc adm policy add-scc-to-user privileged system:serviceaccount:edgedelta:edgedelta
-oc-test oc patch namespace edgedelta -p \
+oc adm policy add-scc-to-user privileged system:serviceaccount:edgedelta:edgedelta
+oc patch namespace edgedelta -p \
 '{"metadata": {"annotations": {"openshift.io/node-selector": ""}}}'
 ```
 
