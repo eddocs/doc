@@ -103,7 +103,7 @@ If enabled, Windows Events allows you to specify a set of Windows Events channel
 
 ```
 
-## Containers
+## Containers \(Docker\)
 
 If enabled, Containers allows you to specify a set of Docker Containers to be monitored by the Edge Delta service.
 
