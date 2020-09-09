@@ -140,6 +140,35 @@ If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods 
         - "namespace=kube_system"
 ```
 
+## Execs \(Scripted Input\)
+
+If enabled, the Execs Input allows you to specify a command, set of commands, or scripts to have executed on a given frequency by the service. The output of the script is then consumed by the service, similar to any other input type. 
+
+**Note**: If the command is a single line, the command can be provided directly in the command parameter, without the need for the script section. If a script is preferred, provide the scripting type / value for the command parameter, and the script inline \(see third example below\).
+
+A saved script can also be referenced directly via the command parameter \(see second example below\).
+
+```go
+  execs:
+    - labels: "top_exec"
+      name: "processes"
+      labels: "top"
+      command: "top"
+      interval: 3m
+    - labels: "foo_script_exec"
+      command: /bin/bash /opt/scripts/foo.sh
+      interval: "30s"
+    - name: "welcomes"
+      labels: "script"
+      interval: 10s
+      command: "/bin/sh -c"
+      script: |
+        for i in {1..50}
+          do
+            echo "Welcome $i times" 
+          done
+```
+
 ## Examples - Linux
 
 ```go
