@@ -48,10 +48,13 @@ If enabled, Files allows you to specify a set of files to have monitored by the 
 
 Provide the full path to the file\(s\) you want to monitor. Wildcards are supported. 
 
+If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
+
 ```go
   files:
     - path: "/var/log/service_a.log"
       labels: "app,service_a"
+      line_pattern: "^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}"
     - path: "/var/log/service_b.log"
       labels: "app,service_b"
     - path: "/var/log/apache2.access.log"
@@ -63,11 +66,15 @@ Provide the full path to the file\(s\) you want to monitor. Wildcards are suppor
 
 If enabled, Ports allows you to specify a set of ports and protocols to have the agent listen on for incoming traffic. Ports are typically used to listen for traffic from network devices \(firewalls, switches, routers, ...\), time-series metrics \(statsd, graphite, carbon, ...\), as well as centralized logging architectures \(rsyslog, syslog-ng, ...\). 
 
+If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
+
+
 ```go
   ports:
     - protocol: tcp
       port: 514
       labels: "syslog,firewall"
+      line_pattern: "^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}"
     - protocol: udp
       port: 1514
       labels: "syslog,router"
@@ -107,13 +114,16 @@ If enabled, Windows Events allows you to specify a set of Windows Events channel
 
 If enabled, Containers allows you to specify a set of Docker Containers to be monitored by the Edge Delta service.
 
-Note: In the 'include' section, after "image=" this is a contains match, so as long as the value provided is contained anywhere in the image name, the value will match. 
+If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
+
+**Note**: In the 'include' section, after "image=" this is a contains match, so as long as the value provided is contained anywhere in the image name, the value will match. 
 
 ```go
   containers:
     - include:
         - "image=.*"
       labels: "docker, all_containers"
+      line_pattern: "^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}"
     - include:
         - "image=nginx:latest"
       labels: "docker, nginx"
@@ -124,6 +134,9 @@ Note: In the 'include' section, after "image=" this is a contains match, so as l
 
 If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods and namespaces to be monitored by the Edge Delta service.
 
+If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
+
+
 **Note**: In the 'include' and 'exclude' section, after "pod=", or "namespace=" this is a contains match, so as long as the value provided is contained anywhere in the pod or namespace name, the value will match. 
 
 **Note**: Excluded pods/namespaces take precedence over Included pods/namespaces.
@@ -133,6 +146,7 @@ If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods 
     - labels: "kubernetes_logs, default_namespace"
       include:
         - "namespace=default"
+      line_pattern: "^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}"
     - labels: "kubernetes_logs, my_pod"
       include:
         - "pod=my_pod*"
