@@ -50,6 +50,8 @@ Provide the full path to the file\(s\) you want to monitor. Wildcards are suppor
 
 If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
 
+If you collect the docker container standard output logs on a file with "JSON File logging driver" (https://docs.docker.com/config/containers/logging/json-file/)  then you need define and enable docker_mode.
+
 ```go
   files:
     - path: "/var/log/service_a.log"
@@ -59,7 +61,9 @@ If you want the agent to process lines not for New Line("\n") but for a specific
       labels: "app,service_b"
     - path: "/var/log/apache2.access.log"
       labels: "web,apache"
-
+    - path: "/var/log/docker/my_container/stdout/json.log"
+      labels: "docker,my_container"
+      docker_mode: true
 ```
 
 ## Ports
