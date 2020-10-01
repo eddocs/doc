@@ -48,6 +48,11 @@ It will not output anything to the terminal due to the service running in silent
 
 Once installation completed, the configuration file \(config.yml\) and the agent log file \(edgedelta.log\) can be found in the installation directory.
 
+## Command Line Silent Uninstallation via Powershell
+```text
+(Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name like 'Edge Delta%'").uninstall()
+```
+
 ### Troubleshooting
 
 After installation, the Windows Services UI \(services.msc\) and the &lt;installation\_directory&gt;\edgedelta.log file can be used to troubleshoot and to check the status of the agent.
