@@ -15,7 +15,7 @@ Change &lt;YOUR\_ED\_API\_KEY&gt;  in task definition with your Edge Delta confi
 Create agent task definition using AWS CLI:
 
 ```text
-aws ecs register-task-definition --cli-input-json <path to edgedelta-ecs.json> 
+aws ecs register-task-definition --cli-input-json file://path_to_edgedelta-ecs.json
 ```
 
 Or Create agent task definition using AWS Console UI:
