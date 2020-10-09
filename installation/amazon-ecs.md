@@ -70,7 +70,7 @@ workflows:
 
 You may want to monitor additional log files on EC2 instances in your ECS cluster. 
 
-Update  `mountpoints` and `volumes` section in [edgedeleta-ecs.json](%20https://release.edgedelta.com/edgedelta-ecs.json). 
+Update  `mountpoints` and `volumes` section in [edgedeleta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json). 
 
 Below example change allows you to also monitor log files in `/var/log/ecs/` on EC2 instance which are about ECS system events.
 
