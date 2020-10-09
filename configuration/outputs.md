@@ -76,7 +76,7 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 | log_stream_prefix | CloudWatch log stream prefix (either name or prefix is supported not both)| Yes |
 | auto_create | When necessery iam policies provided if auto_create is set, log group and log stream will be created if not exists | No |
 | allow_label_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed_log_group_name, ed_log_stream_name, ed_log_stream_prefix labels | No |
-| auto_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/<task_definition_family> and LogsStreamPrefix in the format of ecs/<container_name>/<task_id> | No
+| auto_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task_definition_family and LogsStreamPrefix in the format of ecs/container_name/task_id | No
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
 | features | Features defines which data types stream to backend, it can only be "log" at the moment. | No |
 
@@ -90,7 +90,7 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
         features: log
 ```
 
-* Assign below permission to taskExecutionRoleArn for putting log events into CloudWatch
+* Assign below permission to taskExecutionRoleArn for putting log events into CloudWatch when auto_create is not set
 ```go
       {
         "Version": "2012-10-17",
