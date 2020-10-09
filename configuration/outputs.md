@@ -62,6 +62,70 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
 
 **Finding an existing Sumo Logic HTTPs Endpoint URL:** [https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source\#access-a-sources-url](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url) _\*\*_
 
+## Amazon CloudWatch
+
+If enabled, the CloudWatch integration will stream logs to a given aws region.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
+| region | AWS region destionation for logs | Yes |
+| log_group_name | CloudWatch log group name | Yes |
+| log_stream_name | CloudWatch log stream name (either name or prefix is supported not both) | Yes |
+| log_stream_prefix | CloudWatch log stream prefix (either name or prefix is supported not both)| Yes |
+| auto_create | When necessery iam policies provided if auto_create is set, log group and log stream will be created if not exists | No |
+| allow_label_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed_log_group_name, ed_log_stream_name, ed_log_stream_prefix labels | No |
+| auto_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/<task_definition_family> and LogsStreamPrefix in the format of ecs/<container_name>/<task_id> | No
+| type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
+| features | Features defines which data types stream to backend, it can only be "log" at the moment. | No |
+
+```go
+      - name: cloudwatch
+        type: cloudwatch
+        region: us-west-2
+        log_group_name: /ecs/microservice
+        log_stream_prefix: ecs
+        auto_create: true
+        features: log
+```
+
+* Assign below permission to taskExecutionRoleArn for putting log events into CloudWatch
+```go
+      {
+        "Version": "2012-10-17",
+        "Statement": [{
+          "Effect": "Allow",
+          "Action": [
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }]
+      }
+```
+
+
+* Assign below permission to taskExecutionRoleArn if auto_create is set
+```go
+      {
+        "Version": "2012-10-17",
+        "Statement": [{
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogStream",
+            "logs:CreateLogGroup",
+            "logs:DescribeLogStreams",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }]
+      }
+```
+
+**CloudWatch log group name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html) _\*\*_
+
+**CloudWatch log stream name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html) _\*\*_
+
 ## **Datadog**
 
 If enabled, the Datadog integration will stream analytics and insights to your Datadog environment
