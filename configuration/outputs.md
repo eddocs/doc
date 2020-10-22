@@ -226,13 +226,15 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 
 ## **Elastic Search**
 
-If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment
+If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment. 
+Elastic index template and lifecycle creation guide can be found [here](elastic-index.md). 
+It's not mandatory but highly recommended to complete those steps in the guide to prepare your Elastic Search environment to be Edgedelta streaming target.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. elastic, scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
-| index | Index name where to data stored in elastic search backend | Yes |
+| index | Name of elastic index (or index template) where data will be streamed by edgedelta agents. Set this to 'ed-agent-log' if followed the guide above | Yes |
 | cloud\_id | Cloud ID of elastic search backend | No |
 | address | Adress list of elastic search backend | No |
 | token | Elastic Search API Key | No |
