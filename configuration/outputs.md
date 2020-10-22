@@ -227,7 +227,7 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 ## **Elastic Search**
 
 If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment. 
-Elastic index template and lifecycle creation guide can be found [here](elastic-index.md). 
+Elastic index template and lifecycle creation guide can be found [here](../appendices/elastic-index.md).
 It's not mandatory but highly recommended to complete those steps in the guide to prepare your Elastic Search environment to be Edgedelta streaming target.
 
 | Key | Description | Required |
