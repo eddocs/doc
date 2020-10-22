@@ -228,7 +228,7 @@ So far we have created an index lifecycle policy and an index template. Now we w
 Run below command in your Elastic's dev console
 
 ```
-PUT /<ed-agent-log-{now/d}-000001>
+PUT /%3Ced-agent-log-%7Bnow%2Fd%7D-000001%3E
 {
  "aliases": {
    "ed-agent-log": {
