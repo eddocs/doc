@@ -22,5 +22,5 @@
   * [Linux Configuration](examples/linux-configuration.md)
   * [Windows Configuration](examples/windows-configuration.md)
   * [Docker Configuration](examples/docker-configuration.md)
-* [Appendix](appendix/README.md)
-  * [Elastic Index Setup](appendix/elastic-index.md)
+* [Appendices](appendices/README.md)
+  * [Elastic Index Setup](appendices/elastic-index.md)
