@@ -18,6 +18,7 @@
   * [Outputs](configuration/outputs.md)
   * [Processors](configuration/processors.md)
   * [Workflows](configuration/workflows.md)
+  * [Variables](configuration/variables.md)
 * [Examples](examples/README.md)
   * [Linux Configuration](examples/linux-configuration.md)
   * [Windows Configuration](examples/windows-configuration.md)
