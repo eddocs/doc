@@ -22,7 +22,7 @@ If default value is provided and variable does not exists on agent execution env
 
 ## Example
 
-Slack endpoint is a secret which contains the token for posting directly into a slack channel.
+Slack endpoint is a secret allowing posting directly into a slack channel.
 
 Instead of explicitly putting it into configuration it can be referred from agent execution environment as below:
 
