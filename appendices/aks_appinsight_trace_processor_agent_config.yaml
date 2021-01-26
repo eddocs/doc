@@ -1,0 +1,38 @@
+version: v2
+
+agent_settings:
+  tag: azure-serverless-test
+  log:
+    level: info
+
+inputs:
+  files:
+    - labels: captured_requests
+      path: /var/captured_requests/body_*.json
+      enable_incoming_line_anomalies: true
+
+filters:
+  - name: appinsight_trace_filter
+    type: buffered-trace
+    trace_id_pattern: \"ai\.operation\.id\":\"(?P<id>\w+)"
+    failure_pattern: \"prop__status\":\"Failed\"
+    success_sample_rate: 0
+    trace_deadline: 5s
+
+outputs:
+  streams:
+    - name: app-insights
+      type: azure
+      # replace endpoint and instrumentation key with your app insight endpoint/key
+      endpoint: "https://centralus-0.in.applicationinsights.azure.com/v2/track" 
+      api_key: "INSTRUMENTATION_KEY"
+      features: log
+   
+workflows:
+  function-trace-forward-workflow:
+    filter: appinsight_trace_filter
+    input_labels:
+      - captured_requests
+    destinations:
+      - app-insights
+      
