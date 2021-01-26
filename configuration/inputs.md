@@ -22,7 +22,7 @@ There are a number of different input types supported by the Edge Delta service.
 * [Windows Events](https://docs.edgedelta.com/configuration/inputs#windows-events)
 * [Containers \(Docker\)](https://docs.edgedelta.com/configuration/inputs#containers-docker)
 * [Kubernetes](https://docs.edgedelta.com/configuration/inputs#kubernetes)
-* AWS ECS
+* [AWS ECS](https://docs.edgedelta.com/configuration/inputs#aws-ecs)
 * [Execs \(Scripted Input\)](https://docs.edgedelta.com/configuration/inputs#execs-scripted-input)
 
 ## Agent Stats
