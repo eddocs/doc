@@ -5,13 +5,13 @@ Azure functions generate various telemetry data e.g. (Traces, Error, Exceptions,
 
 ## Prepare edgedelta processor in AKS cluster
 
-Create a new config on [admin.edgedelta.com](https://admin.edgedelta.com/) with the content [from](doc/appendices/aks_appinsight_trace_processor_agent_config.yaml)
+Create a new config on [admin.edgedelta.com](https://admin.edgedelta.com/) with the content from [here](aks_appinsight_trace_processor_agent_config.yaml)
 
 Replace INSTRUMENTATION_KEY with your the instrumentation key
 
 Create a new AKS cluster or use an existing one
 
-Add a new node pool on AKS with below spec. If you skip this step update the nodeSelector in [ed-appinsights-trace-processor.yaml](doc/appendices/ed-appinsights-trace-processor.yaml).
+Add a new node pool on AKS with below spec. If you skip this step update the nodeSelector in [ed-appinsights-trace-processor.yaml](ed-appinsights-trace-processor.yaml).
 ```
   name: processors 
 	OS: linux
@@ -62,7 +62,7 @@ helm install \
 	jetstack/cert-manager
 ```
 
-Update the host values in edgedelta-ingress resource defined in ed-appinsights-trace-processor.yaml with the dns entry you configured above.
+Update the host values in edgedelta-ingress resource defined in [ed-appinsights-trace-processor.yaml](ed-appinsights-trace-processor.yaml) with the dns entry you configured above.
 
 Create edgedelta http recorder and agent
 ```
@@ -92,7 +92,7 @@ dotnet add package Microsoft.Azure.Functions.Extensions
 dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 ```
 
-Create a StartUp.cs file under targeted azure function application. [Here](doc/appendices/azure_function_startup.cs) is the content of the StartUp.cs file. Make sure to put the right namepace.
+Create a StartUp.cs file under targeted azure function application. [Here](azure_function_startup.cs) is the content of the StartUp.cs file. Make sure to put the right namepace.
 As seen below, this custom sinker implementation called ForkingTelemetryChannel and replicates telemetry data to be ingested into secondary ingestion endpoint.
 ```
 ...
@@ -118,7 +118,7 @@ Set the secondary application insight connection string. Provide secondary endpo
     "APPINSIGHTS_INSTRUMENTATIONKEY": "OriginalKey123";
     "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=OriginalKey123;IngestionEndpoint=https://dc.services.visualstudio.com",
     // Required secondary connection string for forking application insight traffic
-    "APPLICATIONINSIGHTS_SECONDARY_CONNECTION_STRING": "InstrumentationKey=SecondaryKey123;IngestionEndpoint=https://ingest.edgedelta.<cluster_id>.centralus.aksapp.io",
+    "APPLICATIONINSIGHTS_SECONDARY_CONNECTION_STRING": "InstrumentationKey=SecondaryKey123;IngestionEndpoint=https://ingest.edgedelta.198de54f02b345ab92a8.centralus.aksapp.io",
 ...
   },
 ...
