@@ -9,3 +9,4 @@ description: >-
 ## Setup Appendices
 
 * [Elastic Index Setup](elastic-index.md)
+* [Azure Function Monitoring Setup](azure-serverless-monitoring.md)
