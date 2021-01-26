@@ -100,7 +100,7 @@ dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 ```
 
 Create a StartUp.cs file under targeted azure function application. [Here](azure_function_startup.cs) is the content of the StartUp.cs file. Make sure to update the namepace at the top.
-As seen below, this custom sinker implementation called ForkingTelemetryChannel and replicates telemetry data to be ingested into secondary ingestion endpoint.
+As seen below, this custom sinker implementation called ForkingTelemetryChannel and replicates telemetry data to be ingested into secondary ingestion endpoint. It is worth to note that dual ingestion process is parallelized to reduce the overall latency.
 ```
 ...
         public void Send(ITelemetry item)
