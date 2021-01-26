@@ -71,12 +71,12 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
 | region | AWS region destionation for logs | Yes |
-| log_group_name | CloudWatch log group name | Yes |
-| log_stream_name | CloudWatch log stream name (either name or prefix is supported not both) | Yes |
-| log_stream_prefix | CloudWatch log stream prefix (either name or prefix is supported not both)| Yes |
-| auto_create | When necessery iam policies provided if auto_create is set, log group and log stream will be created if not exists | No |
-| allow_label_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed_log_group_name, ed_log_stream_name, ed_log_stream_prefix labels | No |
-| auto_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task_definition_family and LogsStreamPrefix in the format of ecs/container_name/task_id | No
+| log\_group\_name | CloudWatch log group name | Yes |
+| log\_stream\_name | CloudWatch log stream name \(either name or prefix is supported not both\) | Yes |
+| log\_stream\_prefix | CloudWatch log stream prefix \(either name or prefix is supported not both\) | Yes |
+| auto\_create | When necessery iam policies provided if auto\_create is set, log group and log stream will be created if not exists | No |
+| allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | No |
+| auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | No |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
 | features | Features defines which data types stream to backend, it can only be "log" at the moment. | No |
 
@@ -90,8 +90,9 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
         features: log
 ```
 
-* Assign below permission to taskExecutionRoleArn for putting log events into CloudWatch when auto_create is not set
-```go
+* Assign below permission to taskExecutionRoleArn for putting log events into CloudWatch when auto\_create is not set
+
+  ```go
       {
         "Version": "2012-10-17",
         "Statement": [{
@@ -102,11 +103,11 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
           "Resource": "*"
         }]
       }
-```
+  ```
 
+* Assign below permission to taskExecutionRoleArn if auto\_create is set
 
-* Assign below permission to taskExecutionRoleArn if auto_create is set
-```go
+  ```go
       {
         "Version": "2012-10-17",
         "Statement": [{
@@ -120,11 +121,11 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
           "Resource": "*"
         }]
       }
-```
+  ```
 
-**CloudWatch log group name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html) _\*\*_
+**CloudWatch log group name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API\_CreateLogGroup.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html) _\*\*_
 
-**CloudWatch log stream name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html) _\*\*_
+**CloudWatch log stream name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API\_CreateLogStream.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html) _\*\*_
 
 ## **Datadog**
 
@@ -226,15 +227,13 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 
 ## **Elastic Search**
 
-If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment. 
-Elastic index template and lifecycle creation guide can be found [here](../appendices/elastic-index.md).
-It's not mandatory but highly recommended to complete those steps in the guide to prepare your Elastic Search environment to be Edgedelta streaming target.
+If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment. Elastic index template and lifecycle creation guide can be found [here](../appendices/elastic-index.md). It's not mandatory but highly recommended to complete those steps in the guide to prepare your Elastic Search environment to be Edgedelta streaming target.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. elastic, scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
-| index | Name of elastic index (or index template) where data will be streamed by edgedelta agents. Set this to 'ed-agent-log' if followed the guide above | Yes |
+| index | Name of elastic index \(or index template\) where data will be streamed by edgedelta agents. Set this to 'ed-agent-log' if followed the guide above | Yes |
 | cloud\_id | Cloud ID of elastic search backend | No |
 | address | Adress list of elastic search backend | No |
 | token | Elastic Search API Key | No |

@@ -1,21 +1,18 @@
 ---
 description: >-
-  This document outlines elastic index configuration that works optimally with edgedelta agents.
+  This document outlines elastic index configuration that works optimally with
+  edgedelta agents.
 ---
 
-## Elastic Search Index setup for Edge Delta
-
+# Elastic Index Setup
 
 1. Create lifecycle policy
 
-Index lifecycle policies manage indices rollover/retention requirements and other aspects of index lifecycle. 
-See official documentation [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html) for further reading on the topic
+Index lifecycle policies manage indices rollover/retention requirements and other aspects of index lifecycle. See official documentation [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html) for further reading on the topic
 
-Edgedelta provides a simple lifecycle policy which creates a new index every day and keeps last 15 days of data.
-You can run the below command as is in your Elastic's dev console. Alternatively the Index Lifecycle Policies can be used.
-Feel free to change retention or any other fields as desired.
+Edgedelta provides a simple lifecycle policy which creates a new index every day and keeps last 15 days of data. You can run the below command as is in your Elastic's dev console. Alternatively the Index Lifecycle Policies can be used. Feel free to change retention or any other fields as desired.
 
-```
+```text
 PUT _ilm/policy/ed-agent-log-policy
 {
   "policy": {
@@ -45,16 +42,13 @@ PUT _ilm/policy/ed-agent-log-policy
 
 Now, you should have an index lifecycle policy named 'ed-agent-log-policy'.
 
+1. Create index template
 
-2. Create index template
-Index templates are useful to configure elastic indices before they are created. 
+   Index templates are useful to configure elastic indices before they are created. 
 
-Edgedelta agents are capable of streaming various types of observations to Elastic Search destination if configured so.
-The target index should ideally be created with our recommended index template. 
-You can create the edgedelta elastic index template by running the command below in your Elastic's dev console.
-It will create an index template named 'ed-agent-log' with proper field mappings and refers to the lifecycle policy 'ed-agent-log-policy'.
+Edgedelta agents are capable of streaming various types of observations to Elastic Search destination if configured so. The target index should ideally be created with our recommended index template. You can create the edgedelta elastic index template by running the command below in your Elastic's dev console. It will create an index template named 'ed-agent-log' with proper field mappings and refers to the lifecycle policy 'ed-agent-log-policy'.
 
-```
+```text
 PUT _template/ed-agent-log?include_type_name
 {
   "order": 0,
@@ -221,13 +215,13 @@ PUT _template/ed-agent-log?include_type_name
 }
 ```
 
-3. Create the first index to kick off daily index generation
+1. Create the first index to kick off daily index generation
 
 So far we have created an index lifecycle policy and an index template. Now we will be creating the first index which inherits its field mapping and policy from the template.
 
 Run below command in your Elastic's dev console
 
-```
+```text
 PUT /%3Ced-agent-log-%7Bnow%2Fd%7D-000001%3E
 {
  "aliases": {
@@ -238,9 +232,7 @@ PUT /%3Ced-agent-log-%7Bnow%2Fd%7D-000001%3E
 }
 ```
 
-Now visit the Index Management > Indices and you should see a new index similar to this 'ed-agent-log-2020.10.22-000000'. (the date should be today)
-
+Now visit the Index Management &gt; Indices and you should see a new index similar to this 'ed-agent-log-2020.10.22-000000'. \(the date should be today\)
 
 Congratulations! Your Elastic environment is ready for Edge Delta. Now you can deploy an agent with Elastic destination pointing to index 'ed-agent-log'.
-
 

@@ -8,7 +8,7 @@ description: >-
 
 ## Overview
 
-Inputs are the mechanism that tells the Edge Delta agent which data types for it to listen to, their location or configuration, as well as associated tags. 
+Inputs are the mechanism that tells the Edge Delta agent which data types for it to listen to, their location or configuration, as well as associated tags.
 
 The labels are used to map inputs to specific monitoring rules, or streaming and alerting destinations.
 
@@ -46,11 +46,11 @@ If enabled, Container Stats will report container level metrics, such as CPU, Me
 
 If enabled, Files allows you to specify a set of files to have monitored by the Edge Delta service.
 
-Provide the full path to the file\(s\) you want to monitor. Wildcards are supported. 
+Provide the full path to the file\(s\) you want to monitor. Wildcards are supported.
 
-If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
+If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
 
-If you collect the docker container standard output logs on a file with "JSON File logging driver" (https://docs.docker.com/config/containers/logging/json-file/)  then you need define and enable docker_mode.
+If you collect the docker container standard output logs on a file with "JSON File logging driver" \([https://docs.docker.com/config/containers/logging/json-file/](https://docs.docker.com/config/containers/logging/json-file/)\) then you need define and enable docker\_mode.
 
 ```go
   files:
@@ -68,10 +68,9 @@ If you collect the docker container standard output logs on a file with "JSON Fi
 
 ## Ports
 
-If enabled, Ports allows you to specify a set of ports and protocols to have the agent listen on for incoming traffic. Ports are typically used to listen for traffic from network devices \(firewalls, switches, routers, ...\), time-series metrics \(statsd, graphite, carbon, ...\), as well as centralized logging architectures \(rsyslog, syslog-ng, ...\). 
+If enabled, Ports allows you to specify a set of ports and protocols to have the agent listen on for incoming traffic. Ports are typically used to listen for traffic from network devices \(firewalls, switches, routers, ...\), time-series metrics \(statsd, graphite, carbon, ...\), as well as centralized logging architectures \(rsyslog, syslog-ng, ...\).
 
-If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
-
+If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
 
 ```go
   ports:
@@ -111,16 +110,15 @@ If enabled, Windows Events allows you to specify a set of Windows Events channel
       labels: "win_events,system"
     - channel: "Microsoft-Windows-Sysmon/Operational"
       labels: "win_events,sysmon"
-
 ```
 
 ## Containers \(Docker\)
 
 If enabled, Containers allows you to specify a set of Docker Containers to be monitored by the Edge Delta service.
 
-If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
+If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
 
-**Note**: In the 'include' section, after "image=" this is a contains match, so as long as the value provided is contained anywhere in the image name, the value will match. 
+**Note**: In the 'include' section, after "image=" this is a contains match, so as long as the value provided is contained anywhere in the image name, the value will match.
 
 ```go
   containers:
@@ -131,17 +129,15 @@ If you want the agent to process lines not for New Line("\n") but for a specific
     - include:
         - "image=nginx:latest"
       labels: "docker, nginx"
-
 ```
 
 ## Kubernetes
 
 If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods and namespaces to be monitored by the Edge Delta service.
 
-If you want the agent to process lines not for New Line("\n") but for a specific line separation rule then you need to define a "line_pattern" regex rule.
+If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
 
-
-**Note**: In the 'include' and 'exclude' section, after "pod=", or "namespace=" this is a contains match, so as long as the value provided is contained anywhere in the pod or namespace name, the value will match. 
+**Note**: In the 'include' and 'exclude' section, after "pod=", or "namespace=" this is a contains match, so as long as the value provided is contained anywhere in the pod or namespace name, the value will match.
 
 **Note**: Excluded pods/namespaces take precedence over Included pods/namespaces.
 
@@ -160,7 +156,7 @@ If you want the agent to process lines not for New Line("\n") but for a specific
 
 ## Execs \(Scripted Input\)
 
-If enabled, the Execs Input allows you to specify a command, set of commands, or scripts to have executed on a given frequency by the service. The output of the script is then consumed by the service, similar to any other input type. 
+If enabled, the Execs Input allows you to specify a command, set of commands, or scripts to have executed on a given frequency by the service. The output of the script is then consumed by the service, similar to any other input type.
 
 **Note**: If the command is a single line, the command can be provided directly in the command parameter, without the need for the script section. If a script is preferred, provide the scripting type / value for the command parameter, and the script inline \(see third example below\).
 

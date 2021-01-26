@@ -1,6 +1,7 @@
 ---
 description: >-
-  This document describes usage of environment variables in Edge Delta configuration.
+  This document describes usage of environment variables in Edge Delta
+  configuration.
 ---
 
 # Variables
@@ -11,7 +12,7 @@ Edge Delta supports the usage of environment variables as values in configuratio
 
 Variables can be referred in one of the following formats:
 
-```
+```text
 {{ Env "MY_VARIABLE_NAME" }}
 {{ Env "MY_VARIABLE_NAME" "my default value" }}
 ```
@@ -26,9 +27,10 @@ Slack endpoint is a secret allowing posting directly into a slack channel.
 
 Instead of explicitly putting it into configuration it can be referred from agent execution environment as below:
 
-```
+```text
   triggers:
       - name: slack-integration
         type: slack
         endpoint: {{ Env "MY_SLACK_ENDPOINT" }}
 ```
+

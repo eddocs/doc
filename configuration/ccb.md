@@ -22,7 +22,7 @@ In the Edge Delta admin portal, click the green Add button in the bottom left co
 
 In the following dialog window, populate the Tag and Description fields \(used for organizing the configurations in the Admin portal\), as well as your configuration, and hit save.
 
-![](../.gitbook/assets/screen-shot-2020-04-08-at-8.39.49-am%20%281%29.png)
+![](../.gitbook/assets/screen-shot-2020-04-08-at-8.39.49-am%20%281%29%20%281%29.png)
 
 Once you've saved your configuration, you will return to the configuration portal, where your new configuration will be listed, as well as an API Key associated with the configuration. 
 

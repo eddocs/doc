@@ -16,6 +16,7 @@ Select from the following deployment types below to review the appropriate docum
 * [Docker](docker.md)
 * [Kubernetes](kubernetes.md)
 * [Kubernetes via Helm](helm.md)
+* [AWS ECS](https://docs.edgedelta.com/installation/amazon-ecs)
 
 In addition - within the admin console, many of the commands needed for installation can be created for you automatically through the wizard:
 

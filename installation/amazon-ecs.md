@@ -10,7 +10,7 @@ description: >-
 
 Download [https://release.edgedelta.com/edgedelta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json) task definition
 
-Change &lt;YOUR\_ED\_API\_KEY&gt;  in task definition with your Edge Delta config API key.
+Change &lt;YOUR\_ED\_API\_KEY&gt; in task definition with your Edge Delta config API key.
 
 Create agent task definition using AWS CLI:
 
@@ -24,7 +24,7 @@ Navigate to ECS/Task Definitions/Create new Task Definition, scroll bottom selec
 
 ## Run agent as an ECS Daemon Service
 
-You may run agent as an ordinary ECS task which will only collect logs from the containers running on the EC2 instance the task is running. 
+You may run agent as an ordinary ECS task which will only collect logs from the containers running on the EC2 instance the task is running.
 
 To properly collect all logs from containers on all instances in your cluster you need to run agent as a Daemon Service.
 
@@ -38,7 +38,7 @@ In AWS Console UI navigate to ECS and find your cluster, then follow below steps
 * Auto Scaling is already disabled, click Next Step
 * Review summary and finish by clicking Create Service
 
-Make sure your container definition for other tasks or services does not have`logConfiguration.logDriver` parameter.  With no logging driver logs are written to standard output and collected by the agent service. 
+Make sure your container definition for other tasks or services does not have`logConfiguration.logDriver` parameter. With no logging driver logs are written to standard output and collected by the agent service.
 
 In agent configuration yaml on [https://admin.edgedelta.com](https://admin.edgedelta.com) make sure you have container input source is enabled as seen below to collect container logs:
 
@@ -68,9 +68,9 @@ workflows:
 
 ### File Monitoring
 
-You may want to monitor additional log files on EC2 instances in your ECS cluster. 
+You may want to monitor additional log files on EC2 instances in your ECS cluster.
 
-Update  `mountpoints` and `volumes` section in [edgedeleta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json). 
+Update `mountpoints` and `volumes` section in [edgedeleta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json).
 
 Below example change allows you to also monitor log files in `/var/log/ecs/` on EC2 instance which are about ECS system events.
 
@@ -88,7 +88,7 @@ Below example change allows you to also monitor log files in `/var/log/ecs/` on 
         },
       ],
  ...
-    
+
 "volumes": [
   {
     "host": {
@@ -103,7 +103,7 @@ Below example change allows you to also monitor log files in `/var/log/ecs/` on 
     "name": "ecs_logs"
   }
 ],
-... 
+...
 ```
 
 Do not forget to add file input in agent yaml config to monitor mounted path which is `/host/var/log/ecs/` in above sample. See [files](https://docs.edgedelta.com/configuration/inputs#files) for further details.
