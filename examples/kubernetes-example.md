@@ -4,7 +4,7 @@ description: >-
   Kubernetes-based Operating Systems
 ---
 
-# Kubernetes Example
+# Kubernetes Configuration
 
 The example configuration is a default, working configuration requiring no changes to be deployed. 
 
