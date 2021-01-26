@@ -30,7 +30,7 @@ After initial deployment, the onboarding wizard can be accessed via [admin.edged
 
 ## Deploy From Existing Configuration
 
-1. Navigate to the Configurations view of the Edge Delta service
+1. Navigate to the [Configurations](https://admin.edgedelta.com/configurations) view of the Edge Delta service
 2. Identify the appropriate configuration you would like to use for deployment, or create a new configuration
 3. Hit the **Deploy** button on the right-hand side of the configuration
 
