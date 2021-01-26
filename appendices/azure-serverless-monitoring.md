@@ -45,8 +45,15 @@ Get IP address
 kubectl --namespace ingress-basic get services -o wide -w nginx-ingress-ingress-nginx-controller
 ```
 
-Create an A record in your DNS zone as described [here](https://docs.microsoft.com/en-us/azure/dns/dns-getstarted-portal).
-ingest.edgedelta.198de54f02b345ab92a8.centralus.aksapp.io ->  <IP Address from above step>
+Create a DNS zone on Azure portal as described [here](https://docs.microsoft.com/en-us/azure/dns/dns-getstarted-portal).
+
+Note: You will need to have a public dns entry for your zone to be publicly accessible. For example if your dns zone is contoso.xyz you need to own contoso.xyz.
+A workaround is to create a separate AKS cluster with http application routing enabled and use its dns zone. It will have public DNS records created by Azure.
+
+Create an A record in your DNS zone which points to IP address of ingress controller. 
+```
+ingest.edgedelta.<your dns zone> ->  <IP Address from above step>
+```
 
 Install cert-manager
 ```
@@ -92,7 +99,7 @@ dotnet add package Microsoft.Azure.Functions.Extensions
 dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 ```
 
-Create a StartUp.cs file under targeted azure function application. [Here](azure_function_startup.cs) is the content of the StartUp.cs file. Make sure to put the right namepace.
+Create a StartUp.cs file under targeted azure function application. [Here](azure_function_startup.cs) is the content of the StartUp.cs file. Make sure to update the namepace at the top.
 As seen below, this custom sinker implementation called ForkingTelemetryChannel and replicates telemetry data to be ingested into secondary ingestion endpoint.
 ```
 ...
