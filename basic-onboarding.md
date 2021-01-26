@@ -12,28 +12,38 @@ description: >-
 2. At the bottom of the Sign-In dialog, hit the _**Sign up**_ button to start the process
 3. Once you have completed all of the steps for signing up, your account will automatically be created
 
-## Create The Initial Configuration
+## Follow The Onboarding Setup Wizard
 
-1. Sign into [admin.edgedelta.com](https://admin.edgedelta.com/)
-2. Navigate to the **Configs** tab of the Edge Delta service
-3. Identify the appropriate example configuration to use as a starting point based on the OS \(Linux, Windows, Docker, etc.\) of the server Edge Delta will be deployed on
-4. Hit the **Edit** button for the appropriate configuration. _**Basic edits of the example configuration are required in order to generate a valid configuration \(specifically the Outputs section, see more details below\)**_
-5. Scan the configuration and identify parameters that may need to change:
-   1. **Inputs** section, add/remove/uncomment inputs as seen fit \(see [Inputs](https://docs.edgedelta.com/configuration/inputs) documentation for more details\)
-   2. **Outputs** section, add/remove/uncomment outputs as seen fit. _**If this is your first time editing one of the example configurations, both of the default Streaming and Trigger Outputs will need to be modified, commented out, or removed in order to generate a valid configuration**_ \(see [Outputs](https://docs.edgedelta.com/configuration/outputs) documentation for more details\)
-   3. **Processors** section, add/remove processors as seen fit \(see [Processors](https://docs.edgedelta.com/configuration/processors) documentation for more details\)
-   4. **Workflows** section, update example\_workflow to match the labels and names of the Inputs, Outputs, and Processors defined within the configuration \(see [Workflows](https://docs.edgedelta.com/configuration/workflows) documentation for more details\)
-6. Once the appropriate updates have been made to the configuration, hit the **Save** button in the bottom right corner of the editor
+After initial deployment, the onboarding wizard can be accessed via [admin.edgedelta.com/onboarding](https://admin.edgedelta.com/onboarding)
 
-## Deploy
+**1.\) Select an Operating System or Architecture Type for Deployment**
 
-1. Identify the appropriate configuration you would like to use for deployment \(modified in prior step\)
-2. Hit the **Deploy** button on the right-hand side of the configuration
-3. **Copy** the appropriate deployment command \(based on the OS of the server Edge Delta will be deployed\)
-4. Run the deployment command on the target server to deploy Edge Delta
+![](.gitbook/assets/screen-shot-2021-01-26-at-2.13.18-pm.png)
+
+**2.\) Copy Pre-configured Deploy Command\(s\) and Run In Appropriate Terminal**
+
+![](.gitbook/assets/screen_shot_2021-01-26_at_2_14_48_pm%20%281%29.jpg)
+
+**3.\) Wait a few seconds for agent\(s\) to deploy and authenticate with the Edge Delta Backend, and navigate to the Status Page to get started!**
+
+![](.gitbook/assets/screen-shot-2021-01-26-at-2.22.57-pm.png)
+
+## Deploy From Existing Configuration
+
+1. Navigate to the Configurations view of the Edge Delta service
+2. Identify the appropriate configuration you would like to use for deployment, or create a new configuration
+3. Hit the **Deploy** button on the right-hand side of the configuration
+
+![](.gitbook/assets/screen_shot_2021-01-26_at_2_24_55_pm.jpg)
+
+1. **Copy** the appropriate deployment command \(based on the OS of the server Edge Delta will be deployed\)
+
+![](.gitbook/assets/screen_shot_2021-01-26_at_2_27_36_pm%20%281%29.jpg)
+
+1. Run the deployment command on the target server or cluster to deploy Edge Delta
    1. Docker, Linux, and MacOS: paste and run the command in the terminal 
    2. Windows: Open Powershell, paste and run the command
-5. Congrats! You have now deployed your first Edge Delta agent
+2. Congrats! You have now deployed your first Edge Delta agent\(s\)
 
 ## Verify Successful Deployment
 
