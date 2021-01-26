@@ -12,6 +12,19 @@ Inputs are the mechanism that tells the Edge Delta agent which data types for it
 
 The labels are used to map inputs to specific monitoring rules, or streaming and alerting destinations.
 
+There are a number of different input types supported by the Edge Delta service. Select from the following input types below to review the appropriate documentation:
+
+* [Agent Stats](https://docs.edgedelta.com/configuration/inputs#agent-stats)
+* [System Stats](https://docs.edgedelta.com/configuration/inputs#system-stats)
+* [Container Stats \(Docker\)](https://docs.edgedelta.com/configuration/inputs#container-stats-docker)
+* [Files](https://docs.edgedelta.com/configuration/inputs#files)
+* [Ports](https://docs.edgedelta.com/configuration/inputs#ports)
+* [Windows Events](https://docs.edgedelta.com/configuration/inputs#windows-events)
+* [Containers \(Docker\)](https://docs.edgedelta.com/configuration/inputs#containers-docker)
+* [Kubernetes](https://docs.edgedelta.com/configuration/inputs#kubernetes)
+* AWS ECS
+* [Execs \(Scripted Input\)](https://docs.edgedelta.com/configuration/inputs#execs-scripted-input)
+
 ## Agent Stats
 
 If enabled, Agent Stats will report agent level metrics, such as lines analyzed, bytes analyzed, etc.
@@ -135,24 +148,43 @@ If you want the agent to process lines not for New Line\("\n"\) but for a specif
 
 If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods and namespaces to be monitored by the Edge Delta service.
 
-If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
-
 **Note**: In the 'include' and 'exclude' section, after "pod=", or "namespace=" this is a contains match, so as long as the value provided is contained anywhere in the pod or namespace name, the value will match.
 
 **Note**: Excluded pods/namespaces take precedence over Included pods/namespaces.
 
 ```go
   kubernetes:
-    - labels: "kubernetes_logs, default_namespace"
+    - labels: "kubernetes_logs"            
       include:
-        - "namespace=default"
-      line_pattern: "^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}"
-    - labels: "kubernetes_logs, my_pod"
-      include:
-        - "pod=my_pod*"
+        - "namespace=.*"                        
       exclude:
-        - "namespace=kube_system"
+        - "namespace=kube-system"                    
+        - "namespace=kube-public"                    
+        - "namespace=kube-node-lease"                    
+        - "pod=edgedelta"
+      auto_detect_line_pattern: true
 ```
+
+## AWS ECS
+
+If enabled, the ECS Input allows you to specify a set of ECS assets \(tasks, containers, etc.\) to be monitored by the Edge Delta service. 
+
+**Note**: In the 'include' and 'exclude' section, after "container-name=", or "task-family=" this is a contains match, so as long as the value provided is contained anywhere in the container or task name, the value will match.
+
+**Note**: Excluded container/task take precedence over Included container/task.
+
+```go
+  ecs:
+    - labels: "docker_logs,all_containers"
+      include:
+        - container-name=.*
+      exclude:
+        - container-name=xray
+        - container-name=edgedelta
+      auto_detect_line_pattern: true
+```
+
+
 
 ## Execs \(Scripted Input\)
 
