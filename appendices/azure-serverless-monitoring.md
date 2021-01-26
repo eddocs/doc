@@ -27,7 +27,7 @@ kubectl create secret generic ed-api-key \
     --from-literal=ed-api-key="c40bafd5-xxxxxxx"
 ```
 
-Create ingress resources as described [here](https://docs.microsoft.com/en-us/azure/aks/ingress-tls)
+Create ingress resources as described [here](https://docs.microsoft.com/en-us/azure/aks/ingress-tls).
 Note: This step requires helm.
 
 ```
