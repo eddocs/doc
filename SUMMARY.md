@@ -20,6 +20,7 @@
   * [Workflows](configuration/workflows.md)
   * [Variables](configuration/variables.md)
 * [Examples](examples/README.md)
+  * [Kubernetes Example](examples/kubernetes-example.md)
   * [Linux Configuration](examples/linux-configuration.md)
   * [Windows Configuration](examples/windows-configuration.md)
   * [Docker Configuration](examples/docker-configuration.md)
