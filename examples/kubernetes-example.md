@@ -12,7 +12,7 @@ Examples of initial changes to customize to your environment would be adding spe
 
 Please comment/uncomment parameters as needed, as well as populate the appropriate values to create your desired configuration.
 
-```text
+```go
 #Configuration File Version (currently v1 and v2 supported)
 version: v2
 
