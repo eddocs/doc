@@ -45,7 +45,7 @@ Get IP address
 kubectl --namespace ingress-basic get services -o wide -w nginx-ingress-ingress-nginx-controller
 ```
 
-Create an A record in your DNS zone
+Create an A record in your DNS zone as described [here](https://docs.microsoft.com/en-us/azure/dns/dns-getstarted-portal).
 ingest.edgedelta.198de54f02b345ab92a8.centralus.aksapp.io ->  <IP Address from above step>
 
 Install cert-manager
