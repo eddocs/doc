@@ -10,6 +10,8 @@ There are a number of different architectures for deploying Edge Delta. Whether 
 
 The goal of this document is to provide a high level overview of a typical Edge Delta deployment in a Kubernetes cluster, and each of the components that make up the deployment.
 
+The setup process for deploying Edge Delta within a Kubernetes cluster is simple, and natively leverages Kubernetes APIs and other components to provide a seamless onboarding, and automated monitoring experience. 
+
 ## Edge Delta Agents
 
 A primary component of the Edge Delta deployment \(in the context of Kubernetes\) are the Edge Delta agents. The agents are a lightweight, go-based process that run as a **Daemonset** in a Kubernetes cluster \(1 agent per node\).
