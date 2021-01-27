@@ -19,7 +19,11 @@ filters:
     # failure_pattern is the regex pattern which is used to determine whether the trace events should be considered failure.
     # all failed traces pass the filter.
     failure_pattern: \"prop__status\":\"Failed\"
-    # success_sample_rate is a floating number between 0 and 1. Default is 0.01.
+    # latency_pattern is an optional regex pattern which extracts latency value from trace events.
+    latency_pattern: \"prop__executionDuration\":\"(?P<latency>\d+)\"
+    # latency_threshold is the limit for trace latencies. Traces whose duration exceeds this threshold will pass the filter.
+    latency_threshold: 3000
+    # success_sample_rate is a floating number between 0 and 1. Default is 0.01 which means 1% of successful traces passes the filter.
     success_sample_rate: 0
     # trace_deadline is the duration to wait after last event of an operation seen. 
     # Once deadline is reached filtering/sampling will be applied to the events of trace
