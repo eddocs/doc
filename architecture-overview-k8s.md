@@ -12,6 +12,14 @@ The goal of this document is to provide a high level overview of a typical Edge 
 
 The setup process for deploying Edge Delta within a Kubernetes cluster is simple, and natively leverages Kubernetes APIs and other components to provide a seamless onboarding, and automated monitoring experience. 
 
+Common and fully Edge Delta integrated Kubernetes services include:
+
+* **Amazon EKS**
+* **Azure AKS**
+* **Google GKE**
+* **OpenShift Enterprise Kubernetes**
+* **Bare Metel Kubernetes**
+
 ## Edge Delta Agents
 
 A primary component of the Edge Delta deployment \(in the context of Kubernetes\) are the Edge Delta agents. The agents are a lightweight, go-based process that run as a **Daemonset** in a Kubernetes cluster \(1 agent per node\).
