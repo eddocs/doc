@@ -2,6 +2,7 @@
 
 * [Edge Delta Overview](README.md)
 * [Basic Onboarding](basic-onboarding.md)
+* [Architecture Overview - K8s](architecture-overview-k8s.md)
 * [Installation](installation/README.md)
   * [Environment Variables](installation/environment-variables.md)
   * [Windows](installation/windows.md)
