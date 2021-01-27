@@ -18,7 +18,7 @@ Common and fully Edge Delta integrated Kubernetes services include:
 * **Azure AKS**
 * **Google GKE**
 * **OpenShift Enterprise Kubernetes**
-* **Bare Metel Kubernetes**
+* **Bare Metal Kubernetes**
 
 ![Examples of natively integrated Kubernetes platforms](.gitbook/assets/screen-shot-2021-01-26-at-7.21.57-pm.png)
 
