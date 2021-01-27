@@ -58,7 +58,7 @@ Deployment Overview Steps:
 
 ## Edge Delta Automated Kubernetes Monitoring
 
-Once the Edge Delta service is running within your Kubernetes environment, we begin automatically begin analyzing telemetry data locally from the active pods within the cluster. The incoming data is enriched with detailed metadata from the environment, and analyzed within the context of low level tags, as well as broader logical groups. 
+Once the Edge Delta service is running within your Kubernetes environment, we automatically begin analyzing telemetry data locally from the active pods within the cluster. The incoming data is enriched with detailed metadata from the environment, and analyzed within the context of low level tags, as well as broader logical groups. 
 
 Without any custom configuration, or user-provided context of the environment, the Edge Delta service will begin analyzing the underlying data, generating patterns, findings, and statistics, as well as **baselining the behavior to provide automated Anomaly Detection and Machine Learning capabilities**.
 
