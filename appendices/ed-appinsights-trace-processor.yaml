@@ -209,11 +209,11 @@ spec:
     # Change this ingest endpoint with your own dns 
     # The DNS must have A record pointing to cluster's ingress IP address.
     # kubectl --namespace ingress-basic get services -o wide nginx-ingress-ingress-nginx-controller
-    - ingest.edgedelta.198de54f02b345ab92a8.centralus.aksapp.io
+    - ingest.edgedelta.<Your DNS Zone>
     secretName: tls-secret
   rules:
     # Set host to same value as above.
-  - host: ingest.edgedelta.198de54f02b345ab92a8.centralus.aksapp.io
+  - host: ingest.edgedelta.<Your DNS Zone>
     http:
       paths:
       - backend:
