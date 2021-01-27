@@ -20,6 +20,8 @@ Common and fully Edge Delta integrated Kubernetes services include:
 * **OpenShift Enterprise Kubernetes**
 * **Bare Metel Kubernetes**
 
+![Examples of natively integrated Kubernetes platforms](.gitbook/assets/screen-shot-2021-01-26-at-7.21.57-pm.png)
+
 ## Edge Delta Agents
 
 A primary component of the Edge Delta deployment \(in the context of Kubernetes\) are the Edge Delta agents. The agents are a lightweight, go-based process that run as a **Daemonset** in a Kubernetes cluster \(1 agent per node\).
