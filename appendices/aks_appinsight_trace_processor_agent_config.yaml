@@ -14,9 +14,15 @@ inputs:
 filters:
   - name: appinsight_trace_filter
     type: buffered-trace
+    # trace_id_pattern  must be a regex with single capture group.
     trace_id_pattern: \"ai\.operation\.id\":\"(?P<id>\w+)"
+    # failure_pattern is the regex pattern which is used to determine whether the trace events should be considered failure.
+    # all failed traces pass the filter.
     failure_pattern: \"prop__status\":\"Failed\"
+    # success_sample_rate is a floating number between 0 and 1. Default is 0.01.
     success_sample_rate: 0
+    # trace_deadline is the duration to wait after last event of an operation seen. 
+    # Once deadline is reached filtering/sampling will be applied to the events of trace
     trace_deadline: 5s
 
 outputs:
