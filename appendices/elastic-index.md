@@ -93,14 +93,7 @@ PUT _template/ed-agent-log?include_type_name
           "type": "keyword"
         },
         "ecs_task_family": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "index_options": "docs",
-          "split_queries_on_whitespace": false,
-          "doc_values": true
+          "type": "keyword"
         },
         "k8s_controller_kind": {
           "type": "keyword"
@@ -124,6 +117,12 @@ PUT _template/ed-agent-log?include_type_name
         "k8s_container_name": {
           "type": "keyword"
         },
+        "score": {
+          "type": "double"
+        },
+        "sub_type": {
+          "type": "keyword"
+        },
         "host": {
           "type": "keyword"
         },
@@ -136,6 +135,9 @@ PUT _template/ed-agent-log?include_type_name
         "value": {
           "type": "double"
         },
+        "timestamp_end": {
+          "type": "date"
+        },
         "timestamp": {
           "index": true,
           "ignore_malformed": false,
@@ -144,14 +146,7 @@ PUT _template/ed-agent-log?include_type_name
           "doc_values": true
         },
         "ecs_task_version": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "split_queries_on_whitespace": false,
-          "index_options": "docs",
-          "doc_values": true
+          "type": "keyword"
         },
         "stat_type": {
           "type": "keyword"
@@ -171,15 +166,11 @@ PUT _template/ed-agent-log?include_type_name
         "k8s_pod_name": {
           "type": "keyword"
         },
+        "logical_source": {
+          "type": "keyword"
+        },
         "ecs_container": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "index_options": "docs",
-          "split_queries_on_whitespace": false,
-          "doc_values": true
+          "type": "keyword"
         },
         "org_id": {
           "type": "keyword"
@@ -188,14 +179,7 @@ PUT _template/ed-agent-log?include_type_name
           "type": "keyword"
         },
         "ecs_cluster": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "index_options": "docs",
-          "split_queries_on_whitespace": false,
-          "doc_values": true
+          "type": "keyword"
         },
         "src_type": {
           "type": "keyword"
