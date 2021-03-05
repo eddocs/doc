@@ -148,9 +148,9 @@ If you want the agent to process lines not for New Line\("\n"\) but for a specif
 
 If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods and namespaces to be monitored by the Edge Delta service.
 
-**Note**: In the 'include' and 'exclude' section, after "pod=", or "namespace=" this is a contains match, so as long as the value provided is contained anywhere in the pod or namespace name, the value will match.
+**Note**: In the 'include' and 'exclude' section, after "pod=", "namespace=" or "kind=" this is a contains match, so as long as the value provided is contained anywhere in the pod or namespace name, the value will match.
 
-**Note**: Excluded pods/namespaces take precedence over Included pods/namespaces.
+**Note**: Excluded pods/namespaces/kinds take precedence over Included pods/namespaces/kinds.
 
 ```go
   kubernetes:
@@ -162,6 +162,7 @@ If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods 
         - "namespace=kube-public"                    
         - "namespace=kube-node-lease"                    
         - "pod=edgedelta"
+        - "kind=ReplicaSet"
       auto_detect_line_pattern: true
 ```
 
