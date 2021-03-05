@@ -125,6 +125,22 @@ If enabled, Windows Events allows you to specify a set of Windows Events channel
       labels: "win_events,sysmon"
 ```
 
+#### Filters for Containers, Kubernetes and AWS ECS
+You can specify which inputs to add by providing include/exclude regex filters.
+These filters work only with Containers, Kubernetes and AWS ECS input types.
+- All rules in the same line with a comma(",") separated means AND
+```
+   include:
+     - "rule-1,rule-2"
+```
+  
+- All rules under the same part (include/exclude) means OR
+```
+   include:
+     - "rule-1"
+     - "rule-2"     
+```
+
 ## Containers \(Docker\)
 
 If enabled, Containers allows you to specify a set of Docker Containers to be monitored by the Edge Delta service.
