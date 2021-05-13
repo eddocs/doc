@@ -47,5 +47,15 @@ agent_settings:
     enabled: true
     sample_msg_count: 100
     once_every: 1h
+  archive:
+    name: "s3"
+    aws_key_id: "<key_id_for_iam_user>"
+    aws_sec_key: "<sec_key_for_iam_user"
+    s3_bucket: "<name_of_s3_bucket>"
+    s3_region: "<region_of_s3_bucket>"
+    size: "1MB"
+    buffer:
+      # setting buffer's path will enable file buffering to reduce agent's memory usage. Make sure agent has write access to provided path.
+      path: "/var/log/edgedelta/archive"
 ```
 
