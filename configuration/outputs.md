@@ -26,7 +26,7 @@ If enabled, the Splunk integration will stream analytics and insights to a Splun
 | type | Streaming destination type \(i.e. splunk, sumologic, datadog, etc.\) | Yes |
 | endpoint | Full Splunk HEC URI for this integration | Yes |
 | token | Splunk HEC Token for this integration | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: splunk-integration
@@ -50,7 +50,7 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
 | endpoint | Full HTTPs URL for this endpoint | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: sumo-logic-integration
@@ -78,7 +78,7 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 | allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | No |
 | auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | No |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
-| features | Features defines which data types stream to backend, it can only be "log" at the moment. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: cloudwatch
@@ -136,7 +136,7 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. datadog, sumologic, splunk, etc.\) | Yes |
 | api\_key | Datadog API Key | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: datadog-integration
@@ -155,7 +155,7 @@ If enabled, the New Relic integration will stream analytics and insights to your
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. newrelic, sumologic, datadog, etc.\) | Yes |
 | api\_key | New Relic Insert API Key | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: new-relic-integration
@@ -177,7 +177,7 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
 | http\_user | InfluxDB user credentials | Yes |
 | http\_password | InfluxDB password for connecting user | Yes |
 | db | Specific InfluxDB database to stream data to | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: influxdb-integration
@@ -199,10 +199,10 @@ If enabled, the Wavefront integration will stream analytics and insights to your
 | type | Streaming destination type \(i.e. wavefront, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Wavefront endpoint | Yes |
 | token | Wavefront API token | Yes |
-| features | Features defines which data types stream to backend. Only "metric" is supported. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
-      - name: wavefront
+      - name: wavefront-integration
         type: wavefront
         endpoint: "https://{your wavefront domain}.wavefront.com/report"
         token: "<add wavefront api token>"
@@ -217,10 +217,10 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Scalyr endpoint | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
-      - name: scalyr
+      - name: scalyr-integration
         type: scalyr
         endpoint: "https://app.scalyr.com/api/uploadLogs?token={scalyr log access write key}"
 ```
@@ -239,13 +239,13 @@ If enabled, the Elastic Search integration will stream analytics and insights to
 | token | Elastic Search API Key | No |
 | user | Username for elastic search credentials | No |
 | password | Elastic Search password for connecting user | No |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 * For the connection url, you can not provide cloud\_id and adress at the same time. And you must provide at least one of them.
 * For the authentication, you can not provide token and user/password at the same time. And you must provide at least one of them.
 
 ```go
-      - name: elastic
+      - name: elastic-integration
         type: elastic
         index: "index name"
         # you can provide cloud or adress list but not both at the same time 
@@ -257,6 +257,66 @@ If enabled, the Elastic Search integration will stream analytics and insights to
         token: "elastic search api key"
         #user: "elastic search username"
         #password: "elastic search password"
+```
+
+## Azure
+
+If enabled, the Azure integration will stream analytics and insights to an Azure endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(azure\) | Yes |
+| endpoint | Azure AppInsight endpoint. | Yes |
+| api_key | Azure AppInsight API key. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```go
+      - name: azure-integration
+        type: azure
+        endpoint: https://dc.services.visualstudio.com/v2/track
+        api_key: "Azure AppInsight api key" 
+        features: "metric"
+```
+
+## Kafka
+
+If enabled, the Kafka integration will stream analytics and insights to an Kafka endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(kafka\) | Yes |
+| endpoint | Kafka broker addresses. | Yes |
+| topic | Kafka topic name. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```go
+      - name: kafka-integration
+        type: kafka
+        endpoint: https://dc.services.visualstudio.com/v2/track
+        endpoint: <kafka broker address-1>,<kafka broker address-2>
+        topic: topic
+```
+
+## SignalFx
+
+If enabled, the SignalFx integration will stream analytics and insights to an SignalFx endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(signalfx\) | Yes |
+| endpoint | SignalFx endpoint. | Yes |
+| token | SignalFx API token. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```go
+      - name: signalfx-integration
+        type: signalfx
+        endpoint: https://ingest.us1.signalfx.com/v2
+        token: "<add signalfx api token>"
+        features: "metric,log"
 ```
 
 ## Trigger Destinations
@@ -292,4 +352,3 @@ outputs:
         type: slack
         endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 ```
-
