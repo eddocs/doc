@@ -6,7 +6,7 @@ description: >-
 
 # Environment Variables
 
-## Environment Variables
+## Frequently Used Environment Variables
 
 <table>
   <thead>
@@ -57,18 +57,65 @@ description: >-
   </tbody>
 </table>
 
-## Examples - Linux
+## Examples - Kubernetes \(yml configuration\)
 
-```text
-ED_API_KEY=<your api key> \
-HTTPS_PROXY=<your proxy details> \
-bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
+Snippet pulled from: [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml)
+
+```yaml
+spec:
+  containers:
+  - name: edgedelta
+    image: docker.io/edgedelta/agent:latest
+    env:
+      - name: ED_API_KEY
+        valueFrom:
+          secretKeyRef:
+            key: ed-api-key
+            name: ed-api-key
+      - name: HTTPS_PROXY
+        value: <your proxy details>
 
 ```
+### Examples - Kubernetes Secret \(yml configuration\)
 
+```yaml
+apiVersion: v1
+kind: Namespace
+...
+spec:
+  ...
+    spec:
+      serviceAccountName: edgedelta
+      containers:
+      - name: edgedelta-agent
+        image: docker.io/edgedelta/agent:latest
+        env:
+          - name: MY_VARIABLE
+            value: VARIABLE_VALUE
+          - name: MY_SECRET
+            valueFrom:
+              secretKeyRef:
+                key: my-secret
+                name: my-secret
+      ...
+```
+Note that "SECRET_VALUE" is not defined in the yaml as clear text. Using the Kubernetes secrets mechanism, secret value should be defined with below command within the Kubernetes cluster:
+```bash
+kubectl create secret generic my-secret --namespace=edgedelta --from-literal=my-secret="SECRET_VALUE"
+```
+
+## Examples - Linux/MacOSX
+
+ED_ENV_VARS is a special variable used during installation where multiple environment variables specified in a comma separated format **variable1=value2,variable2=value2**
+
+```bash
+ED_API_KEY=<your api key> \
+ED_ENV_VARS="HTTPS_PROXY=<your proxy details>" \
+bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
+```
 ## Examples - Docker
 
-```text
+```bash
 docker run --rm -d --name edgedelta \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -e "ED_API_KEY=<your api key>" \
@@ -77,23 +124,10 @@ edgedelta/agent:latest
 
 ```
 
-## Examples - Kubernetes \(yml configuration\)
+## Example - Windows
 
-Snippet pulled from: [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml)
+On Windows systems use following command to define environment variables globally. Agent service needs to be restart after setting the variable.
 
-```text
-    spec:
-      containers:
-      - name: edgedelta
-        image: docker.io/edgedelta/agent:latest
-        env:
-          - name: ED_API_KEY
-            valueFrom:
-              secretKeyRef:
-                key: ed-api-key
-                name: ed-api-key
-          - name: HTTPS_PROXY
-            value: <your proxy details>
-
+```powershell
+[System.Environment]::SetEnvironmentVariable('HTTP_PROXY', '<your proxy details>',[System.EnvironmentVariableTarget]::Machine)
 ```
-
