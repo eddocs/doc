@@ -1,7 +1,9 @@
 ---
 description: >-
   This document outlines the various Processor types supported by the Edge Delta
-  service, and how the processors are configured.
+  agent, and how the processors are configured. Processor declarations go under `processors` section in config yaml and in order to activate them they must be put into workflows.
+
+
 ---
 
 # Processors
@@ -10,43 +12,84 @@ description: >-
 
 Processors are the mechanism used to allow users to specify various analytical, statistical, and machine-learning based algorithms to apply to their incoming data. 
 
-The labels are used to map processors to specific inputs and outputs, as part of a workflow. 
+## Cluster
 
-## Regexes - Simple Keyword Match
+The cluster processor finds patterns in the logs and clusters them based on similarity. Cluster patterns and samples of each cluster are reported to target streaming destination. 
 
-If enabled, the simple match regex processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the events that match the given match pattern.
+*Note*: Analyzing patterns in high log volume environments can be compute intensive. To be super resource friendly, by default cluster processor applies sampling to the incoming logs. It will only process 200 logs per-source (e.g. a container or file) unless one of the rate limiting related fields are set. See *cpu_friendly* and *throttle_limit_per_sec* below for details.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| pattern | Regular Expression pattern to define which strings to match on | Yes |
-| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
-| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
-| upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. No default value. | No |
+| reporting_frequency | The frequency to report clustering results (patterns + samples) to streaming destinations  | Yes |
+| num_of_clusters | Clustering reports top N and bottom N clusters. N = num_of_clusters | Yes |
+| samples_per_cluster | The number of sample events to report   | Yes |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents a cluster's retention The clusters that don't have any new logs for last retention period will be dropped and will no longer be reported until seen again. | Yes |
+| cpu_friendly | When set to 'true' the CPU aware rate limiting is enabled. This makes the agent honor the given CPU limit (specified at top level agent_settings section) by dropping some percentage of events in order to keep agent's CPU usage below the given limit. Unless you have more than 1k logs per second don't worry about this setting. | Yes |
+| throttle_limit_per_sec | Puts a hard limit on how many logs should be clustered per second from a single source. If cpu_friendly is enabled then this will be ignored. | Yes |
 
-```go
-regexes:
-  - name: "errors"
-    pattern: "error|err|ERROR|ERR"
-    trigger_thresholds:
-      anomaly_probability_percentage: 90       
+
+**Example config:**
+```
+  cluster:
+    name: clustering
+    num_of_clusters: 100
+    samples_per_cluster: 20
+    reporting_frequency: 1m
+    retention: 30m
 ```
 
-## Regexes - Statistical Capture
+## Simple Keyword Match Processor
 
-If enabled, the statistical capture regex processors will analyze a specific numerical field,  and automatically generate statistics and detect anomalies based on the aggregate values parsed out from the events. 
 
-Typically Statistical Capture regexes are used for numerical statistics, such as response times, process times, sizes \(bytes, pool size, buffer, ...\), active users, etc.
+The simple keyword match processor checks for basic regex match in the logs, counts the matching logs and generates anomaly scores. The counts are rolled up by the agent with given *interval* and emitted as metrics. Thresholds can be set to get notified when anomalies occur (e.g. metric value spikes or drops unexpectedly).
+
+
+**Example config:**
+```
+regexes:
+  - name: "error"
+    pattern: "error|err|ERROR|ERR"
+    trigger_thresholds:
+      anomaly_probability_percentage: 90
+```
+
+Metrics generated from example config:
+- *error.count*: Total count of matches within an interval
+- *error.anomaly1*: Anomaly score of current interval based on total count history. represents the how anomalous the current error count is compared to its history. Score is in the range of [0,100]. 
+
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| pattern | Regular Expression pattern containing a capture group to define which field to perform statistics on | Yes |
-| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
-| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
-| upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. No default value. | No |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| pattern | Regular Expression pattern to define which strings to match on. | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+| anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
 
-```go
+
+## Numeric Capture Processor
+
+Numeric capture processor supports exact same configuration as **Simple Keyword Match** processor except that the regular expression has a numeric capture group. Typically **Numeric Capture** processors are used for numerical statistics, such as response duration, payload size etc.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| pattern | Regular Expression pattern which has a named group that is numeric value. e.g. "(\\d+)" | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+| anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+
+
+**Example config:**
+```
 regexes:
   - name: "response_time"
     pattern: "completed in (\\d+)ms"
@@ -54,196 +97,302 @@ regexes:
       anomaly_probability_percentage: 90
 ```
 
-## Regexes - Dimension Counter
+When such regular expression pattern is provided the following statistics are generated and emitted as metrics
+- response_time.count: total count of matches in current interval
+- response_time.avg: average of captured numeric values. e.g. average response time in above example.
+- response_time.min: minimum of captured numeric values.
+- response_time.max: maximum of captured numeric values.
+- response_time.anomaly1: anomaly score based on history of average values.
 
-If enabled, the dimension counter regex processors will analyze incoming lines and dynamically generate the values for a given dimension. For each of the values of that dimension, the system will automatically generate statistics, and detect anomalies based on the events that match the given match pattern.
+
+## Dimension Counter Processor
+
+The dimension counter processor extracts a specified part of the log, considers it as the dimension (the key) and counts matching logs for each distinct dimension value. It generates count and anomaly metrics for each unique dimension value.
+
+
+Dimension counter supports exact same configuration as **Simple Keyword Match** processor with addition of below fields:
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| pattern | Regular Expression pattern containing a named capture group, or set of named capture groups to define which field\(s\) to perform dimensional statistics on. _Note: named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"_ | Yes |
-| dimensions | List of named capture group fields to use as dynamic dimensions \(group by\)  | Yes |
-| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
-| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. The anomaly\_probability\_percentage threshold will be applied dynamically to each underlying value found for the given dimension\(s\). Default value = 90 | No |
-| upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. The upper\_limit\_per\_interval threshold will be applied dynamically to each underlying value found for the given dimension\(s\). No default value. | No |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| pattern | Regular Expression pattern containing a named capture group representing the dimension. _Note: named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"_ | Yes |
+| dimensions | List of named capture group fields to use as dynamic dimensions \(group by\). Each dimension specified here must have a corresponding named capture group in the pattern field for this processor.  | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+| anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
 
-```go
+**Example config:** Count per log level
+```
 regexes:
-  - name: "log_levels"
-    pattern: "level=(?P<log_level>\\w+) "
-    dimensions: ["log_level"]
+  - name: "log"
+    pattern: "level=(?P<level>\\w+) "
+    dimensions: ["level"]
     trigger_thresholds:
-      anomaly_probability_percentage: 90       
+      anomaly_probability_percentage: 90
 ```
 
-## Regexes - Dimension Statistics
+Let's assume our logs have 3 levels: DEBUG, INFO, ERROR. In this case the following metrics will be generated by the Dimension Counter processor:
 
-If enabled, the dimension statistics processor will dynamically analyze a specific numerical field \(i.e. response\_time, buffer\_size, latency, ...\),  and automatically generate statistics and detect anomalies based on the aggregate values parsed out from the events, grouped by the dimensions outlined in the configuration \(i.e. log\_level, status\_code, method, host\_name, ...\)
+- *log_level_debug.count*
+- *log_level_debug.anomaly1*
+- *log_level_info.count*
+- *log_level_info.anomaly1*
+- *log_level_error.count*
+- *log_level_error.anomaly1*
+
+Format: *{processor name}_{dimension name}_{dimension value}.{stat type}*
+
+## Dimension Numeric Capture Processor
+
+The dimension numeric capture processor keeps track of a specific numerical field (i.e. latency) per unique dimension value (i.e. api_path), and automatically generate statistics (counts, averages) and detect anomalies based on the aggregate values grouped by dimensions.
+
+It supports same configurations as **Dimension Counter Processor** with the difference being regex pattern contains a numeric capture group.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| pattern | Regular Expression pattern containing a named capture group, or set of named capture groups to define which field\(s\) to perform dimensional statistics on. _Note: named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"_ | Yes |
-| dimensions | List of named capture group fields to use as dynamic dimensions \(group by\), i.e. status\_code, log\_level, user\_name, pod, cluster, namespace, ... | Yes |
-| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
-| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. The anomaly\_probability\_percentage threshold will be applied dynamically to each underlying value found for the given dimension\(s\). Default value = 90 | No |
-| upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. The upper\_limit\_per\_interval threshold will be applied dynamically to each underlying value found for the given dimension\(s\). No default value. | No |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| pattern | Regular Expression pattern containing one named capture group representing dimension and one or more numeric named captured groups. *Note:* named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"_ | Yes |
+| dimensions | List of named capture group fields to use as dynamic dimensions \(group by\). Each dimension specified here must have a corresponding named capture group in the pattern field for this processor.  | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+| anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
 
-```go
+
+**Example config:**
+```
 regexes:
-  - name: "http-request-latencies"
-    pattern: "] \"(?P<method>\\w+) took (?P<latency>\\d+) ms"
+  - name: "http"
+    pattern: "(?P<method>\\w+) took (?P<latency>\\d+) ms"
     dimensions: ["method"]
     trigger_thresholds:
       anomaly_probability_percentage: 90 
 ```
 
-## Ratios
 
-If enabled, the ratio processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the ratio between success and failure patterns. 
+Let's say we have following logs feeding into the **Dimension Numeric Capture Processor** that is configured above:
+
+- "GetAlbums took 12ms"
+- "GetRecords took 16ms"
+
+When agent sees these logs, it will start generating the metrics below:
+
+- *http_method_getalbums_latency.count*
+- *http_getalbums_latency.avg*
+- *http_getalbums_latency.min*
+- *http_getalbums_latency.max*
+- *http_getalbums_latency.anomaly1*
+- *http_getrecords_latency.count*
+- *http_getrecords_latency.avg*
+- *http_getrecords_latency.min*
+- *http_getrecords_latency.max*
+- *http_getrecords_latency.anomaly1*
+
+Format: *{processor name}_{dimension name}_{dimension value}_{numeric capture group name}.{stat type}*
+
+For each distinct dimension (*getalbums* and *getrecords*) numeric statistics are calculated and reported with a metric name containing the dimension in it. **Dimension Numeric Capture Processor** processor basically does what **Numeric Capture Processor** does for each distinct dimension value.
+
+
+
+## Trace Processor
+
+The trace processor is useful for tracking events that has a unique ID and a distinguishable start and end logs. IDs typically dynamic fields such as transaction IDs, trace ID etc. Each event's duration is tracked and average/min/max in current interval are emitted as metrics. Anomalies are detected based on the average event duration based on the history of average durations. 
+
+
+Trace processor configuration looks similar to **Simple Keyword Match Processor** except that instead of *pattern* field the trace processor expects *start_pattern* and *finish_pattern*. 
+In addition to the other trigger thresholds, the trace processor supports *max_duration* which is useful to get notified of long running events.
+
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| success\_pattern | Regular Expression match pattern to define which strings to match a success event | Yes |
-| failure\_pattern | Regular Expression match pattern to define which strings to match a failure event | Yes |
-| **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
-| anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| start_pattern | Regular Expression match pattern to define which strings to match a success event | Yes |
+| finish_pattern | Regular Expression match pattern to define which strings to match a failure event | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+| max_duration | Maximum duration of an event allowed. If an event doesn't complete within this duration then a trigger is generated | No |
+| anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
 
-```go
+**Example config:**
+```
+traces:
+  - name: render-trace
+    start_pattern: "rendering job: (?P<ID>[0-9a-fA-F]{8}) started"
+    finish_pattern: "rendering job: (?P<ID>[0-9a-fA-F]{8}) finished"
+    trigger_thresholds:
+      max_duration: 50000 # 50 seconds      
+```
+
+## Top-K processor
+
+Top-K processor keeps track of top K records (e.g. k=10) where the records are identified with one or more named regex group values combined together. It reports top k items as a string value.
+
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| pattern | Logs matching this pattern will be selected and named groups combined together will be the key of the record for which we keep counter. | Yes |
+| k | Integer value that specifies how many top records to keep track of at every interval. Records are ordered by their count descendingly and top k items are picked for reporting. | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting interval. At every interval the top records will be reported and they will be removed locally. | Yes |
+| lower_limit | If a lower limit is provided only records whose count is greater than the limit will be able to make it to top k. | No |
+| separator | separator is used to combine the named group values together to form a record key. Default is comma ',' | No |
+
+**Example config:**
+```
+  top_ks:
+    - name: top-api-requests
+      pattern: (?P<ip>\d+\.\d+\.\d+\.\d+) - \w+ \[.*\] "(?P<method>\w+) (?P<path>.+) HTTP\/\d.0" (?P<code>.+) \d+
+      k: 10
+      interval: 30s
+```
+
+**Example log:**
+
+*"12.195.88.88 - joe \[08/Aug/2020:05:57:49 +0000\] "GET /optimize/engage HTTP/1.0" 200 19092"*
+
+The pattern above would generate a record key like this: *"12.195.88.88,GET,/optimize/engage,200"*
+
+Let's say this record has been seen 5 times in last period and it was one of the top k items. Then below log will be generated by Top-K processor and sent to workflow's destinations:
+
+*"12.195.88.88,GET,/optimize/engage,200=5"*
+
+
+## Ratio
+
+The ratio processor takes one success and one failure regex pattern and calculates success ratio. Ratio is calculated with following formula: `ratio = success / (success+failure)`. Ratio processor detects ratio anomalies and supports static thresholds as well.
+
+Ratio processor configuration looks similar to **Simple Keyword Match** processor except that instead of pattern field it expects two regular expressions: *success_pattern* and *failure_pattern*.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| success_pattern | Regular Expression match pattern to define which strings to match a success event | Yes |
+| failure_pattern | Regular Expression match pattern to define which strings to match a failure event | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+| anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+
+
+**Example config:**
+```
 ratios:
-  - name: request-error-ratio
+  - name: error-ratio
     success_pattern: "request succeeded"
     failure_pattern: "request failed"
     trigger_thresholds:
-      anomaly_probability_percentage: 90       
+      anomaly_probability_percentage: 90 
 ```
 
-## Traces
+## Complete example
 
-If enabled, the traces processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the duration of events, given a fixed start and finish pattern. Trace durations will dynamically be computed for each unique value identified for a given key. Keys are typically dynamic fields such as transaction IDs, trace ID, process IDs, microservice identifiers, etc.
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Key</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:left">Required</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">name</td>
-      <td style="text-align:left">User defined name of this specific processor, used for mapping this processor
-        to a workflow</td>
-      <td style="text-align:left">Yes</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">start_pattern</td>
-      <td style="text-align:left">
-        <p>Regular Expression pattern to define the starting event for a trace. Start
-          pattern must contain a named capture group, which is used as the key for
-          individual traces.</p>
-        <p><em>Note: named capture groups must follow Golang regex protocol, ex:<br /> &quot;initializing render transaction: (?P&lt;transaction_id&gt;\w+)&quot;</em>
-        </p>
-      </td>
-      <td style="text-align:left">Yes</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">stop_pattern</td>
-      <td style="text-align:left">
-        <p>Regular Expression pattern to define the stopping event for a trace. Stop
-          pattern must contain a named capture group, which is used as the key for
-          individual traces.</p>
-        <p><em>Note: named capture groups must follow Golang regex protocol, ex:<br /> &quot;completed render transaction: (?P&lt;transaction_id&gt;\w+)&quot;</em>
-        </p>
-      </td>
-      <td style="text-align:left">Yes</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b>trigger_thresholds</b>
-      </td>
-      <td style="text-align:left">The trigger_thresholds section is used to define trigger_thresholds (alerting
-        and automation) based on Edge Delta&apos;s analysis of the incoming data</td>
-      <td
-      style="text-align:left">Yes</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">max_duration</td>
-      <td style="text-align:left">The max timeout window (in milliseconds) for a transaction. Any transaction
-        that exceeds the max_duration will generate a trigger</td>
-      <td style="text-align:left">No</td>
-    </tr>
-  </tbody>
-</table>
-
-```go
-traces:
-  - name: rendering-transaction
-    start_pattern: "starting render transaction: (?P<transaction_id>\w+)"
-    stop_pattern: "completed render transaction: (?P<transaction_id>\w+)"
-    trigger_thresholds:
-      max_duration: 10000   
 ```
+version: v2
+agent_settings:
+  tag: prod
 
-## Cluster
+inputs:
+  kubernetes:
+    - labels: "my-app"
+      include:
+        - "pod=^my-app.*$,kind=ReplicaSet"
+outputs:
+  streams:
+    - name: my-datadog-trial
+      type: datadog
+      log_host: <ADD DATADOG LOG_HOST>
+      metric_host: <ADD DATADOG METRIC_HOST>
+      api_key: {{Env "TEST_DD_APIKEY"}} # define datadog api key as environment variable (recommended way for secrets)
 
-If enabled, the cluster processor will apply realtime clustering algorithms to the specified inputs as part of a workflow. The clustering algorithms automatically detect the structure, and patterns of each incoming event, providing a comprehensive analysis of all incoming data. In addition, clustering provides a unique analysis of incoming data streams to make detecting log-based anomalies extremely simple.
-
-_Note: As expected, in certain cases the cluster algorithm can increase resource consumption of the Edge Delta service._ _This typically depends on various factors of the incoming datasets \(throughput, event structure, pattern distributions, etc.\)_ 
-
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow | Yes |
-| num\_of\_clusters | Max number of clusters to generate for a given input.  | Yes |
-| samples\_per\_cluster | The number of sample events to report when providing cluster details  | Yes |
-| reporting\_frequency | The frequency to report cluster analysis to streaming destinations  | Yes |
-
-```go
-cluster:
-  name: clustering
-  num_of_clusters: 100
-  samples_per_cluster: 3
-  reporting_frequency: 30s    
-```
-
-## Examples
-
-```go
 processors:
 
+  # Clustering processor
+  cluster:      
+    name: clustering
+    num_of_clusters: 100
+    samples_per_cluster: 20
+    reporting_frequency: 1m
+    retention: 30m 
+
   regexes:
-    - name: "errors"
+
+    # Simple keyword match processor
+    - name: "error"     
       pattern: "error|err|ERROR|ERR"
       trigger_thresholds:
         anomaly_probability_percentage: 90
-    - name: "response_time"
+
+    # Numeric capture processor
+    - name: "response_time"     
       pattern: "completed in (\\d+)ms"
       trigger_thresholds:
-        anomaly_probability_percentage: 90  
-    - name: "log_levels"
-      pattern: "level=(?P<log_level>\\w+) "
+        anomaly_probability_percentage: 90
+
+    # Dimension counter processor
+    - name: "log"
+      pattern: "level=(?P<level>\\w+) "
+      dimensions: ["level"]
+      trigger_thresholds:
+        anomaly_probability_percentage: 90
+
+    # Dimension Numeric Capture Processor
+    - name: "http"
+      pattern: "(?P<method>\\w+) took (?P<latency>\\d+) ms"
+      dimensions: ["method"]
       trigger_thresholds:
         anomaly_probability_percentage: 90 
-      
+
+  traces:
+
+    # Trace processor
+    - name: render-trace
+      start_pattern: "rendering job: (?P<ID>[0-9a-fA-F]{8}) started"
+      finish_pattern: "rendering job: (?P<ID>[0-9a-fA-F]{8}) finished"
+      trigger_thresholds:
+        max_duration: 50000 # 50 seconds        
+
+  top_ks:
+    - name: top-api-requests
+      pattern: (?P<ip>\d+\.\d+\.\d+\.\d+) - \w+ \[.*\] "(?P<method>\w+) (?P<path>.+) HTTP\/\d.0" (?P<code>.+) \d+
+      k: 10
+      interval: 30s
+
   ratios:
-    - name: request-error-ratio
+    # Ratio processor
+    - name: error-ratio
       success_pattern: "request succeeded"
       failure_pattern: "request failed"
       trigger_thresholds:
-        anomaly_probability_percentage: 90
-      
-  traces:
-    - name: rendering-transaction-traces
-      start_pattern: "starting render transaction: (?P<transaction_id>\w+)"
-      stop_pattern: "completed render transaction: (?P<transaction_id>\w+)"
-      trigger_thresholds:
-        max_duration: 10000 
-        
-  cluster:
-    name: clustering
-    num_of_clusters: 100
-    samples_per_cluster: 3
-    reporting_frequency: 30s    
+        anomaly_probability_percentage: 90 
+
+workflows:
+    my-workflow:
+      input_labels:
+        - my-app
+      processors:
+        - clustering
+        - error
+        - response_time
+        - log
+        - http
+        - render-trace
+        - top-api-requests
+        - error-ratio
+      destinations:
+        - my-datadog-trial
 ```
 
