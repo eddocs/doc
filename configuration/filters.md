@@ -29,9 +29,9 @@ Filters should be defined at the top level, under filters section before using:
 ```
 ### Regex Filters
 
-Regex filters pass all log lines that match the specified regular expression for further processing and discard unmatched logs.
+Regex filters pass all log lines that match the specified regular expression for further processing and discard all unmatched logs.
 
-Below example will grab log lines that ares error related and discard other lines.
+Below example will grab the log lines that are error related and discard other lines.
 
 ```yaml
   - name: error
