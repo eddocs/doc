@@ -57,7 +57,7 @@ description: >-
   </tbody>
 </table>
 
-## Examples - Kubernetes \(yml configuration\)
+## Examples - Kubernetes (yml configuration)
 
 Snippet pulled from: [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml)
 
@@ -76,37 +76,15 @@ spec:
         value: <your proxy details>
 
 ```
-### Examples - Kubernetes Secret \(yml configuration\)
 
-```yaml
-apiVersion: v1
-kind: Namespace
-...
-spec:
-  ...
-    spec:
-      serviceAccountName: edgedelta
-      containers:
-      - name: edgedelta-agent
-        image: docker.io/edgedelta/agent:latest
-        env:
-          - name: MY_VARIABLE
-            value: VARIABLE_VALUE
-          - name: MY_SECRET
-            valueFrom:
-              secretKeyRef:
-                key: my-secret
-                name: my-secret
-      ...
-```
-Note that "SECRET_VALUE" is not defined in the yaml as clear text. Using the Kubernetes secrets mechanism, secret value should be defined with below command within the Kubernetes cluster:
+Note that "ED_API_KEY" is not defined in the yaml as clear text. Using the Kubernetes secrets mechanism, secret value should be defined with below command within the Kubernetes cluster:
 ```bash
-kubectl create secret generic my-secret --namespace=edgedelta --from-literal=my-secret="SECRET_VALUE"
+kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="YOUR_API_KEY_VALUE"
 ```
 
 ## Examples - Linux/MacOSX
 
-ED_ENV_VARS is a special variable used during installation where multiple environment variables specified in a comma separated format **variable1=value2,variable2=value2**
+ED_ENV_VARS is a special variable used during installation where multiple environment variables specified in following comma separated format: "variable1=value1,variable2=value2"
 
 ```bash
 ED_API_KEY=<your api key> \

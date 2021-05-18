@@ -44,7 +44,7 @@ Instead of explicitly putting it into configuration it can be referred from agen
 
 In certain scenarios it is useful to set a variable in a simple way. On production environment with large number of agents it is impractical to toggle certain features, change destinations or update parts of the processing rules by updating operating system variables.
 
-Configuration Variables table under [Global Settings](https://admin.edgedelta.com/global-settings) provides an easy way to set or override such variables. Variables will be replaced by their values in the table at the next agent heartbeat and agent will not try to acquire values from local agent environment.
+Configuration Variables table under [Global Settings](https://admin.edgedelta.com/global-settings) provides an easy way to set or override such variables. Variable updates will be detected automatically by the agents and will be in use within a minute.
 
 Example Configuration Variables:
 
