@@ -8,9 +8,9 @@ description: >-
 
 ## Overview
 
-Processors are the mechanism used to allow users to specify various analytical, statistical, and machine-learning based algorithms to apply to their incoming data. 
+Processors are the mechanism used to allow users to specify various analytical, statistical, and machine-learning based algorithms to apply to their incoming data.
 
-The labels are used to map processors to specific inputs and outputs, as part of a workflow. 
+The labels are used to map processors to specific inputs and outputs, as part of a workflow.
 
 ## Regexes - Simple Keyword Match
 
@@ -24,17 +24,17 @@ If enabled, the simple match regex processors will analyze incoming lines and au
 | anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
 | upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. No default value. | No |
 
-```go
+```yaml
 regexes:
   - name: "errors"
     pattern: "error|err|ERROR|ERR"
     trigger_thresholds:
-      anomaly_probability_percentage: 90       
+      anomaly_probability_percentage: 90
 ```
 
 ## Regexes - Statistical Capture
 
-If enabled, the statistical capture regex processors will analyze a specific numerical field,  and automatically generate statistics and detect anomalies based on the aggregate values parsed out from the events. 
+If enabled, the statistical capture regex processors will analyze a specific numerical field,  and automatically generate statistics and detect anomalies based on the aggregate values parsed out from the events.
 
 Typically Statistical Capture regexes are used for numerical statistics, such as response times, process times, sizes \(bytes, pool size, buffer, ...\), active users, etc.
 
@@ -46,7 +46,7 @@ Typically Statistical Capture regexes are used for numerical statistics, such as
 | anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
 | upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. No default value. | No |
 
-```go
+```yaml
 regexes:
   - name: "response_time"
     pattern: "completed in (\\d+)ms"
@@ -67,13 +67,13 @@ If enabled, the dimension counter regex processors will analyze incoming lines a
 | anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. The anomaly\_probability\_percentage threshold will be applied dynamically to each underlying value found for the given dimension\(s\). Default value = 90 | No |
 | upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. The upper\_limit\_per\_interval threshold will be applied dynamically to each underlying value found for the given dimension\(s\). No default value. | No |
 
-```go
+```yaml
 regexes:
   - name: "log_levels"
     pattern: "level=(?P<log_level>\\w+) "
     dimensions: ["log_level"]
     trigger_thresholds:
-      anomaly_probability_percentage: 90       
+      anomaly_probability_percentage: 90
 ```
 
 ## Regexes - Dimension Statistics
@@ -89,18 +89,18 @@ If enabled, the dimension statistics processor will dynamically analyze a specif
 | anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. The anomaly\_probability\_percentage threshold will be applied dynamically to each underlying value found for the given dimension\(s\). Default value = 90 | No |
 | upper\_limit\_per\_interval | Static threshold for generating a trigger, if the number of events that match the given pattern for the most recent reporting interval is greater than that limit, a trigger will be generated. The upper\_limit\_per\_interval threshold will be applied dynamically to each underlying value found for the given dimension\(s\). No default value. | No |
 
-```go
+```yaml
 regexes:
   - name: "http-request-latencies"
     pattern: "] \"(?P<method>\\w+) took (?P<latency>\\d+) ms"
     dimensions: ["method"]
     trigger_thresholds:
-      anomaly_probability_percentage: 90 
+      anomaly_probability_percentage: 90
 ```
 
 ## Ratios
 
-If enabled, the ratio processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the ratio between success and failure patterns. 
+If enabled, the ratio processors will analyze incoming lines and automatically generate statistics, and detect anomalies based on the ratio between success and failure patterns.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -110,13 +110,13 @@ If enabled, the ratio processors will analyze incoming lines and automatically g
 | **trigger\_thresholds** | The trigger\_thresholds section is used to define trigger\_thresholds \(alerting and automation\) based on Edge Delta's analysis of the incoming data | Yes |
 | anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be breached in order to generate a trigger. Lower values \(0-50\) will generate a trigger if minor anomalies are detected within the data, higher values \(50+\) will only generate a trigger if major anomalies are detected. Default value = 90 | No |
 
-```go
+```yaml
 ratios:
   - name: request-error-ratio
     success_pattern: "request succeeded"
     failure_pattern: "request failed"
     trigger_thresholds:
-      anomaly_probability_percentage: 90       
+      anomaly_probability_percentage: 90
 ```
 
 ## Traces
@@ -183,14 +183,14 @@ traces:
     start_pattern: "starting render transaction: (?P<transaction_id>\w+)"
     stop_pattern: "completed render transaction: (?P<transaction_id>\w+)"
     trigger_thresholds:
-      max_duration: 10000   
+      max_duration: 10000
 ```
 
 ## Cluster
 
 If enabled, the cluster processor will apply realtime clustering algorithms to the specified inputs as part of a workflow. The clustering algorithms automatically detect the structure, and patterns of each incoming event, providing a comprehensive analysis of all incoming data. In addition, clustering provides a unique analysis of incoming data streams to make detecting log-based anomalies extremely simple.
 
-_Note: As expected, in certain cases the cluster algorithm can increase resource consumption of the Edge Delta service._ _This typically depends on various factors of the incoming datasets \(throughput, event structure, pattern distributions, etc.\)_ 
+_Note: As expected, in certain cases the cluster algorithm can increase resource consumption of the Edge Delta service._ _This typically depends on various factors of the incoming datasets \(throughput, event structure, pattern distributions, etc.\)_
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -204,7 +204,7 @@ cluster:
   name: clustering
   num_of_clusters: 100
   samples_per_cluster: 3
-  reporting_frequency: 30s    
+  reporting_frequency: 30s
 ```
 
 ## Examples
@@ -220,30 +220,30 @@ processors:
     - name: "response_time"
       pattern: "completed in (\\d+)ms"
       trigger_thresholds:
-        anomaly_probability_percentage: 90  
+        anomaly_probability_percentage: 90
     - name: "log_levels"
       pattern: "level=(?P<log_level>\\w+) "
       trigger_thresholds:
-        anomaly_probability_percentage: 90 
-      
+        anomaly_probability_percentage: 90
+
   ratios:
     - name: request-error-ratio
       success_pattern: "request succeeded"
       failure_pattern: "request failed"
       trigger_thresholds:
         anomaly_probability_percentage: 90
-      
+
   traces:
     - name: rendering-transaction-traces
       start_pattern: "starting render transaction: (?P<transaction_id>\w+)"
       stop_pattern: "completed render transaction: (?P<transaction_id>\w+)"
       trigger_thresholds:
-        max_duration: 10000 
-        
+        max_duration: 10000
+
   cluster:
     name: clustering
     num_of_clusters: 100
     samples_per_cluster: 3
-    reporting_frequency: 30s    
+    reporting_frequency: 30s
 ```
 

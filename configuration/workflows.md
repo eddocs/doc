@@ -19,7 +19,7 @@ Workflows are the mapping of Inputs, Processors and Outputs, logically grouped t
 | processors | A list of Processor names to apply to the given Workflow. Processor names are defined as part of the Processor configuration.  | Yes |
 | destinations | A list of Output names to apply to the given Workflow. Destination names are defined as part of the Output configuration.  | No |
 
-```go
+```yaml
 workflows:
   application_workflow:
     input_labels:
@@ -33,7 +33,7 @@ workflows:
     destinations:
       - sumo-logic-devops-integration
       - slack-devops-integration
-      
+
   security_workflow:
     input_labels:
       - syslog_traffic
@@ -45,6 +45,6 @@ workflows:
       - system-patterns
     destinations:
       - sumo-logic-security-integration
-      - slack-security-integration         
+      - slack-security-integration
 ```
 
