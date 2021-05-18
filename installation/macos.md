@@ -52,3 +52,11 @@ Configuration File path: `/opt/edgedelta/agent/config.yml`
 cat /opt/edgedelta/agent/config.yml
 ```
 
+## Uninstallation
+
+Make sure to run uninstallation process as root.
+
+```text
+launchctl remove edgedelta
+rm -rfd /opt/edgedelta
+```

@@ -58,7 +58,7 @@ cat /opt/edgedelta/agent/config.yml
 
 ## Uninstallation
 
-The uninstallation process may prompt for the sudo password if you are not running as root. 
+Make sure to run uninstallation process as root.
 
 ```text
 systemctl stop edgedelta.service
