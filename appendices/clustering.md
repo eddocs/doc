@@ -1,8 +1,8 @@
 # Clustering Details
 
-When a new event passes through the pipeline, the variants are identified via a proprietary Ragel FSM Based Tokenization process (80%-90% more efficient than regex) and stripped from the event, replaced with wildcards, and the remaining invariant components of the event are then compared to existing pattern sets to determine their similarities.
+When a new log passes through the pipeline, the variants are identified via a proprietary Ragel FSM Based Tokenization process (80%-90% more efficient than regex) and stripped from the log, replaced with wildcards, and the remaining invariant components of the log are then compared to existing pattern sets to determine their similarities.
 
-There are 2 sampling modes for calculating similarities:
+There are modes for calculating similarities:
 * [Drain](https://docs.edgedelta.com/appendices/clustering#drain)
 * [Levenshtein Distance](https://docs.edgedelta.com/appendices/clustering#levenshtein-distance)
 
@@ -10,7 +10,9 @@ The goal of calculating similarities is to transform raw log messages into struc
 
 ## Drain
 
-Drain is a log parsing algorithm that we used for clustering our logs, it is based on parse tree with fixed depth to guide the log group search process, which effectively avoids constructing a very deep and unbalanced tree.
+Drain is the default algorithm.
+
+Drain is a log parsing algorithm that we used for clustering logs, it is based on parse tree with fixed depth to guide the log group search process, which effectively avoids constructing a very deep and unbalanced tree.
 
 When a new raw log message arrives we preprocess it with Ragel FSM Based Tokenization process. Then we search a log group (i.e., leaf node of the tree) by traversing the nodes of the tree based on the token prefix. If a suitable log group is found, we also calculate the similarity between the log message and the log event stored in log group. If the similarity threshold is above certain threshold then the log message will be matched with the log event stored in that log group. Otherwise, a new log group will be created based on the log message.
 
