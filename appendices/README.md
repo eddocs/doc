@@ -10,4 +10,5 @@ description: >-
 
 * [Elastic Index Setup](elastic-index.md)
 * [Azure Function Monitoring Setup](azure-serverless-monitoring.md)
-
+* [Clustering Details](clustering.md)
+* [MultiLine Detection](line_detection.md)

@@ -28,4 +28,6 @@
 * [Appendices](appendices/README.md)
   * [Elastic Index Setup](appendices/elastic-index.md)
   * [Azure Function Monitoring Setup](appendices/azure-serverless-monitoring.md)
+  * [Clustering Details](appendices/clustering.md)
+  * [MultiLine Detection](appendices/line_detection.md)
 
