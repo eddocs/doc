@@ -70,11 +70,11 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
-| region | AWS region destionation for logs | Yes |
+| region | AWS region destination for logs | Yes |
 | log\_group\_name | CloudWatch log group name | Yes |
 | log\_stream\_name | CloudWatch log stream name \(either name or prefix is supported not both\) | Yes |
 | log\_stream\_prefix | CloudWatch log stream prefix \(either name or prefix is supported not both\) | Yes |
-| auto\_create | When necessery iam policies provided if auto\_create is set, log group and log stream will be created if not exists | No |
+| auto\_create | When necessary iam policies provided if auto\_create is set, log group and log stream will be created if not exists | No |
 | allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | No |
 | auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | No |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
@@ -235,25 +235,25 @@ If enabled, the Elastic Search integration will stream analytics and insights to
 | type | Streaming destination type \(i.e. elastic, scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
 | index | Name of elastic index \(or index template\) where data will be streamed by edgedelta agents. Set this to 'ed-agent-log' if followed the guide above | Yes |
 | cloud\_id | Cloud ID of elastic search backend | No |
-| address | Adress list of elastic search backend | No |
+| address | Address list of elastic search backend | No |
 | token | Elastic Search API Key | No |
 | user | Username for elastic search credentials | No |
 | password | Elastic Search password for connecting user | No |
 | features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
 
-* For the connection url, you can not provide cloud\_id and adress at the same time. And you must provide at least one of them.
+* For the connection url, you can not provide cloud\_id and address at the same time. And you must provide at least one of them.
 * For the authentication, you can not provide token and user/password at the same time. And you must provide at least one of them.
 
 ```go
       - name: elastic
         type: elastic
         index: "index name"
-        # you can provide cloud or adress list but not both at the same time 
+        # you can provide cloud or adress list but not both at the same time
         cloud_id: "<add elasticsearch cloud_id>"
         #address:
          #- <elastic search endpoint address_1>
          #- <elastic search endpoint address_2>
-        # you can provide token or user/pass for auth but not both at the same time 
+        # you can provide token or user/pass for auth but not both at the same time
         token: "elastic search api key"
         #user: "elastic search username"
         #password: "elastic search password"

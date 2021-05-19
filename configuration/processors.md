@@ -10,7 +10,7 @@ description: >-
 
 ## Overview
 
-Processors are the mechanism used to allow users to specify various analytical, statistical, and machine-learning based algorithms to apply to their incoming data. 
+Processors are the mechanism used to allow users to specify various analytical, statistical, and machine-learning based algorithms to apply to their incoming data.
 
 ## Cluster
 
@@ -44,6 +44,7 @@ The cluster processor finds patterns in the logs and clusters them based on simi
 The simple keyword match processor checks for basic regex match in the logs, counts the matching logs and generates anomaly scores. The counts are rolled up by the agent with given *interval* and emitted as metrics. Thresholds can be set to get notified when anomalies occur (e.g. metric value spikes or drops unexpectedly).
 
 
+
 **Example config:**
 ```
 regexes:
@@ -55,8 +56,7 @@ regexes:
 
 Metrics generated from example config:
 - *error.count*: Total count of matches within an interval
-- *error.anomaly1*: Anomaly score of current interval based on total count history. represents the how anomalous the current error count is compared to its history. Score is in the range of [0,100]. 
-
+- *error.anomaly1*: Anomaly score of current interval based on total count history. represents the how anomalous the current error count is compared to its history. Score is in the range of [0,100].
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -173,9 +173,8 @@ regexes:
     pattern: "(?P<method>\\w+) took (?P<latency>\\d+) ms"
     dimensions: ["method"]
     trigger_thresholds:
-      anomaly_probability_percentage: 90 
+      anomaly_probability_percentage: 90
 ```
-
 
 Let's say we have following logs feeding into the **Dimension Numeric Capture Processor** that is configured above:
 
@@ -237,7 +236,6 @@ traces:
 ## Top-K processor
 
 Top-K processor keeps track of top K records (e.g. k=10) where the records are identified with one or more named regex group values combined together. It reports top k items as a string value.
-
 
 | Key | Description | Required |
 | :--- | :--- | :--- |

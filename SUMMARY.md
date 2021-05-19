@@ -16,6 +16,7 @@
   * [Central Configuration Backend \(CCB\)](configuration/ccb.md)
   * [Agent Settings](configuration/agent-settings.md)
   * [Inputs](configuration/inputs.md)
+  * [Filters](configuration/filters.md)
   * [Outputs](configuration/outputs.md)
   * [Processors](configuration/processors.md)
   * [Workflows](configuration/workflows.md)
