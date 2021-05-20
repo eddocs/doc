@@ -1,6 +1,6 @@
 ---
 description: >-
-  This document outlines the various Output types (Streaming and Triggers)
+  This document outlines the various Output types (Streaming, Triggers and Archives)
   supported by the Edge Delta agent, and how the outputs are configured.
 ---
 
@@ -14,7 +14,21 @@ Outputs are the mechanism that tells the Edge Delta agent which destinations to 
 
 \*\*\*\*[**Trigger destinations**](outputs.md#trigger-destinations) are alerting and automation systems \(i.e. PagerDuty, Slack, ServiceNow, OpsGenie, Runbook, etc.\) that Edge Delta can be configured to send alerts and notifications when anomalies are detected or various conditions are met.
 
+\*\*\*\*[**Archive destinations**](outputs.md#archive-destinations) are storage services that Edge Delta can be configured to send raw data logs.
+
 ## Streaming Destinations
+
+### Features Description
+
+Features are the data types enabled for the streaming destinations. 
+These are the data types to use in streaming definitions.
+
+- **log**: log data type is used to enable log forwarding a stream destination.
+- **metric**: metric data type enables to send metrics which are populated from ingested raw data with defined processors.
+- **edac**: EDAC (Edge Delta Anomaly Context) data type to enable sending contextual logs when an anomaly happened.
+- **cluster**: cluster data type enables to send cluster info of ingested raw data which includes "cluster-pattern, count" pairs and cluster samples of each pattern.
+- **topk**: topk data type enables to send top k records whose counts are greater than others. 
+- **all**: all enables all features for stream destination but note that only supported features will be working by stream destination.
 
 ### Splunk
 
