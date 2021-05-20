@@ -56,5 +56,18 @@ Configuration File path: `/opt/edgedelta/agent/config.yml`
 cat /opt/edgedelta/agent/config.yml
 ```
 
+## Uninstallation
+
+Make sure to run uninstallation process as root.
+
+```text
+systemctl stop edgedelta.service
+systemctl disable edgedelta.service
+rm /etc/systemd/system/edgedelta.service
+rm /usr/lib/systemd/system/edgedelta.service 
+systemctl daemon-reload
+systemctl reset-failed
+```
+
 
 
