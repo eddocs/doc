@@ -14,10 +14,12 @@ Workflows are the mapping of Inputs, Processors and Outputs, logically grouped t
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific Workflow. The Workflow names are strictly used for labeling and organizing Workflows within a configuration, thus are not reported to any Destinations.  | Yes |
-| input\_labels | A list of input labels to apply to the given workflow. Input labels are defined as part of the input configuration.  | Yes |
-| processors | A list of Processor names to apply to the given Workflow. Processor names are defined as part of the Processor configuration.  | Yes |
-| destinations | A list of Output names to apply to the given Workflow. Destination names are defined as part of the Output configuration.  | No |
+| name | User defined name of this specific workflow. The workflow names are strictly used for labeling and organizing Workflows within a configuration, thus are not reported to any destinations.  | Yes |
+| input_labels | A list of input labels to feed into the workflow. Input labels are defined as part of the input configuration. See [Inputs](https://docs.edgedelta.com/configuration/inputs) documentation for more details about available processors. | Yes |
+| filters | List of filter names to be applied before passing incoming logs to the processors in this workflow. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for more details about filters. | No |
+| processors | A list of processor names to apply to the given workflow. See [Processors](https://docs.edgedelta.com/configuration/processors) documentation for more details about available processors. | Yes |
+| destinations | A list of Output names to apply to the given workflow. See [Outputs](https://docs.edgedelta.com/configuration/outputs) documentation for details about available integrations and how to configure them.  | No |
+
 
 ```yaml
 workflows:
@@ -39,6 +41,8 @@ workflows:
       - syslog_traffic
       - windows_events
       - auth_logs
+    filters:
+      - not_debug
     processors:
       - traffic-patterns
       - authentication-monitoring

@@ -27,7 +27,7 @@ The cluster processor finds patterns in the logs and clusters them based on simi
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents a cluster's retention The clusters that don't have any new logs for last retention period will be dropped and will no longer be reported until seen again. | Yes |
 | cpu_friendly | When set to 'true' the CPU aware rate limiting is enabled. This makes the agent honor the given CPU limit (specified at top level agent_settings section) by dropping some percentage of events in order to keep agent's CPU usage below the given limit. Unless you have more than 1k logs per second don't worry about this setting. | Yes |
 | throttle_limit_per_sec | Puts a hard limit on how many logs should be clustered per second from a single source. If cpu_friendly is enabled then this will be ignored. | Yes |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 **Example config:**
 ```
@@ -66,11 +66,11 @@ Metrics generated from example config:
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
-| - anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
-| - upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
-| - lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
-| - consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| &nbsp;&nbsp;anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| &nbsp;&nbsp;upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 ## Numeric Capture Processor
 
@@ -83,11 +83,11 @@ Numeric capture processor supports exact same configuration as **Simple Keyword 
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
-| - anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
-| - upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
-| - lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
-| - consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| &nbsp;&nbsp;anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| &nbsp;&nbsp;upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 **Example config:**
 ```
@@ -121,11 +121,11 @@ Dimension counter supports exact same configuration as **Simple Keyword Match** 
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
-| - anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
-| - upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
-| - lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
-| - consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| &nbsp;&nbsp;anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| &nbsp;&nbsp;upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 **Example config:** Count per log level
 ```
@@ -162,11 +162,11 @@ It supports same configurations as **Dimension Counter Processor** with the diff
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
-| - anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
-| - upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
-| - lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
-| - consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| &nbsp;&nbsp;anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| &nbsp;&nbsp;upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 **Example config:**
 ```
@@ -219,12 +219,12 @@ In addition to the other trigger thresholds, the trace processor supports *max_d
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
-| - max_duration | Maximum duration of an event allowed. If an event doesn't complete within this duration then a trigger is generated | No |
-| - anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
-| - upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
-| - lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
-| - consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| &nbsp;&nbsp;max_duration | Maximum duration of an event allowed. If an event doesn't complete within this duration then a trigger is generated | No |
+| &nbsp;&nbsp;anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| &nbsp;&nbsp;upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 **Example config:**
 ```
@@ -248,7 +248,7 @@ Top-K processor keeps track of top K records (e.g. k=10) where the records are i
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting interval. At every interval the top records will be reported and they will be removed locally. | Yes |
 | lower_limit | If a lower limit is provided only records whose count is greater than the limit will be able to make it to top k. | No |
 | separator | separator is used to combine the named group values together to form a record key. Default is comma ',' | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 **Example config:**
 ```
@@ -284,11 +284,11 @@ Ratio processor configuration looks similar to **Simple Keyword Match** processo
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger_thresholds** | The trigger_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
-| - anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
-| - upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
-| - lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
-| - consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about. | No |
+| &nbsp;&nbsp;anomaly_probability_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+| &nbsp;&nbsp;upper_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;lower_limit_per_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+| &nbsp;&nbsp;consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 **Example config:**
 ```
