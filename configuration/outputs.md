@@ -6,7 +6,7 @@ description: >-
 
 # Outputs
 
-## Overview
+### Overview
 
 Outputs are the mechanism that tells the Edge Delta agent which destinations to stream data, alerts, notifications, and automation. Outputs come in two forms, **Streaming** destinations, and **Trigger** destinations.
 
@@ -16,7 +16,7 @@ Outputs are the mechanism that tells the Edge Delta agent which destinations to 
 
 ## Streaming Destinations
 
-## Splunk
+### Splunk
 
 If enabled, the Splunk integration will stream analytics and insights to a Splunk HEC endpoint.
 
@@ -41,7 +41,7 @@ If enabled, the Splunk integration will stream analytics and insights to a Splun
 
 **Find the HTTP Port Number used for HEC endpoints \(Global Settings\):** [https://docs.splunk.com/Documentation/Splunk/8.0.3/Data/UsetheHTTPEventCollector\#Enable\_HTTP\_Event\_Collector](https://docs.splunk.com/Documentation/Splunk/8.0.3/Data/UsetheHTTPEventCollector#Enable_HTTP_Event_Collector)
 
-## Sumo Logic
+### Sumo Logic
 
 If enabled, the Sumo Logic integration will stream analytics and insights to a Sumo Logic HTTPs Endpoint
 
@@ -62,7 +62,7 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
 
 **Finding an existing Sumo Logic HTTPs Endpoint URL:** [https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source\#access-a-sources-url](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url) _\*\*_
 
-## Amazon CloudWatch
+### Amazon CloudWatch
 
 If enabled, the CloudWatch integration will stream logs to a given aws region.
 
@@ -78,7 +78,7 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 | allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | No |
 | auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | No |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log" only for Amazon Cloudwatch. | No |
 
 ```go
       - name: cloudwatch
@@ -127,7 +127,7 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 
 **CloudWatch log stream name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API\_CreateLogStream.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html) _\*\*_
 
-## **Datadog**
+### **Datadog**
 
 If enabled, the Datadog integration will stream analytics and insights to your Datadog environment
 
@@ -146,7 +146,7 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 
 **Create a new Datadog API Key:** [https://docs.datadoghq.com/account\_management/api-app-keys/\#add-a-key](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key)
 
-## **New Relic**
+### **New Relic**
 
 If enabled, the New Relic integration will stream analytics and insights to your New Relic environment
 
@@ -165,7 +165,7 @@ If enabled, the New Relic integration will stream analytics and insights to your
 
 **Create a new New Relic Insert API Key:** [https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys\#event-insert-key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key)
 
-## **InfluxDB**
+### **InfluxDB**
 
 If enabled, the InfluxDB integration will stream analytics and insights to your InfluxDB deployment
 
@@ -177,7 +177,7 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
 | http\_user | InfluxDB user credentials | Yes |
 | http\_password | InfluxDB password for connecting user | Yes |
 | db | Specific InfluxDB database to stream data to | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "metric", "edac". If you don't provide any value then it is all. | No |
 
 ```go
       - name: influxdb-integration
@@ -189,7 +189,7 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
         db: "specific_influxdb_database"
 ```
 
-## **Wavefront**
+### **Wavefront**
 
 If enabled, the Wavefront integration will stream analytics and insights to your Wavefront environment
 
@@ -199,7 +199,7 @@ If enabled, the Wavefront integration will stream analytics and insights to your
 | type | Streaming destination type \(i.e. wavefront, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Wavefront endpoint | Yes |
 | token | Wavefront API token | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "metric" only for Wavefront. | No |
 
 ```go
       - name: wavefront-integration
@@ -208,7 +208,7 @@ If enabled, the Wavefront integration will stream analytics and insights to your
         token: "<add wavefront api token>"
 ```
 
-## **Scalyr**
+### **Scalyr**
 
 If enabled, the Scalyr integration will stream analytics and insights to your Scalyr environment
 
@@ -217,7 +217,7 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Scalyr endpoint | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log" for Scalyr. | No |
 
 ```go
       - name: scalyr-integration
@@ -225,7 +225,7 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
         endpoint: "https://app.scalyr.com/api/uploadLogs?token={scalyr log access write key}"
 ```
 
-## **Elastic Search**
+### **Elastic Search**
 
 If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment. Elastic index template and lifecycle creation guide can be found [here](../appendices/elastic-index.md). It's not mandatory but highly recommended to complete those steps in the guide to prepare your Elastic Search environment to be Edgedelta streaming target.
 
@@ -259,9 +259,9 @@ If enabled, the Elastic Search integration will stream analytics and insights to
         #password: "elastic search password"
 ```
 
-## Azure
+### Azure AppInsight
 
-If enabled, the Azure integration will stream analytics and insights to an Azure endpoint.
+If enabled, the Azure AppInsight integration will stream analytics and insights to an Azure endpoint.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -279,7 +279,7 @@ If enabled, the Azure integration will stream analytics and insights to an Azure
         features: "metric"
 ```
 
-## Kafka
+### Kafka
 
 If enabled, the Kafka integration will stream analytics and insights to an Kafka endpoint.
 
@@ -299,7 +299,7 @@ If enabled, the Kafka integration will stream analytics and insights to an Kafka
         topic: topic
 ```
 
-## SignalFx
+### SignalFx
 
 If enabled, the SignalFx integration will stream analytics and insights to an SignalFx endpoint.
 
@@ -321,14 +321,14 @@ If enabled, the SignalFx integration will stream analytics and insights to an Si
 
 ## Trigger Destinations
 
-## **Slack**
+### **Slack**
 
 If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
-| type | Trigger destination type \(i.e. slack, etc.\) | Yes |
+| type | Trigger destination type \(slack\) | Yes |
 | endpoint | Slack Webhook or APP endpoint URL | Yes |
 
 ```go
@@ -339,7 +339,7 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
 
 **Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
 
-## Examples
+### Examples
 
 ```go
 outputs:
@@ -351,4 +351,68 @@ outputs:
       - name: slack-integration
         type: slack
         endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+```
+
+## Archive Destinations
+
+### **AWS S3**
+
+If enabled, the AWS S3 integration will stream logs to an AWS S3 endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Archive destination type \(s3\) | Yes |
+| bucket | Target s3 bucket to send archived logs | Yes |
+| region | The specified s3 bucket's region | Yes |
+| aws_key_id | AWS key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key) | Yes |
+| aws_sec_key | AWS secret key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key)| Yes |
+
+```go
+      - name: my-s3
+        type: s3
+        bucket: testbucket
+        region: us-east-2
+        aws_key_id: "<add aws key id>"
+        aws_sec_key: "<add aws secure key>"
+```
+
+### **Azure Blob Storage**
+
+If enabled, the Azure Blob Storage integration will stream logs to an Azure Blob Storage endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Archive destination type \(blob\) | Yes |
+| account_name | Account Name for the azure account. | Yes |
+| account_key | Account Key for azure account. You can visit [https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) | Yes |
+| container | Container to upload. | Yes |
+
+```go
+      - name: my-blob
+        type: blob
+        account_name: "<add account name>"
+        account_key: "<add account key>"
+        container: testcontainer
+```
+
+### **Google Cloud Storage**
+
+If enabled, the Google Cloud Storage integration will stream logs to an GCS endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Archive destination type \(gcs\) | Yes |
+| bucket | Target gcs bucket to send archived logs. | Yes |
+| hmac_access_key | GCS HMAC Access Key which has permissions to upload files to specified bucket. See [https://cloud.google.com/storage/docs/authentication/managing-hmackeys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys) for details on how to create new keys | Yes |
+| hmac_secret | GCS HMAC secret associated with the access key specified. | Yes |
+
+```go
+      - name: my-gcs
+        type: gcs
+        bucket: ed-test-bucket
+        hmac_access_key: my_hmac_access_key_123
+        hmac_secret: my_hmac_secret_123
 ```
