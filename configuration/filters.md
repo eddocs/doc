@@ -11,7 +11,7 @@ description: >-
 Filters can be used to filter and transform the received logs before further processing.
 They are useful to discard unnecessary logs, protect sensitive data (e.g. mask ssn) and reduce the agent resource usage (due to less data being fed into processors), .
 
-Filters are defined at the top level in config yml and 
+Filters are defined at the top level in config yaml.
 
 ```yaml
 filters:
