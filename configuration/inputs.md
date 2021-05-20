@@ -25,6 +25,9 @@ There are a number of different input types supported by the Edge Delta service.
 * [AWS ECS](https://docs.edgedelta.com/configuration/inputs#aws-ecs)
 * [Execs \(Scripted Input\)](https://docs.edgedelta.com/configuration/inputs#execs-scripted-input)
 
+You can specify the filters to monitor sources of containers, kubernetes and aws ecs. 
+* [Input filters](https://docs.edgedelta.com/configuration/inputs#filters-for-containers-kubernetes-and-aws-ecs)
+
 ## Agent Stats
 
 If enabled, Agent Stats will report agent level metrics, such as lines analyzed, bytes analyzed, etc.
