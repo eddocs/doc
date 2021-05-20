@@ -31,4 +31,5 @@
   * [Azure Function Monitoring Setup](appendices/azure-serverless-monitoring.md)
   * [Clustering Details](appendices/clustering.md)
   * [MultiLine Detection](appendices/line_detection.md)
+  * [Ingestion to ED Backend Preferences](appendices/data_preferences.md)
 
