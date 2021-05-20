@@ -1,12 +1,12 @@
 ---
 description: >-
-  This document outlines the various Output types (Streaming and Triggers)
+  This document outlines the various Output types (Streaming, Triggers and Archives)
   supported by the Edge Delta agent, and how the outputs are configured.
 ---
 
 # Outputs
 
-## Overview
+### Overview
 
 Outputs are the mechanism that tells the Edge Delta agent which destinations to stream data, alerts, notifications, and automation. Outputs come in two forms, **Streaming** destinations, and **Trigger** destinations.
 
@@ -14,9 +14,23 @@ Outputs are the mechanism that tells the Edge Delta agent which destinations to 
 
 \*\*\*\*[**Trigger destinations**](outputs.md#trigger-destinations) are alerting and automation systems \(i.e. PagerDuty, Slack, ServiceNow, OpsGenie, Runbook, etc.\) that Edge Delta can be configured to send alerts and notifications when anomalies are detected or various conditions are met.
 
+\*\*\*\*[**Archive destinations**](outputs.md#archive-destinations) are storage services that Edge Delta can be configured to send raw data logs.
+
 ## Streaming Destinations
 
-## Splunk
+### Features Description
+
+Features are the data types enabled for the streaming destinations. 
+These are the data types to use in streaming definitions.
+
+- **log**: log data type is used to enable log forwarding a stream destination.
+- **metric**: metric data type enables to send metrics which are populated from ingested raw data with defined processors.
+- **edac**: EDAC (Edge Delta Anomaly Context) data type to enable sending contextual logs when an anomaly happened.
+- **cluster**: cluster data type enables to send cluster info of ingested raw data which includes "cluster-pattern, count" pairs and cluster samples of each pattern.
+- **topk**: topk data type enables to send top k records whose counts are greater than others. 
+- **all**: all enables all features for stream destination but note that only supported features will be working by stream destination.
+
+### Splunk
 
 If enabled, the Splunk integration will stream analytics and insights to a Splunk HEC endpoint.
 
@@ -26,7 +40,7 @@ If enabled, the Splunk integration will stream analytics and insights to a Splun
 | type | Streaming destination type \(i.e. splunk, sumologic, datadog, etc.\) | Yes |
 | endpoint | Full Splunk HEC URI for this integration | Yes |
 | token | Splunk HEC Token for this integration | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: splunk-integration
@@ -41,7 +55,7 @@ If enabled, the Splunk integration will stream analytics and insights to a Splun
 
 **Find the HTTP Port Number used for HEC endpoints \(Global Settings\):** [https://docs.splunk.com/Documentation/Splunk/8.0.3/Data/UsetheHTTPEventCollector\#Enable\_HTTP\_Event\_Collector](https://docs.splunk.com/Documentation/Splunk/8.0.3/Data/UsetheHTTPEventCollector#Enable_HTTP_Event_Collector)
 
-## Sumo Logic
+### Sumo Logic
 
 If enabled, the Sumo Logic integration will stream analytics and insights to a Sumo Logic HTTPs Endpoint
 
@@ -50,7 +64,7 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
 | endpoint | Full HTTPs URL for this endpoint | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: sumo-logic-integration
@@ -62,7 +76,7 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
 
 **Finding an existing Sumo Logic HTTPs Endpoint URL:** [https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source\#access-a-sources-url](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url) _\*\*_
 
-## Amazon CloudWatch
+### Amazon CloudWatch
 
 If enabled, the CloudWatch integration will stream logs to a given aws region.
 
@@ -78,7 +92,7 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 | allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | No |
 | auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | No |
 | type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
-| features | Features defines which data types stream to backend, it can only be "log" at the moment. | No |
+| features | Features defines which data types stream to backend, it can be "log" only for Amazon Cloudwatch. | No |
 
 ```go
       - name: cloudwatch
@@ -127,7 +141,7 @@ If enabled, the CloudWatch integration will stream logs to a given aws region.
 
 **CloudWatch log stream name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API\_CreateLogStream.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html) _\*\*_
 
-## **Datadog**
+### **Datadog**
 
 If enabled, the Datadog integration will stream analytics and insights to your Datadog environment
 
@@ -136,7 +150,7 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. datadog, sumologic, splunk, etc.\) | Yes |
 | api\_key | Datadog API Key | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: datadog-integration
@@ -146,7 +160,7 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 
 **Create a new Datadog API Key:** [https://docs.datadoghq.com/account\_management/api-app-keys/\#add-a-key](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key)
 
-## **New Relic**
+### **New Relic**
 
 If enabled, the New Relic integration will stream analytics and insights to your New Relic environment
 
@@ -155,7 +169,7 @@ If enabled, the New Relic integration will stream analytics and insights to your
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. newrelic, sumologic, datadog, etc.\) | Yes |
 | api\_key | New Relic Insert API Key | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```go
       - name: new-relic-integration
@@ -165,7 +179,7 @@ If enabled, the New Relic integration will stream analytics and insights to your
 
 **Create a new New Relic Insert API Key:** [https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys\#event-insert-key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key)
 
-## **InfluxDB**
+### **InfluxDB**
 
 If enabled, the InfluxDB integration will stream analytics and insights to your InfluxDB deployment
 
@@ -177,7 +191,7 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
 | http\_user | InfluxDB user credentials | Yes |
 | http\_password | InfluxDB password for connecting user | Yes |
 | db | Specific InfluxDB database to stream data to | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "metric", "edac". If you don't provide any value then it is all. | No |
 
 ```go
       - name: influxdb-integration
@@ -189,7 +203,7 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
         db: "specific_influxdb_database"
 ```
 
-## **Wavefront**
+### **Wavefront**
 
 If enabled, the Wavefront integration will stream analytics and insights to your Wavefront environment
 
@@ -199,16 +213,16 @@ If enabled, the Wavefront integration will stream analytics and insights to your
 | type | Streaming destination type \(i.e. wavefront, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Wavefront endpoint | Yes |
 | token | Wavefront API token | Yes |
-| features | Features defines which data types stream to backend. Only "metric" is supported. | No |
+| features | Features defines which data types stream to backend, it can be "metric" only for Wavefront. | No |
 
 ```go
-      - name: wavefront
+      - name: wavefront-integration
         type: wavefront
         endpoint: "https://{your wavefront domain}.wavefront.com/report"
         token: "<add wavefront api token>"
 ```
 
-## **Scalyr**
+### **Scalyr**
 
 If enabled, the Scalyr integration will stream analytics and insights to your Scalyr environment
 
@@ -217,15 +231,15 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
 | type | Streaming destination type \(i.e. scalyr, influxdb, sumologic, datadog, etc.\) | Yes |
 | endpoint | Scalyr endpoint | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log" for Scalyr. | No |
 
 ```go
-      - name: scalyr
+      - name: scalyr-integration
         type: scalyr
         endpoint: "https://app.scalyr.com/api/uploadLogs?token={scalyr log access write key}"
 ```
 
-## **Elastic Search**
+### **Elastic Search**
 
 If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment. Elastic index template and lifecycle creation guide can be found [here](../appendices/elastic-index.md). It's not mandatory but highly recommended to complete those steps in the guide to prepare your Elastic Search environment to be Edgedelta streaming target.
 
@@ -239,13 +253,13 @@ If enabled, the Elastic Search integration will stream analytics and insights to
 | token | Elastic Search API Key | No |
 | user | Username for elastic search credentials | No |
 | password | Elastic Search password for connecting user | No |
-| features | Features defines which data types stream to backend, it can be "log", "metric" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 * For the connection url, you can not provide cloud\_id and address at the same time. And you must provide at least one of them.
 * For the authentication, you can not provide token and user/password at the same time. And you must provide at least one of them.
 
 ```go
-      - name: elastic
+      - name: elastic-integration
         type: elastic
         index: "index name"
         # you can provide cloud or adress list but not both at the same time
@@ -259,16 +273,76 @@ If enabled, the Elastic Search integration will stream analytics and insights to
         #password: "elastic search password"
 ```
 
+### Azure AppInsight
+
+If enabled, the Azure AppInsight integration will stream analytics and insights to an Azure endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(azure\) | Yes |
+| endpoint | Azure AppInsight endpoint. | Yes |
+| api_key | Azure AppInsight API key. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```go
+      - name: azure-integration
+        type: azure
+        endpoint: https://dc.services.visualstudio.com/v2/track
+        api_key: "Azure AppInsight api key" 
+        features: "metric"
+```
+
+### Kafka
+
+If enabled, the Kafka integration will stream analytics and insights to an Kafka endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(kafka\) | Yes |
+| endpoint | Kafka broker addresses. | Yes |
+| topic | Kafka topic name. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```go
+      - name: kafka-integration
+        type: kafka
+        endpoint: https://dc.services.visualstudio.com/v2/track
+        endpoint: <kafka broker address-1>,<kafka broker address-2>
+        topic: topic
+```
+
+### SignalFx
+
+If enabled, the SignalFx integration will stream analytics and insights to an SignalFx endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Streaming destination type \(signalfx\) | Yes |
+| endpoint | SignalFx endpoint. | Yes |
+| token | SignalFx API token. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```go
+      - name: signalfx-integration
+        type: signalfx
+        endpoint: https://ingest.us1.signalfx.com/v2
+        token: "<add signalfx api token>"
+        features: "metric,log"
+```
+
 ## Trigger Destinations
 
-## **Slack**
+### **Slack**
 
 If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
-| type | Trigger destination type \(i.e. slack, etc.\) | Yes |
+| type | Trigger destination type \(slack\) | Yes |
 | endpoint | Slack Webhook or APP endpoint URL | Yes |
 
 ```go
@@ -279,7 +353,7 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
 
 **Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
 
-## Examples
+### Examples
 
 ```go
 outputs:
@@ -293,3 +367,66 @@ outputs:
         endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 ```
 
+## Archive Destinations
+
+### **AWS S3**
+
+If enabled, the AWS S3 integration will stream logs to an AWS S3 endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Archive destination type \(s3\) | Yes |
+| bucket | Target s3 bucket to send archived logs | Yes |
+| region | The specified s3 bucket's region | Yes |
+| aws_key_id | AWS key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key) | Yes |
+| aws_sec_key | AWS secret key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key)| Yes |
+
+```go
+      - name: my-s3
+        type: s3
+        bucket: testbucket
+        region: us-east-2
+        aws_key_id: "<add aws key id>"
+        aws_sec_key: "<add aws secure key>"
+```
+
+### **Azure Blob Storage**
+
+If enabled, the Azure Blob Storage integration will stream logs to an Azure Blob Storage endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Archive destination type \(blob\) | Yes |
+| account_name | Account Name for the azure account. | Yes |
+| account_key | Account Key for azure account. You can visit [https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) | Yes |
+| container | Container to upload. | Yes |
+
+```go
+      - name: my-blob
+        type: blob
+        account_name: "<add account name>"
+        account_key: "<add account key>"
+        container: testcontainer
+```
+
+### **Google Cloud Storage**
+
+If enabled, the Google Cloud Storage integration will stream logs to an GCS endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | Yes |
+| type | Archive destination type \(gcs\) | Yes |
+| bucket | Target gcs bucket to send archived logs. | Yes |
+| hmac_access_key | GCS HMAC Access Key which has permissions to upload files to specified bucket. See [https://cloud.google.com/storage/docs/authentication/managing-hmackeys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys) for details on how to create new keys | Yes |
+| hmac_secret | GCS HMAC secret associated with the access key specified. | Yes |
+
+```go
+      - name: my-gcs
+        type: gcs
+        bucket: ed-test-bucket
+        hmac_access_key: my_hmac_access_key_123
+        hmac_secret: my_hmac_secret_123
+```
