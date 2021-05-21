@@ -25,6 +25,9 @@ There are a number of different input types supported by the Edge Delta service.
 * [AWS ECS](https://docs.edgedelta.com/configuration/inputs#aws-ecs)
 * [Execs \(Scripted Input\)](https://docs.edgedelta.com/configuration/inputs#execs-scripted-input)
 
+You can specify the filters to monitor sources of containers, kubernetes and aws ecs. 
+* [Input filters](https://docs.edgedelta.com/configuration/inputs#filters-for-containers-kubernetes-and-aws-ecs)
+
 ## Agent Stats
 
 If enabled, Agent Stats will report agent level metrics, such as lines analyzed, bytes analyzed, etc.
@@ -125,7 +128,7 @@ If enabled, Windows Events allows you to specify a set of Windows Events channel
       labels: "win_events,sysmon"
 ```
 
-#### Filters for Containers, Kubernetes and AWS ECS
+## Filters for Containers, Kubernetes and AWS ECS
 You can specify which inputs to add by providing include/exclude regex filters.
 These filters work only with Containers, Kubernetes and AWS ECS input types.
 - All rules in the same line with a comma(",") separated means AND
