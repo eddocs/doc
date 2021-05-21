@@ -116,7 +116,7 @@ Dimension counter supports exact same configuration as **Simple Keyword Match** 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
-| pattern | Regular expression pattern containing a named capture group representing the dimension. _Note: named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"_ | Yes |
+| pattern | Regular expression pattern containing a named capture group representing the dimension. *Note:* named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)" | Yes |
 | dimensions | List of named capture group fields to use as dynamic dimensions \(group by\). Each dimension specified here must have a corresponding named capture group in the pattern field for this processor.  | Yes |
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |

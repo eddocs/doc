@@ -52,7 +52,7 @@ Below example will discard DEBUG logs and only pass thru other logs:
 
 ```yaml
   - name: not_debug
-    pattern: "  DEBUG "
+    pattern: "DEBUG"
     negate: true
 ```
 
