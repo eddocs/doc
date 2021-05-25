@@ -366,6 +366,8 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
 | integration_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via *integration_name* in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When *integration_name* is set the *name* is ignored and *integration_name*'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "slack" to send alerts to Slack | Yes |
 | endpoint | Slack Webhook or APP endpoint URL | Yes |
+| suppression_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this slack endpoint it will suppress any new issues for this duration. Default is "20m". | No |
+| suppression_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents (the ones sharing same tag in config).  | No |
 
 ```yaml
       - name: slack-integration
