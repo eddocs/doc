@@ -1,6 +1,6 @@
 ---
 description: >-
-This document outlines the benchmark results of Edge Delta agent.
+  This document outlines the benchmark results of Edge Delta agent.
 ---
 
 
@@ -20,7 +20,7 @@ Vector already did benchmark tests for the performance of different APM tools in
 We stick to the results obtained by Vector and extend the results table by adding Edge Delta agent results. Therefore, the table of the results took the shape below.
 ---
 description: >-
-make sure this is kept in sync with the table on https://edgedelta.com/. If new benchmark results are calculated ping Ozan to update https://edgedelta.com/
+  make sure this is kept in sync with the table on https://edgedelta.com/. If new benchmark results are calculated ping Ozan to update https://edgedelta.com/
 ---
 | Test | Edge Delta | Vector | Filebeat | FluentBit | FluentD | Logstash | SplunkUF | SplunkHF |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
