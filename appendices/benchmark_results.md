@@ -1,6 +1,6 @@
 ---
 description: >-
-  This document outlines the benchmark results of Edge Delta agent.
+  Benchmark results of Edge Delta agent.
 ---
 
 
@@ -18,10 +18,9 @@ Performance test cases:
 
 Vector already did benchmark tests for the performance of different APM tools including Vector, Filebeat, FluentBit, FluentD, Logstash, Splunk UF and Splunk HF and published the results. 
 We stick to the results obtained by Vector and extend the results table by adding Edge Delta agent results. Therefore, the table of the results took the shape below.
----
-description: >-
-  make sure this is kept in sync with the table on https://edgedelta.com/. If new benchmark results are calculated ping Ozan to update https://edgedelta.com/
----
+
+[comment]: <> (keep in sync with the table on https://edgedelta.com/. If new benchmark results are calculated ping Ozan to update https://edgedelta.com/)
+  
 | Test | Edge Delta | Vector | Filebeat | FluentBit | FluentD | Logstash | SplunkUF | SplunkHF |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | TCP to Blackhole | 490.3 mib/s | 86mib/s | n/a | 64.4mib/s | 27.7mib/s | 40.6mib/s | n/a | n/a |
