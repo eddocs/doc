@@ -25,7 +25,7 @@ For example, below screenshot shows an alert configuration which fires if sum of
 *Note:* Tag is specified at [agent_settings](https://docs.edgedelta.com/configuration/agent-settings) section of the config
 
 
-![Custom Metric Alert Configuration Example](https://docs.edgedelta.com/appendices/custom-metric-alerts.png)
+![](../.gitbook/assets/custom-metric-alert.png)
 
 
 
