@@ -87,7 +87,7 @@ kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed
 ED_ENV_VARS is a special variable used during installation where multiple environment variables specified in following comma separated format: "variable1=value1,variable2=value2"
 
 ```bash
-ED_API_KEY=<your api key> \
+sudo ED_API_KEY=<your api key> \
 ED_ENV_VARS="HTTPS_PROXY=<your proxy details>" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 ```
@@ -106,6 +106,6 @@ edgedelta/agent:latest
 
 On Windows systems use following command to define environment variables globally. Agent service needs to be restart after setting the variable.
 
-```powershell
+```
 [System.Environment]::SetEnvironmentVariable('HTTP_PROXY', '<your proxy details>',[System.EnvironmentVariableTarget]::Machine)
 ```
