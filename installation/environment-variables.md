@@ -26,6 +26,26 @@ description: >-
       <td style="text-align:left">0a3a6ca3-0df0-45f8-8ea2-d1329ee3de60</td>
     </tr>
     <tr>
+      <td style="text-align:left">ED_WORKFLOWS</td>
+      <td style="text-align:left">Colon (:) separated workflow names that will enable all matching workflows
+        and disable the rest together with ED_WORKFLOW_PREFIXES</td>
+      <td style="text-align:left">name:name:...</td>
+      <td style="text-align:left">
+        <p>workflow_1:workflow_2</p>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">ED_WORKFLOW_PREFIXES</td>
+      <td style="text-align:left">Colon (:) separated workflow prefixes that will enable all matching workflows
+        according their prefixes and disable the rest together with ED_WORKFLOWS</td>
+      <td style="text-align:left">prefix:prefix:...</td>
+      <td style="text-align:left">
+        <p>workflow_prod_:workflow_cache_</p>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
       <td style="text-align:left">HTTP_PROXY</td>
       <td style="text-align:left">Proxy details for routing Edge Delta agent&apos;s outbound traffic through
         an HTTP internal proxy</td>
