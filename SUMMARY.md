@@ -33,4 +33,4 @@
   * [MultiLine Detection](appendices/line_detection.md)
   * [Ingestion to ED Backend Preferences](appendices/data_preferences.md)
   * [Benchmark Test Results](appendices/benchmark_results.md)
-  * [Custom Metric Alerts](custom-metric-alerts.md)
+  * [Custom Metric Alerts](appendices/custom-metric-alerts.md)
