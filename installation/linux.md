@@ -37,45 +37,43 @@ sudo ED_API_KEY=<your api key> \
 ED_ENV_VARS="MY_VAR1=MY_VALUE_1,MY_VAR2=MY_VALUE_2" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 ```
+See [Environment Variables](environment-variables.md) page for full list of variables supported by agent.
 
 ## Troubleshooting
 
-Check the agent's service status using one of the following commands \(dependent on Linux distribution\):
+* Check the agent's service status using one of the following commands depending on your Linux.
 
-```text
-sudo su
-service edgedelta status
-systemctl status edgedelta
-/etc/init.d/edgedelta status
-```
+  Systems with systemd(most distributions):
+  ```text
+  sudo systemctl status edgedelta
+  ```
 
-Check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings.
+  Older systems with init:
+  ```text
+  sudo /etc/init.d/edgedelta status
+  ```
 
-Edge Delta's Service Log file path: `/opt/edgedelta/agent/edgedelta.log`
+  Some older versions of Ubuntu:
+  ```text
+  sudo service edgedelta status
+  ```
 
-```
-cat /opt/edgedelta/agent/edgedelta.log
-```
+* Check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings.
 
-Check the agent's configuration file to ensure the configuration doesn't contain issues.
+  ```
+  cat /opt/edgedelta/agent/edgedelta.log
+  ```
 
-Configuration File path: `/opt/edgedelta/agent/config.yml`
+* Check the agent's configuration file to ensure the configuration doesn't contain issues.
 
-```
-cat /opt/edgedelta/agent/config.yml
-```
+  ```
+  cat /opt/edgedelta/agent/config.yml
+  ```
 
 ## Uninstallation
 
-Make sure to run uninstallation process as root.
-
 ```text
-systemctl stop edgedelta.service
-systemctl disable edgedelta.service
-rm /etc/systemd/system/edgedelta.service
-rm /usr/lib/systemd/system/edgedelta.service
-systemctl daemon-reload
-systemctl reset-failed
+sudo bash -c "$(curl -L https://release.edgedelta.com/uninstall.sh)"
 ```
 
 
