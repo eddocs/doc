@@ -8,11 +8,9 @@ description: >-
 
 ## Overview
 
-Edge Delta supports the usage of environment variables as values in configuration file.
-Variables are especially useful to pass secrets to agent in a secure manner.
+Edge Delta supports the usage of environment variables as values in configuration file. Variables are especially useful to pass secrets to agent in a secure manner.
 
-Environment variables values are acquired from the local operating system environment of the Edge Delta agent process during runtime.
-Values of environment variables are passed in different ways depending on the agent deployment method and the target environment, see [Environment Variables](https://docs.edgedelta.com/installation/environment-variables).
+Environment variables values are acquired from the local operating system environment of the Edge Delta agent process during runtime. Values of environment variables are passed in different ways depending on the agent deployment method and the target environment, see [Environment Variables](https://docs.edgedelta.com/installation/environment-variables).
 
 ## Using Variables in Agent Configuration Files
 
@@ -50,6 +48,6 @@ Example Configuration Variables:
 
 | Name | Value |
 | :--- | :--- |
-| AGENT_LOG_LEVEL | error |
-| API_FILTER_PATTERN | INFO |
+| AGENT\_LOG\_LEVEL | error |
+| API\_FILTER\_PATTERN | INFO |
 

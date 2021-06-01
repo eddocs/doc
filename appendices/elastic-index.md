@@ -44,7 +44,7 @@ Now, you should have an index lifecycle policy named 'ed-agent-log-policy'.
 
 1. Create index template
 
-   Index templates are useful to configure elastic indices before they are created. 
+   Index templates are useful to configure elastic indices before they are created.
 
 Edgedelta agents are capable of streaming various types of observations to Elastic Search destination if configured so. The target index should ideally be created with our recommended index template. You can create the edgedelta elastic index template by running the command below in your Elastic's dev console. It will create an index template named 'ed-agent-log' with proper field mappings and refers to the lifecycle policy 'ed-agent-log-policy'.
 
