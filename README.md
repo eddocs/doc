@@ -25,7 +25,7 @@ Modern enterprises and leaders in the market are making significant investments 
 
 ## Distributed Intelligence - Four Stage Approach
 
-![](.gitbook/assets/4stages.png)
+![](.gitbook/assets/di4stages.png)
 
 ## Typical Architecture
 
