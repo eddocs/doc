@@ -12,17 +12,17 @@ With CCB, users can use the Edge Delta UI to create and manage configuration fil
 
 Additionally, CCB allows users to update and modify configuration files directly through the UI, automatically propagating changes down to running agents.  
 
-![](../.gitbook/assets/screen-shot-2020-04-02-at-10.43.45-am.png)
+![](../.gitbook/assets/edge_delta_agentsettings.jpg)
 
 ## Creating a New Configuration
 
-In the Edge Delta admin portal, click the green Add button in the bottom left corner to generate a new configuration.
+In the Edge Delta admin portal, click the green "Create Configuration" button in the top right corner to generate a new configuration.
 
-![](../.gitbook/assets/screen-shot-2020-04-07-at-1.37.04-pm.png)
+![](../.gitbook/assets/edge_delta_createconfig.jpg)
 
-In the following dialog window, populate the Tag and Description fields \(used for organizing the configurations in the Admin portal\), as well as your configuration, and hit save.
+Start with a template or create your own from scratch:
 
-![](../.gitbook/assets/screen-shot-2020-04-08-at-8.39.49-am%20%281%29%20%281%29.png)
+![](../.gitbook/assets/screen-shot-2021-06-01-at-12.32.07-pm.png)
 
 Once you've saved your configuration, you will return to the configuration portal, where your new configuration will be listed, as well as an API Key associated with the configuration. 
 
@@ -30,9 +30,9 @@ The API Key is utilized as part of the agent deployment process, allowing new ag
 
 ## Updating an Existing Configuration
 
-To edit an existing configuration, hit the yellow Edit button to the right of the configuration you wish to edit.  Once you've made your changes, hit the green Save button in the bottom right to save your changes.
+To edit an existing configuration, hit the Edit button to the right of the configuration you wish to edit.  Once you've made your changes, hit the green Save button in the bottom right to save your changes.
 
-After an existing configuration has been updated via the UI, the updated configuration version will automatically be propagated down to running agents using that API Key. Typically the update will take place within one minute. 
+After an existing configuration has been updated via the UI, the updated configuration version will automatically be propagated down to running agents using that API Key. The agents will check back with the CCB and will pull updates as required. Typically the update will take place within approximately one minute or less. 
 
 ## Local Configuration File Management
 
