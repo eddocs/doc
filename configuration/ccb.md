@@ -1,7 +1,7 @@
 ---
 description: >-
-  This document outlines how the Edge Delta Cloud Configuration Backend works,
-  and how it is designed to be used.
+  This document outlines how the Edge Delta SaaS Cloud Configuration Backend
+  works, and how it is designed to be used.
 ---
 
 # Cloud Configuration Backend \(CCB\)
