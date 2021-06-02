@@ -8,23 +8,23 @@ description: >-
 
 ## Configuration Parameters
 
-| Key | Description | Default  | Required |
+| Key | Description | Default | Required |
 | :--- | :--- | :--- | :--- |
-| tag | User defined tag to describe the environment. e.g. *prod_us_west_2_cluster*.  Default value is *Edge* but it's highly recommended to set this value. | Edge | No |
-| _**log**_ | The *log* section contains subfields to configure agent's own log settings. Agent logs to standard output when run inside a container (e.g. when run in kubernetes). When installed as a linux/windows/macos service the agent logs to a file named edgedelta.log next to the installed service location. | N/A | No |
-| &nbsp;&nbsp;level | Logging level for the edge delta agent's self logs. | info | No |
+| tag | User defined tag to describe the environment. e.g. _prod\_us\_west\_2\_cluster_.  Default value is _Edge_ but it's highly recommended to set this value. | Edge | No |
+| _**log**_ | The _log_ section contains subfields to configure agent's own log settings. Agent logs to standard output when run inside a container \(e.g. when run in kubernetes\). When installed as a linux/windows/macos service the agent logs to a file named edgedelta.log next to the installed service location. | N/A | No |
+|   level | Logging level for the edge delta agent's self logs. | info | No |
 | anomaly\_capture\_size | Anomaly Capture buffer size represents the number of log lines to capture during an anomaly capture | 125 | No |
-| anomaly\_capture\_bytesize | Anomaly Capture buffer byte size represents the maximum buffer size in terms of bytes during an anomaly capture | 0 B (disabled) | No |
-| anomaly\_capture\_duration | Anomaly Capture buffer duration represents the maximum span that the logs of an anomaly capture can belong to | 0s (disabled) | No |
+| anomaly\_capture\_bytesize | Anomaly Capture buffer byte size represents the maximum buffer size in terms of bytes during an anomaly capture | 0 B \(disabled\) | No |
+| anomaly\_capture\_duration | Anomaly Capture buffer duration represents the maximum span that the logs of an anomaly capture can belong to | 0s \(disabled\) | No |
 | anomaly\_tolerance | When it is non-zero, anomaly scores handle edge cases better when standard deviation is too small. Can be set at rule level for some rule types. | 0.01 | No |
 | anomaly\_confidence\_period | Anomaly scores will not be calculated for the first this period after a source is found. Can be set at rule level for some rule types. | 30m | No |
-| anomaly\_coefficient | Anomaly coefficient is used to multiple final score to [0, 100] range. The higher the coefficient the higher the anomaly score will be. Can be set at rule level for some rule types. | 10 | No |
+| anomaly\_coefficient | Anomaly coefficient is used to multiple final score to \[0, 100\] range. The higher the coefficient the higher the anomaly score will be. Can be set at rule level for some rule types. | 10 | No |
 | skip\_empty\_intervals | Skips empty intervals when rolling so the anomaly scores are calculated based on history of non-zero intervals. Can be set at rule level for some rule types. | false | No |
 | only\_report\_nonzeros | Only report non zero stats. Can be set at rule level for some rule types. | false | No |
-| capture\_flush\_mode | Sets the behavior of flushing captured contextual log buffers. Supported modes are listed below: <br> **local_per_source**: This is the default mode. captured buffer of a source is flushed when there's a local alert being triggered from same source. <br> **local_all**: This is the mode where all captured buffers are flushed when there's a local alert being triggered (not necessarily from same source). So in this mode whenever an alert is triggered from agent all capture buffers from all active sources will be flushed <br> **tag_per_source**: This is the mode where captured buffer of a source is flushed when there's an alert from same source and tag (from any agent within current tag) <br> **tag_all**: This is the mode where all captured buffers on all agents within the same tag is flushed whenever any of the agents trigger an alert| local_per_source | No |
+| capture\_flush\_mode | Sets the behavior of flushing captured contextual log buffers. Supported modes are listed below:   **local\_per\_source**: This is the default mode. captured buffer of a source is flushed when there's a local alert being triggered from same source.   **local\_all**: This is the mode where all captured buffers are flushed when there's a local alert being triggered \(not necessarily from same source\). So in this mode whenever an alert is triggered from agent all capture buffers from all active sources will be flushed   **tag\_per\_source**: This is the mode where captured buffer of a source is flushed when there's an alert from same source and tag \(from any agent within current tag\)   **tag\_all**: This is the mode where all captured buffers on all agents within the same tag is flushed whenever any of the agents trigger an alert | local\_per\_source | No |
 | grace\_period | Time the agent waits before triggering alerts. Can be in seconds \(s\) or minutes \(m\) | 0s | No |
 | ephemeral | It marks the agent as can be down temporarily due to scale down scenarios and it will be used for capturing down agents. | true | No |
-| soft\_cpu\_limit | It is only honored by clustering processor at the moment. 0.5 means 50% of a core. It can be enabled by setting cpu_friendly=true in clustering rule. | 0.0 | No |
+| soft\_cpu\_limit | It is only honored by clustering processor at the moment. 0.5 means 50% of a core. It can be enabled by setting cpu\_friendly=true in clustering rule. | 0.0 | No |
 
 Example:
 
@@ -43,5 +43,5 @@ agent_settings:
   anomaly_capture_duration: 1m
   anomaly_coefficient: 10.0
   grace_period: 30s
-
 ```
+

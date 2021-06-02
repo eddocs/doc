@@ -30,20 +30,15 @@ description: >-
       <td style="text-align:left">Colon (:) separated workflow names that will enable all matching workflows
         and disable the rest together with ED_WORKFLOW_PREFIXES</td>
       <td style="text-align:left">name:name:...</td>
-      <td style="text-align:left">
-        <p>workflow_1:workflow_2</p>
-        <p></p>
-      </td>
+      <td style="text-align:left">workflow_1:workflow_2</td>
     </tr>
     <tr>
       <td style="text-align:left">ED_WORKFLOW_PREFIXES</td>
       <td style="text-align:left">Colon (:) separated workflow prefixes that will enable all matching workflows
         according their prefixes and disable the rest together with ED_WORKFLOWS</td>
-      <td style="text-align:left">prefix:prefix:...</td>
-      <td style="text-align:left">
-        <p>workflow_prod_:workflow_cache_</p>
-        <p></p>
-      </td>
+      <td
+      style="text-align:left">prefix:prefix:...</td>
+        <td style="text-align:left">workflow_prod_:workflow_cache_</td>
     </tr>
     <tr>
       <td style="text-align:left">HTTP_PROXY</td>
@@ -69,15 +64,18 @@ description: >-
       <td style="text-align:left">NO_PROXY</td>
       <td style="text-align:left">Disable proxy for requests hitting a specific destination</td>
       <td style="text-align:left">domain:port</td>
-      <td style="text-align:left">
-        <p>https://your-endpoint.com</p>
-        <p></p>
-      </td>
+      <td style="text-align:left">https://your-endpoint.com</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">STORE_PORT</td>
+      <td style="text-align:left">Port number to expose agent metrics storage</td>
+      <td style="text-align:left">port</td>
+      <td style="text-align:left">6062</td>
     </tr>
   </tbody>
 </table>
 
-## Examples - Kubernetes (yml configuration)
+## Examples - Kubernetes \(yml configuration\)
 
 Snippet pulled from: [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml)
 
@@ -94,23 +92,24 @@ spec:
             name: ed-api-key
       - name: HTTPS_PROXY
         value: <your proxy details>
-
 ```
 
-Note that "ED_API_KEY" is not defined in the yaml as clear text. Using the Kubernetes secrets mechanism, secret value should be defined with below command within the Kubernetes cluster:
+Note that "ED\_API\_KEY" is not defined in the yaml as clear text. Using the Kubernetes secrets mechanism, secret value should be defined with below command within the Kubernetes cluster:
+
 ```bash
 kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="YOUR_API_KEY_VALUE"
 ```
 
 ## Examples - Linux/MacOSX
 
-ED_ENV_VARS is a special variable used during installation where multiple environment variables specified in following comma separated format: "variable1=value1,variable2=value2"
+ED\_ENV\_VARS is a special variable used during installation where multiple environment variables specified in following comma separated format: "variable1=value1,variable2=value2"
 
 ```bash
 sudo ED_API_KEY=<your api key> \
 ED_ENV_VARS="HTTPS_PROXY=<your proxy details>" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 ```
+
 ## Examples - Docker
 
 ```bash
@@ -119,13 +118,11 @@ docker run --rm -d --name edgedelta \
 -e "ED_API_KEY=<your api key>" \
 -e "HTTPS_PROXY=<your proxy details>" \
 edgedelta/agent:latest
-
 ```
 
 ## Example - Windows
 
 On Windows systems use following command to define environment variables globally. Agent service needs to be restart after setting the variable.
 
-```text
-[System.Environment]::SetEnvironmentVariable('HTTP_PROXY', '<your proxy details>',[System.EnvironmentVariableTarget]::Machine)
-```
+`[System.Environment]::SetEnvironmentVariable('HTTP_PROXY', '<your proxy details>',[System.EnvironmentVariableTarget]::Machine)`
+
