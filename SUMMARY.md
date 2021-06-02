@@ -12,6 +12,7 @@
   * [Kubernetes](installation/kubernetes.md)
   * [Kubernetes via Helm](installation/helm.md)
   * [Amazon ECS](installation/amazon-ecs.md)
+  * [Agent Network Access Requirements](installation/network-access.md)
 * [Configuration](configuration/README.md)
   * [Cloud Configuration Backend \(CCB\)](configuration/ccb.md)
   * [Agent Settings](configuration/agent-settings.md)
