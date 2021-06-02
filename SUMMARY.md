@@ -14,7 +14,7 @@
   * [Amazon ECS](installation/amazon-ecs.md)
   * [Agent Network Access Requirements](installation/network-access.md)
 * [Configuration](configuration/README.md)
-  * [Central Configuration Backend \(CCB\)](configuration/ccb.md)
+  * [Cloud Configuration Backend \(CCB\)](configuration/ccb.md)
   * [Agent Settings](configuration/agent-settings.md)
   * [Inputs](configuration/inputs.md)
   * [Filters](configuration/filters.md)
@@ -35,3 +35,4 @@
   * [Ingestion to ED Backend Preferences](appendices/data_preferences.md)
   * [Benchmark Test Results](appendices/benchmark_results.md)
   * [Custom Metric Alerts](appendices/custom-metric-alerts.md)
+
