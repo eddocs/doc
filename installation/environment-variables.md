@@ -66,6 +66,12 @@ description: >-
       <td style="text-align:left">domain:port</td>
       <td style="text-align:left">https://your-endpoint.com</td>
     </tr>
+    <tr>
+      <td style="text-align:left">STORE_PORT</td>
+      <td style="text-align:left">Port number to expose agent metrics storage</td>
+      <td style="text-align:left">port</td>
+      <td style="text-align:left">6062</td>
+    </tr>
   </tbody>
 </table>
 
