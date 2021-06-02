@@ -25,7 +25,8 @@ There are a number of different input types supported by the Edge Delta service.
 * [AWS ECS](https://docs.edgedelta.com/configuration/inputs#aws-ecs)
 * [Execs \(Scripted Input\)](https://docs.edgedelta.com/configuration/inputs#execs-scripted-input)
 
-You can specify the filters to monitor sources of containers, kubernetes and aws ecs. 
+You can specify the filters to monitor sources of containers, kubernetes and aws ecs.
+
 * [Input filters](https://docs.edgedelta.com/configuration/inputs#filters-for-containers-kubernetes-and-aws-ecs)
 
 ## Agent Stats
@@ -129,20 +130,23 @@ If enabled, Windows Events allows you to specify a set of Windows Events channel
 ```
 
 ## Filters for Containers, Kubernetes and AWS ECS
-You can specify which inputs to add by providing include/exclude regex filters.
-These filters work only with Containers, Kubernetes and AWS ECS input types.
-- All rules in the same line with a comma(",") separated means AND
-```
+
+You can specify which inputs to add by providing include/exclude regex filters. These filters work only with Containers, Kubernetes and AWS ECS input types.
+
+* All rules in the same line with a comma\(","\) separated means AND
+
+  ```text
    include:
      - "rule-1,rule-2"
-```
-  
-- All rules under the same part (include/exclude) means OR
-```
+  ```
+
+* All rules under the same part \(include/exclude\) means OR
+
+  ```text
    include:
      - "rule-1"
-     - "rule-2"     
-```
+     - "rule-2"
+  ```
 
 ## Containers \(Docker\)
 
@@ -187,7 +191,7 @@ If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods 
 
 ## AWS ECS
 
-If enabled, the ECS Input allows you to specify a set of ECS assets \(tasks, containers, etc.\) to be monitored by the Edge Delta service. 
+If enabled, the ECS Input allows you to specify a set of ECS assets \(tasks, containers, etc.\) to be monitored by the Edge Delta service.
 
 **Note**: In the 'include' and 'exclude' section, after "container-name=", or "task-family=" this is a contains match, so as long as the value provided is contained anywhere in the container or task name, the value will match.
 
@@ -203,8 +207,6 @@ If enabled, the ECS Input allows you to specify a set of ECS assets \(tasks, con
         - container-name=edgedelta
       auto_detect_line_pattern: true
 ```
-
-
 
 ## Execs \(Scripted Input\)
 

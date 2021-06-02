@@ -30,43 +30,47 @@ The installation process may prompt for the sudo password if you are not running
 
 The installation process deploys Edge Delta into the path`/opt/edgedelta/agent/` and system service `edgedelta` starts automatically with default configuration.
 
-ED_ENV_VARS special variable is used as part of the installation command to pass one or more persistent environment variables to the agent which will run as the system service.
+ED\_ENV\_VARS special variable is used as part of the installation command to pass one or more persistent environment variables to the agent which will run as the system service.
 
 ```bash
 sudo ED_API_KEY=<your api key> \
 ED_ENV_VARS="MY_VAR1=MY_VALUE_1,MY_VAR2=MY_VALUE_2" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 ```
+
 See [Environment Variables](environment-variables.md) page for full list of variables supported by agent.
 
 ## Troubleshooting
 
 * Check the agent's service status using one of the following commands depending on your Linux.
 
-  Systems with systemd(most distributions):
+  Systems with systemd\(most distributions\):
+
   ```text
   sudo systemctl status edgedelta
   ```
 
   Older systems with init:
+
   ```text
   sudo /etc/init.d/edgedelta status
   ```
 
   Some older versions of Ubuntu:
+
   ```text
   sudo service edgedelta status
   ```
 
 * Check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings.
 
-  ```
+  ```text
   cat /opt/edgedelta/agent/edgedelta.log
   ```
 
 * Check the agent's configuration file to ensure the configuration doesn't contain issues.
 
-  ```
+  ```text
   cat /opt/edgedelta/agent/config.yml
   ```
 
@@ -75,6 +79,4 @@ See [Environment Variables](environment-variables.md) page for full list of vari
 ```text
 sudo bash -c "$(curl -L https://release.edgedelta.com/uninstall.sh)"
 ```
-
-
 

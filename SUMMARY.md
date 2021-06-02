@@ -13,7 +13,7 @@
   * [Kubernetes via Helm](installation/helm.md)
   * [Amazon ECS](installation/amazon-ecs.md)
 * [Configuration](configuration/README.md)
-  * [Central Configuration Backend \(CCB\)](configuration/ccb.md)
+  * [Cloud Configuration Backend \(CCB\)](configuration/ccb.md)
   * [Agent Settings](configuration/agent-settings.md)
   * [Inputs](configuration/inputs.md)
   * [Filters](configuration/filters.md)
