@@ -30,6 +30,8 @@ _Note:_ Tag is specified at [agent\_settings](https://docs.edgedelta.com/configu
 
 ![](../.gitbook/assets/custom-metric-alert.png)
 
+You can delete or update previously created Custom Metrtic Alerts on [Monitors Page](https://admin.edgedelta.com/monitors).
+
 ### Agent based alerts \(aka signals\) vs backend generated alerts \(aka findings\)
 
 You might have noticed that the [processors](https://docs.edgedelta.com/configuration/processors) also have some threshold configuration. Those are evaluated by individual agents running on your nodes. It's possible to get notified directly by the agents in real time as soon as something anomalous happens. These agent based alerts are called _Signal_ and can be seen on [Insights](https://admin.edgedelta.com/insights) page.

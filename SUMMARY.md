@@ -34,4 +34,4 @@
   * [Ingestion to ED Backend Preferences](appendices/data_preferences.md)
   * [Benchmark Test Results](appendices/benchmark_results.md)
   * [Custom Metric Alerts](appendices/custom-metric-alerts.md)
-
+  * [Monitors](appendices/monitors.md)
