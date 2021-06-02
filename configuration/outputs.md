@@ -356,6 +356,100 @@ If enabled, the SignalFx integration will stream analytics and insights to an Si
 
 ## Trigger Destinations
 
+### **Notify Content**
+Notify Content is optional way to customize the notification content for slack/webhook triggers. 
+It supports templating. Available template fields:
+- Tag
+- EDAC
+- Host
+- ConfigID
+- MetricName
+- Source
+- SourceType
+- SourceAttributes
+- Timestamp
+- Epoch
+- CurrentValue
+- ThresholdValue
+- ThresholdDescription
+- MatchedTerm
+- ThresholdType
+- FileGlobPath
+- K8sPodName
+- K8sNamespace
+- K8sControllerKind
+- K8sContainerName
+- K8sContainerImage
+- K8sControllerLogicalName
+- ECSCluster
+- ECSContainerName
+- ECSTaskVersion
+- ECSTaskFamily
+- DockerContainerName
+*Note:* About templates you should read before use:
+- if the value is empty the item will not be sent to slack
+- the keys are sorted alphabetically before sending to slack so they will not appear in the order specified in the config
+
+**Title**: Title text for webhook message. It can be customized with custom template fields.
+**Disable default fields**: It is used for disabling default fields in notify message. Its value is false by default.
+**Advanced Content**: It provides full flexibility to defined the payload in slack notification post requests.
+# advanced_content
+# important notes about advanced_content template should read before use;
+# - overides all other settings, if custom_fields, title or disable_default_fields are provided then they will be ignored.
+# - same set of templating fields are supported as in custom_fields
+# - author is responsible to make sure validity of the json
+# - use block kit builder tool provided by slack https://app.slack.com/block-kit-builder prior to test
+advanced_content: |
+{
+"blocks": [
+{
+"type": "section",
+"text": {
+"type": "mrkdwn",
+"text": "*Raw POST Anomaly Detected: {{.ProcessorDescription}}*"
+}
+},
+{
+"type": "section",
+"text": {
+"type": "mrkdwn",
+"text": "*MatchedTerm* {{.MatchedTerm}}\n*ConfigID* {{.ConfigID}}"
+}
+}
+]
+}
+custom_fields:
+"Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+"Current Value": "{{.CurrentValue}}"
+"Threshold Value": "{{.ThresholdValue}}"
+"Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
+"Built-in Threshold Description": "{{.ThresholdDescription}}"
+"Matched Term": "{{.MatchedTerm}}"
+"Threshold Type": "{{.ThresholdType}}"
+"File Path": "{{.FileGlobPath}}"
+"K8s PodName": "{{.K8sPodName}}"
+"K8s Namespace": "{{.K8sNamespace}}"
+"K8s ControllerKind": "{{.K8sControllerKind}}"
+"K8s ContainerName": "{{.K8sContainerName}}"
+"K8s ContainerImage": "{{.K8sContainerImage}}"
+"K8s ControllerLogicalName": "{{.K8sControllerLogicalName}}"
+"ECSCluster": "{{.ECSCluster}}"
+"ECSContainerName": "{{.ECSContainerName}}"
+"ECSTaskVersion": "{{.ECSTaskVersion}}"
+"ECSTaskFamily": "{{.ECSTaskFamily}}"
+"DockerContainerName": "{{.DockerContainerName}}"
+"SourceAttributes": "{{.SourceAttributes}}"
+"ConfigID": "{{.ConfigID}}"
+"EDAC": "{{.EDAC}}"
+"Epoch": "{{.Epoch}}"
+"Host": "{{.Host}}"
+"MetricName": "{{.MetricName}}"
+"Source": "{{.Source}}"
+"SourceType": "{{.SourceType}}"
+"Tag": "{{.Tag}}"
+
+
+
 ### **Slack**
 
 If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
@@ -368,6 +462,7 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
 | endpoint | Slack Webhook or APP endpoint URL | Yes |
 | suppression_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this slack endpoint it will suppress any new issues for this duration. Default is "20m". | No |
 | suppression_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents (the ones sharing same tag in config).  | No |
+| notify_content | Used to customize the notification content. It supports templating. You can set advanced content to manage all payload [Slack Block Kit Builder](https://app.slack.com/block-kit-builder) or you can choose available template fields. <br>  | No |
 
 ```yaml
       - name: slack-integration
