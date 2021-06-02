@@ -7,7 +7,7 @@ description: >-
 
 # Kubernetes via Helm
 
-Edge Delta agent is a daemon that analyze logs and container metrics from a Kubernetes cluster and stream analytics to configured streaming destination. This page streamlined instructions to get you up and running in Kubernetes environment.
+Edge Delta agent is a daemon that analyzes logs and container metrics from a Kubernetes cluster and stream analytics to configured streaming destinations. This page streamlined instructions to get you up and running in the Kubernetes environment.
 
 Edge Delta uses Kubernetes recommended node level logging architecture, in other words DaemonSet architecture. The DaemonSet runs Edge Delta agent pod on each node. Each Agent pod analyzes logs from all other pods running on the same node.
 
@@ -58,4 +58,3 @@ helm ls -n edgedelta
 ```text
 helm delete edgedelta -n edgedelta
 ```
-

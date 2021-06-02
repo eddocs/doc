@@ -1,7 +1,7 @@
 ---
 description: >-
   This document outlines the environment variable parameters that can be passed
-  in while installing and deploying the Edge Delta agent.
+  while installing and deploying the Edge Delta agent.
 ---
 
 # Environment Variables
@@ -100,10 +100,10 @@ Download [values.yaml file](https://raw.githubusercontent.com/edgedelta/charts/m
 Edit the values.yaml file to set optional parameters by commenting out and editing relevant sections such as:
 * Secret API key instead of clear text API key
 * Frequently used environment variables for agent
-* One or more custom environment variables which can be refered in the config as [Config Variables](../configuration/variables.md)
-* One or more custom secret environment variables which can be also used as custom environment variables but kept as Kubernet secrets
+* One or more custom environment variables which can be referred to in the config as [Config Variables](../configuration/variables.md)
+* One or more custom secret environment variables which can be also used as custom environment variables but kept as Kubernetes secrets
 
-After file is updated follow [Helm Installation](helm.md) steps.
+After the file is updated follow [Helm Installation](helm.md) steps.
 
 Do not forget to create secrets as instructed in values.yaml after namespace is created in above step, otherwise agent will fail to start.
 
@@ -129,7 +129,6 @@ edgedelta/agent:latest
 
 ## Example - Windows
 
-On Windows systems use following command to define environment variables globally. Agent service needs to be restart after setting the variable.
+On Windows systems use the following command to define environment variables globally. Agent service needs to be restarted after setting the variable.
 
 `[System.Environment]::SetEnvironmentVariable('HTTP_PROXY', '<your proxy details>',[System.EnvironmentVariableTarget]::Machine)`
-
