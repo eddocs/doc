@@ -49,7 +49,7 @@ Example components include:
 
 There are a number of different ways to deploy the Edge Delta service in a Kubernetes environment. The three most common approaches for deploying Edge Delta in Kubernetes are via direct kubectl Apply commands, using Helm, or via Terraform.
 
-![Example deployment overview using direct kubectl deploy commands](.gitbook/assets/screen-shot-2021-01-26-at-3.55.18-pm%20%281%29.png)
+![Example deployment overview using direct kubectl deploy commands](.gitbook/assets/screen-shot-2021-01-26-at-3.55.18-pm%20%281%29%20%281%29.png)
 
 Deployment Overview Steps:
 

@@ -173,7 +173,6 @@ If enabled, the Datadog integration will stream analytics and insights to your D
           "app": "transaction_manager"
           "env": "pre_prod"
           "region": "us-west-2"
-
 ```
 
 **Create a new Datadog API Key:** [https://docs.datadoghq.com/account\_management/api-app-keys/\#add-a-key](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key)
