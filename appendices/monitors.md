@@ -16,6 +16,7 @@ Monitors provides actionable insights by exposing anomalous behaviours identifie
 
 All monitors created on the system are visible on [Monitors Page](https://admin.edgedelta.com/monitors).
 By default there are two monitors defined for each organization sending notifications to the organization creator.
+
 ![](../.gitbook/assets/monitors_default.png)
 
 To create a new monitor click __+ Add Button__ on [Monitors Page](https://admin.edgedelta.com/monitors).
