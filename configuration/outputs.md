@@ -173,7 +173,7 @@ If enabled, the Datadog integration will stream analytics and insights to your D
         custom_tags:
           "app": "transaction_manager"
           "env": "pre_prod"
-          "region": "Seattle,WA"
+          "region": "us-west-2"
 
 ```
 
