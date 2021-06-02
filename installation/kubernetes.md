@@ -33,6 +33,8 @@ Create daemonset
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
 
+To provide additional environment variables download and edit https://edgedelta.github.io/k8s/edgedelta-agent.yml as described in [Environment Variables](environment-variables) in Kubernetes with yaml section.
+
 Checking status of Edge Delta container
 
 ```text

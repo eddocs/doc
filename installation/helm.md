@@ -19,10 +19,16 @@ Add Edge Delta helm repository
 helm repo add edgedelta https://edgedelta.github.io/charts
 ```
 
-Run Helm installation and create "edgedelta" namespace
+Run helm installation command and create "edgedelta" namespace to use agent with default parameters:
 
 ```text
 helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta --create-namespace
+```
+
+If you have a custom values file to configure [Environment Variables](environment-variables.md) use below command instead within the same folder with values.yaml:
+
+```text
+helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
 ```
 
 Output

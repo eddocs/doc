@@ -93,6 +93,19 @@ Note that "ED\_API\_KEY" is not defined in the yaml as clear text. Using the Kub
 ```bash
 kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="YOUR_API_KEY_VALUE"
 ```
+## Examples - Kubernetes \(helm deployment\)
+
+Download [values.yaml file](https://raw.githubusercontent.com/edgedelta/charts/master/edgedelta/values.yaml).
+
+Edit the values.yaml file to set optional parameters by commenting out and editing relevant sections such as:
+* Secret API key instead of clear text API key
+* Frequently used environment variables for agent
+* One or more custom environment variables which can be refered in the config as [Config Variables](../configuration/variables.md)
+* One or more custom secret environment variables which can be also used as custom environment variables but kept as Kubernet secrets
+
+After file is updated follow [Helm Installation](helm.md) steps.
+
+Do not forget to create secrets as instructed in values.yaml after namespace is created in above step, otherwise agent will fail to start.
 
 ## Examples - Linux/MacOSX
 
