@@ -7,6 +7,7 @@ description: >-
 # Appendices
 
 ## Setup Appendices
+
 * [Elastic Index Setup](elastic-index.md)
 * [Azure Function Monitoring Setup](azure-serverless-monitoring.md)
 * [Clustering Details](clustering.md)
@@ -15,3 +16,5 @@ description: >-
 * [Benchmark Test Results](benchmark_results.md)
 * [Custom Metric Alerts](custom-metric-alerts.md)
 * [Monitors](monitors.md)
+* [Prometheus Scraping](prometheus-scraping.md)
+

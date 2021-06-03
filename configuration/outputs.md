@@ -162,12 +162,17 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "datadog" to stream data to Datadog | Yes |
 | api\_key | Datadog API Key | Yes |
+| custom\_tags | Key-values defined in custom tags by the user are streamed to datadog for every request. | No |
 | features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```yaml
       - name: datadog-integration
         type: datadog
         api_key: "<add datadog api key>"
+        custom_tags:
+          "app": "transaction_manager"
+          "env": "pre_prod"
+          "region": "us-west-2"
 ```
 
 **Create a new Datadog API Key:** [https://docs.datadoghq.com/account\_management/api-app-keys/\#add-a-key](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key)

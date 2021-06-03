@@ -36,3 +36,5 @@
   * [Benchmark Test Results](appendices/benchmark_results.md)
   * [Custom Metric Alerts](appendices/custom-metric-alerts.md)
   * [Monitors](appendices/monitors.md)
+  * [Prometheus Scraping](appendices/prometheus-scraping.md)
+
