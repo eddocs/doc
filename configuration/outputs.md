@@ -372,11 +372,124 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
 | endpoint | Slack Webhook or APP endpoint URL | Yes |
 | suppression\_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this slack endpoint it will suppress any new issues for this duration. Default is "20m". | No |
 | suppression\_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents \(the ones sharing same tag in config\). | No |
+| notify_content | Used to customize the notification content. It supports templating. | No |
+
+#### **Notify Content**
+Notify Content is optional way to customize the notification content for slack/webhook triggers.
+It supports templating.<br>
+**Available template fields**:
+- **Tag**: User defined tag to describe the environment. e.g. prod_us_west_2_cluster.
+- **EDAC**: Edge Delta Anomaly Context ID.
+- **Host**: Hostname of the environment where agent running on.
+- **ConfigID**: Configuration ID which agent is using.
+- **MetricName**: Metric name causing the anomaly.
+- **Source**: Source name is the identifier of the source such as docker container id or file name.
+- **SourceType**: Source type. e.g. "Docker", "system"
+- **SourceAttributes**: List of source attributes.
+- **Timestamp**: Timestamp when event triggered.
+- **Epoch**: Timestamp in epoch format when event triggered. [epoch](https://en.wikipedia.org/wiki/Epoch)
+- **CurrentValue**: Metric current value.
+- **ThresholdValue**: Threshold value.
+- **ThresholdDescription**: Detailed threshold description including threshold type, value, etc.
+- **MatchedTerm**: A sample log message causing the anomaly event.
+- **ThresholdType**: Threshold type.
+- **FileGlobPath**: File global path.
+- **K8sPodName**: Kubernetes pod name.
+- **K8sNamespace**: Kubernetes namespace.
+- **K8sControllerKind**: Kubernetes controller kind.
+- **K8sContainerName**: Kubernetes container name.
+- **K8sContainerImage** Kubernetes container image.
+- **K8sControllerLogicalName**: Kubernetes controller logical name.
+- **ECSCluster**: ECS cluster name.
+- **ECSContainerName**: ECS container name.
+- **ECSTaskVersion**: ECS task version/
+- **ECSTaskFamily**: ECS task family.
+- **DockerContainerName**: Docker container name.
+  *Note:* About templates you should read before use:
+- if the value is empty the item will not be sent to slack
+- the keys are sorted alphabetically before sending to slack so they will not appear in the order specified in the config
+
+**Title**: Title text for webhook message. It can be customized with custom template fields.
+**Disable default fields**: It is used for disabling default fields in notify message. Its value is false by default.
+**Custom Fields**: You can extend the notification content by adding name-value pairs. You can build by using template fields given above.
+**Advanced Content**: It provides full flexibility to define the payload in slack notification post requests.
+- Advanced content overrides the other settings(title, custom fields...)
+- Custom templates are also supported in advanced content.
+- You can use block kit builder tool provided by slack [https://app.slack.com/block-kit-builder](https://app.slack.com/block-kit-builder) prior to test.
+
+```yaml
+       notify_content:
+         title: "Anomaly Detected: {{.ProcessorDescription}}"
+         disable_default_fields: false
+         custom_fields:
+           "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+           "Current Value": "{{.CurrentValue}}"
+           "Threshold Value": "{{.ThresholdValue}}"
+           "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
+           "Built-in Threshold Description": "{{.ThresholdDescription}}"
+           "Matched Term": "{{.MatchedTerm}}"
+           "Threshold Type": "{{.ThresholdType}}"
+           "File Path": "{{.FileGlobPath}}"
+           "K8s PodName": "{{.K8sPodName}}"
+           "K8s Namespace": "{{.K8sNamespace}}"
+           "K8s ControllerKind": "{{.K8sControllerKind}}"
+           "K8s ContainerName": "{{.K8sContainerName}}"
+           "K8s ContainerImage": "{{.K8sContainerImage}}"
+           "K8s ControllerLogicalName": "{{.K8sControllerLogicalName}}"
+           "ECSCluster": "{{.ECSCluster}}"
+           "ECSContainerName": "{{.ECSContainerName}}"
+           "ECSTaskVersion": "{{.ECSTaskVersion}}"
+           "ECSTaskFamily": "{{.ECSTaskFamily}}"
+           "DockerContainerName": "{{.DockerContainerName}}"
+           "SourceAttributes": "{{.SourceAttributes}}"
+           "ConfigID": "{{.ConfigID}}"
+           "EDAC": "{{.EDAC}}"
+           "Epoch": "{{.Epoch}}"
+           "Host": "{{.Host}}"
+           "MetricName": "{{.MetricName}}"
+           "Source": "{{.Source}}"
+           "SourceType": "{{.SourceType}}"
+           "Tag": "{{.Tag}}"
+```
+
+```yaml
+       notify_content:
+         title: "Anomaly Detected: {{.ProcessorDescription}}"
+         advanced_content: |
+           {
+             "blocks": [
+               {
+                 "type": "section",
+                 "text": {
+                   "type": "mrkdwn",
+                   "text": "*Raw POST Anomaly Detected: {{.ProcessorDescription}}*"
+                 }
+               },
+               {
+                 "type": "section",
+                 "text": {
+                   "type": "mrkdwn",
+                   "text": "*MatchedTerm* {{.MatchedTerm}}\n*ConfigID* {{.ConfigID}}"
+                 }
+               }
+             ]
+           }
+```
+
 
 ```yaml
       - name: slack-integration
         type: slack
         endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+        notify_content:
+          title: "Anomaly Detected: {{.ProcessorDescription}}"
+          disable_default_fields: false
+          custom_fields:
+            "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+            "Current Value": "{{.CurrentValue}}"
+            "Threshold Value": "{{.ThresholdValue}}"
+            "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
+            "Matched Term": "{{.MatchedTerm}}"
 ```
 
 **Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
