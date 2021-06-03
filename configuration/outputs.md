@@ -409,9 +409,9 @@ It supports templating.<br>
 - if the value is empty the item will not be sent to slack
 - the keys are sorted alphabetically before sending to slack so they will not appear in the order specified in the config
 
-**Title**: Title text for webhook message. It can be customized with custom template fields.
-**Disable default fields**: It is used for disabling default fields in notify message. Its value is false by default.
-**Custom Fields**: You can extend the notification content by adding name-value pairs. You can build by using template fields given above.
+**Title**: Title text for webhook message. It can be customized with custom template fields.<br>
+**Disable default fields**: It is used for disabling default fields in notify message. Its value is false by default.<br>
+**Custom Fields**: You can extend the notification content by adding name-value pairs. You can build by using template fields given above.<br>
 **Advanced Content**: It provides full flexibility to define the payload in slack notification post requests.
 - Advanced content overrides the other settings(title, custom fields...)
 - Custom templates are also supported in advanced content.
