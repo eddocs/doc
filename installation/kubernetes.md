@@ -1,13 +1,13 @@
 ---
 description: >-
-  The following document covers the process for deploying the Edge Delta agent
-  as a DaemonSet on your Kubernetes cluster. We are assuming you have conceptual
-  understanding of Kubernetes such as Pods, No
+ The following document covers the process for deploying the Edge Delta agent
+ as a DaemonSet on your Kubernetes cluster. We are assuming you have conceptual
+ understanding of Kubernetes.
 ---
 
 # Kubernetes
 
-Edge Delta agent is a daemon that analyze logs and container metrics from a Kubernetes cluster and stream analytics to configured streaming destination. This page streamlined instructions to get you up and running in Kubernetes environment.
+Edge Delta agent is a daemon that analyzes logs and container metrics from a Kubernetes cluster and stream analytics to configured streaming destinations. This page streamlined instructions to get you up and running in the Kubernetes environment.
 
 Edge Delta uses Kubernetes recommended node level logging architecture, in other words DaemonSet architecture. The DaemonSet runs Edge Delta agent pod on each node. Each Agent pod analyzes logs from all other pods running on the same node.
 
@@ -33,6 +33,8 @@ Create daemonset
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
 
+To provide additional environment variables download and edit https://edgedelta.github.io/k8s/edgedelta-agent.yml as described in [Environment Variables](environment-variables) in Kubernetes with yaml section.
+
 Checking status of Edge Delta container
 
 ```text
@@ -55,7 +57,7 @@ kubectl delete daemonset edgedelta --namespace edgedelta
 
 ### Running Edge Delta agent on select nodes
 
-To run Edge Delta Agent on specific nodes of your cluster, add a node selector or nodeAffinity section to your pod config file. If your desired nodes are labeled logging=edgedelta then adding following nodeSelector will restrict Edge Delta agent pods to Nodes that have logging=edgedelta label.
+To run Edge Delta Agent on specific nodes of your cluster, add a node selector or nodeAffinity section to your pod config file. If your desired nodes are labeled logging=edgedelta then adding the following nodeSelector will restrict Edge Delta agent pods to Nodes that have logging=edgedelta label.
 
 ```text
 spec:
@@ -67,14 +69,14 @@ Read more about specifying [node selectors and affinity](https://kubernetes.io/d
 
 ### SELinux & Openshift
 
-If you are running a SELinux enforcing Kubernetes cluster you need to add following securityContext configuration into edgedelta-agent.yml manifest DaemonSet spec. This change will run agent pod in privileged mode to allow collecting logs of other pods.
+If you are running a SELinux enforcing Kubernetes cluster you need to add the following securityContext configuration into edgedelta-agent.yml manifest DaemonSet spec. This change will run agent pods in privileged mode to allow collecting logs of other pods.
 
 ```text
      runAsUser: 0
      privileged: true
 ```
 
-In an OpenShift cluster you need to also run below commands to allows agent pods to run in privileged mode.
+In an OpenShift cluster you need to also run below commands to allow agent pods to run in privileged mode.
 
 ```text
 oc adm policy add-scc-to-user privileged system:serviceaccount:edgedelta:edgedelta
@@ -94,4 +96,3 @@ Example: If you have an Elasticsearch service "elasticsearch-master" in "elastic
 ```
 
 Read more about [service DNS resolution](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records)
-
