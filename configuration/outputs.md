@@ -361,14 +361,28 @@ If enabled, the SignalFx integration will stream analytics and insights to an Si
 
 ## Trigger Destinations
 
-### **Notify Content**
-Notify Content is optional way to customize the notification content for slack/webhook triggers. 
-It supports templating.<br> 
+### **Slack**
+
+If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "slack" to send alerts to Slack | Yes |
+| endpoint | Slack Webhook or APP endpoint URL | Yes |
+| suppression\_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this slack endpoint it will suppress any new issues for this duration. Default is "20m". | No |
+| suppression\_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents \(the ones sharing same tag in config\). | No |
+| notify_content | Used to customize the notification content. It supports templating. | No |
+
+#### **Notify Content**
+Notify Content is optional way to customize the notification content for slack/webhook triggers.
+It supports templating.<br>
 **Available template fields**:
 - **Tag**: User defined tag to describe the environment. e.g. prod_us_west_2_cluster.
 - **EDAC**: Edge Delta Anomaly Context ID.
 - **Host**: Hostname of the environment where agent running on.
-- **ConfigID**: Configuration ID which agent is using. 
+- **ConfigID**: Configuration ID which agent is using.
 - **MetricName**: Metric name causing the anomaly.
 - **Source**: Source name is the identifier of the source such as docker container id or file name.
 - **SourceType**: Source type. e.g. "Docker", "system"
@@ -392,7 +406,7 @@ It supports templating.<br>
 - **ECSTaskVersion**: ECS task version/
 - **ECSTaskFamily**: ECS task family.
 - **DockerContainerName**: Docker container name.
-*Note:* About templates you should read before use:
+  *Note:* About templates you should read before use:
 - if the value is empty the item will not be sent to slack
 - the keys are sorted alphabetically before sending to slack so they will not appear in the order specified in the config
 
@@ -463,20 +477,6 @@ It supports templating.<br>
            }
 ```
 
-
-### **Slack**
-
-If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
-
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
-| type | Must be set to "slack" to send alerts to Slack | Yes |
-| endpoint | Slack Webhook or APP endpoint URL | Yes |
-| suppression\_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this slack endpoint it will suppress any new issues for this duration. Default is "20m". | No |
-| suppression\_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents \(the ones sharing same tag in config\). | No |
-| notify_content | Used to customize the notification content. It supports templating. Please see [Notify Content](https://docs.edgedelta.com/configuration/outputs#notify-content) | No |
 
 ```yaml
       - name: slack-integration
