@@ -41,7 +41,7 @@ description: >-
     </tr>
     <tr>
       <td style="text-align:left">ED_LEADER_ELECTION_ENABLED</td>
-      <td style="text-align:left">Should be set to "1" in order Kubernetes leader election mechanism to be enabled.
+      <td style="text-align:left">Should be set to "1" in order to enable agent leader election mechanism in Kubernetes environment.
         If not enabled, Kubernetes event ingestion would be disabled even if it is activated through configuration.
       </td>
       <td style="text-align:left">0 or 1</td>
