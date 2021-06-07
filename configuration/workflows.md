@@ -54,7 +54,7 @@ workflows:
 
 User can define an expiring workflow and set the expiration time in workflow definition. 
 By using expiring workflow you can also enable log forwarding until a specific time.
-*Note* The "expires_in" time format must be in UTC datetime format.
+*Note* The "expires_in" time format must be in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) format.
 ```yaml
 workflows:
   log_forward_workflow:
