@@ -360,8 +360,9 @@ If enabled, the SignalFx integration will stream analytics and insights to an Si
 
 ## Trigger Destinations
 
-### **Slack**
+### **Slack/Webhook**
 
+Slack and webhook configuration are the same so you can follow slack to add a webhook trigger.<br>
 If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
 
 | Key | Description | Required |
