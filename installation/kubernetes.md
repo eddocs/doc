@@ -1,8 +1,8 @@
 ---
 description: >-
- The following document covers the process for deploying the Edge Delta agent
- as a DaemonSet on your Kubernetes cluster. We are assuming you have conceptual
- understanding of Kubernetes.
+  The following document covers the process for deploying the Edge Delta agent
+  as a DaemonSet on your Kubernetes cluster. We are assuming you have conceptual
+  understanding of Kubernetes.
 ---
 
 # Kubernetes
@@ -33,7 +33,7 @@ Create daemonset
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
 
-To provide additional environment variables download and edit https://edgedelta.github.io/k8s/edgedelta-agent.yml as described in [Environment Variables](environment-variables) in Kubernetes with yaml section.
+To provide additional environment variables download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml) as described in [Environment Variables](https://github.com/eddocs/doc/tree/84cffae72c67a865ae8b16be19c2b0bb23c6f7f3/installation/environment-variables/README.md) in Kubernetes with yaml section.
 
 Checking status of Edge Delta container
 
@@ -96,3 +96,4 @@ Example: If you have an Elasticsearch service "elasticsearch-master" in "elastic
 ```
 
 Read more about [service DNS resolution](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records)
+

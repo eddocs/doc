@@ -28,8 +28,6 @@ Linux Example:
 
 ![](../.gitbook/assets/edge_delta_deploy.jpg)
 
-
-
 Kubernetes Example:
 
 ![](../.gitbook/assets/edge_delta_dk8s.jpg)

@@ -99,11 +99,13 @@ Note that "ED\_API\_KEY" is not defined in the yaml as clear text. Using the Kub
 ```bash
 kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="YOUR_API_KEY_VALUE"
 ```
+
 ## Examples - Kubernetes \(helm deployment\)
 
 Download [values.yaml file](https://raw.githubusercontent.com/edgedelta/charts/master/edgedelta/values.yaml).
 
 Edit the values.yaml file to set optional parameters by commenting out and editing relevant sections such as:
+
 * Secret API key instead of clear text API key
 * Frequently used environment variables for agent
 * One or more custom environment variables which can be referred to in the config as [Config Variables](../configuration/variables.md)
@@ -138,3 +140,4 @@ edgedelta/agent:latest
 On Windows systems use the following command to define environment variables globally. Agent service needs to be restarted after setting the variable.
 
 `[System.Environment]::SetEnvironmentVariable('HTTP_PROXY', '<your proxy details>',[System.EnvironmentVariableTarget]::Machine)`
+
