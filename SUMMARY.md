@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Edge Delta Overview](README.md)
+* [Edge Delta Overview](overview.md)
 * [Basic Onboarding](basic-onboarding.md)
 * [Architecture Overview - K8s](architecture-overview-k8s.md)
 * [Installation](installation/README.md)
