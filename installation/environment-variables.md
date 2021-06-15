@@ -36,9 +36,16 @@ description: >-
       <td style="text-align:left">ED_WORKFLOW_PREFIXES</td>
       <td style="text-align:left">Colon (:) separated workflow prefixes that will enable all matching workflows
         according their prefixes and disable the rest together with ED_WORKFLOWS</td>
-      <td
-      style="text-align:left">prefix:prefix:...</td>
-        <td style="text-align:left">workflow_prod_:workflow_cache_</td>
+      <td style="text-align:left">prefix:prefix:...</td>
+      <td style="text-align:left">workflow_prod_:workflow_cache_</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">ED_LEADER_ELECTION_ENABLED</td>
+      <td style="text-align:left">Should be set to "1" in order to enable agent leader election mechanism in Kubernetes environment.
+        If not enabled, Kubernetes event ingestion would be disabled even if it is activated through configuration.
+      </td>
+      <td style="text-align:left">0 or 1</td>
+      <td style="text-align:left">1</td>
     </tr>
     <tr>
       <td style="text-align:left">HTTP_PROXY</td>
