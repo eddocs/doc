@@ -19,7 +19,6 @@ Workflows are the mapping of Inputs, Processors and Outputs, logically grouped t
 | filters | List of filter names to be applied before passing incoming logs to the processors in this workflow. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for more details about filters. | No |
 | processors | A list of processor names to apply to the given workflow. See [Processors](https://docs.edgedelta.com/configuration/processors) documentation for more details about available processors. | Yes |
 | destinations | A list of Output names to apply to the given workflow. See [Outputs](https://docs.edgedelta.com/configuration/outputs) documentation for details about available integrations and how to configure them. | No |
-
 ```yaml
 workflows:
   application_workflow:
@@ -51,3 +50,21 @@ workflows:
       - slack-security-integration
 ```
 
+### Expiring Workflow
+
+User can define an expiring workflow and set the expiration time in workflow definition. 
+By using expiring workflow you can also enable log forwarding until a specific time.
+*Note* The "expires_in" time format must be in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) format.
+```yaml
+workflows:
+  log_forward_workflow:
+    input_labels:
+      - system_stats
+      - agent_stats
+      - application_logs
+    filters:
+      - not_debug
+    destinations:
+      - sumo-logic-devops-integration
+    expires_in: 2021-06-01T12:00:00.000Z
+```
