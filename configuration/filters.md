@@ -8,7 +8,7 @@ description: >-
 
 ## Overview
 
-Filters can be used to filter and transform the received logs before further processing. They are useful to discard unnecessary logs, protect sensitive data \(e.g. mask ssn\) and reduce the agent resource usage \(due to less data being fed into processors\), .
+Filters can be used to filter and transform the received logs before further processing. They are useful to discard unnecessary logs, protect sensitive data \(e.g. mask ssn\), transform content. Adding filters at the right place help reducing the agent resource usage due to less data being fed into processors.
 
 Filters are defined at the top level in config yaml.
 
@@ -83,9 +83,34 @@ Below is an example filter that masks US phone numbers:
     predefined_pattern: us_phone_dash
 ```
 
-### Buffered trace filter
+### JSON Field Extractor
 
-Buffered trace filter is a special purpose filter for trace logs. By "trace log" we mean a set of logs that can be tied together with an id such as trace id or request id. Buffered trace filter groups the logs by specified id, waits for a specified duration to make sure all relavant events of that trace/request is collected and then makes a decision on either discard the trace logs or pass them based on configuration.
+JSON Field Extractor extracts a field's value and replaces the whole JSON content with the field's value. Original JSON is discarded once this filter is applied. It's recommended to attach this filter to the processor if the original json needs to be fed into other workflows/processors.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific filter, used for referring this filter in inputs/processors/workflows | Yes |
+| type | Type should be set to "extract-json-field" | Yes |
+| field_path | Field path is a dot separated path of the field (i.e. "log.message"). Its value will be extracted and the original json content will be discarded | Yes |
+
+The example below extracts the message field. If the field was nested then we would set field_path to its path.
+
+```yaml
+  - name: extract_message
+    type: extract-json-field
+    field_path: "message"
+```
+
+
+Example log:
+**`{"timestamp":1623793757, "level": "info", "message": "hello world"}`**
+
+After extractor filter is applied:
+**`hello world`**
+
+### Buffered Trace Filter
+
+Buffered Trace Filter is a special purpose filter for trace logs. By "trace log" we mean a set of logs that can be tied together with an id such as trace id or request id. Buffered trace filter groups the logs by specified id, waits for a specified duration to make sure all relavant events of that trace/request is collected and then makes a decision on either discard the trace logs or pass them based on configuration.
 
 Options are
 
